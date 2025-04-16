@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{mathalfa}
+\usepackage{blindtext}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage{amssymb}
+\usepackage{epsf, subfigure, verbatim, epsfig}
+\usepackage{fancyhdr}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{layout}
+\usepackage{fancybox}
+\usepackage{eurosym}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{dsfont,mathrsfs}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\title{Homework 2 \\ \large MATH 476}
+\author{Ahad Jiva}
+\date{April 15, 2025}
+
+\begin{document}
+
+\maketitle
+\section*{Exercise 17} 
+
+An investor sells a European call option with strike price K and maturity T, and buys a put with
+the same strike price and maturity. Describe the investor’s position–describe all of the possible situations at
+maturity, explain which (if any) of the options the investor should exercise at maturity, and find the investor’s
+payoff in each case. \\
+
+\textbf{Solution:}
+The investor has a short position on an ECO and a long position on an EPO. There are two cases to consider:
+\begin{enumerate}
+    \item The long position will exercise if $S_T > K$. Thus, the investor will have to sell to the long position for $K$. At time $t=T$, the payoff is \\
+    
+    $\begin{cases}
+        0 & S_T \leq K \\
+        K - S_T & S_T > K
+    \end{cases}$
+
+    or $-\text{max}\{S_T-K, 0\}$.
+
+    \item The investor will exercise their long position on the EPO if $S_T < K$. At time $t=T$ the payoff is \\
+    
+    $\begin{cases}
+        K-S_T & S_T < K \\
+        0 & S_T \geq K
+    \end{cases}$
+
+    or $-\text{max}\{K-S_T, 0\}$.
+\end{enumerate}
+Then the overall payoff at expiry will be 
+\begin{center}
+    $-\text{max}\{S_T-K, 0\} + \text{max}\{K-S_T, 0\} = 
+    \begin{cases}
+        0 + K - S_T & S_T < K \\
+        K - S_T + 0 & S_T \geq K
+    \end{cases}
+    = K - S_T$.
+\end{center}
+The payoff diagram looks like the following: \\
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[black, thick] [->] (-5,0) -- (-5, 5);
+        \draw[black, thick] [->] (-5,2) -- (0,2);
+        \filldraw[black] (-5,4) circle (2pt) node[anchor=east]{K};
+        \filldraw[black] (-3,2) circle (2pt) node[anchor=north]{K};
+        \draw[gray, thick] [->] (-5,4) -- (-2,1);
+        \filldraw[black] (0,2) circle (0pt) node[anchor=west]{$S_T$};
+        \filldraw[black] (-5,5) circle (0pt) node[anchor=south]{Payoff};
+    \end{tikzpicture}
+\end{center}
+\break
+
+\section*{Exercise 18}
+A trader buys a call option with a strike price of \$45 and a put option with a strike price of \$40.
+Both options have the same maturity. The call costs \$3 and the put costs \$4. Draw a diagram showing the
+variation of the trader’s profit with the asset price. Note: this type of trading strategy is known as a strangle. \\
+
+\textbf{Solution:} Let's start by calculating the profit for each option: \\
+\begin{enumerate}
+    \item Long Position on an ECO: \\
+    $K = \$45$, $c = \$3$, expiry $t=T$. The profit is represented as
+    \begin{center}
+        $\begin{cases}
+            S_T - 45 - 3 & S_T \geq 45 \\
+            -3 & S_T < 45
+        \end{cases}$
+    \end{center}
+    
+    \item Long Position on an EPO: \\
+    $K = \$40$, $c = \$4$, expiry $t=T$. The profit is represented as
+    \begin{center}
+        $\begin{cases}
+            40-4-S_T & S_T < 40 \\
+            -4 & S_T \geq 40
+        \end{cases}$
+    \end{center}
+\end{enumerate}
+Then the net profit is 
+\begin{center}
+    $\begin{cases}
+        36-S_T-3 & S_T < 40 \\
+        -3-4 & 40 \leq S_T \leq 45 \\
+        S_T - 48 - 4 & S_T > 45
+    \end{cases}$
+\end{center}
+The payoff diagram is as follows:
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[xmin=0, xmax=55, ymin=-10, ymax=35, axis lines=middle];
+            \addplot[domain=0:40]{33-x};
+            \addplot[domain=40:45]{-7};
+            \addplot[domain=45:55] [->] {x-52};
+        \end{axis};
+        \filldraw[black] (7,1) circle (0pt) node[anchor=west]{$S_T$};
+        \filldraw[black] (0,6) circle (0pt) node[anchor=east]{Profit};
+    \end{tikzpicture}
+\end{center}
+
+\section*{Exercise 26}
+On May 21, 2020, an investor owns 100 Apple shares. The
+investor is comparing two alternatives to limit risk. The first involves buying one December put option contract
+with a strike price of \$290. The second involves instructing a broker to sell the 100 shares as soon as Apple’s
+price reaches \$290. Discuss the advantages and disadvantages of the two strategies. \\
+
+\textbf{Solution:} Let's look at the two possible choices separately:
+\begin{enumerate}
+    \item Buying a put option: $K = \$290, c = \$21.30$. Then the profit is
+    \begin{center}
+        $\begin{cases}
+        -(21.30)(1000) & S_T > K \\
+        K - S_T - 2130 & S_T \leq K
+        \end{cases}$
+    \end{center}
+    \item Use a stop-loss to sell AAPL at \$290. This option is less risky, but it could lose out on profits if the market is volatile.
+\end{enumerate}
+Using a stop-loss is a less risky and simpler strategy that will ensure an investor will receive an exact amount for their shares. On the other hand,
+using a put option could allow the investor to make a profit in the future if the stock price is predicted to decline. Given that the investor holds shares
+at this instant, using a put option allows them to spend a portion of the value of the shares as "insurance", bounding the maximum possible loss. Also, if the market
+is volatile, the stop-loss could be triggered before a breakout rally, causing the investor to lose out on potential profits.
+
+\end{document}
