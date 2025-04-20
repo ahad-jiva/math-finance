@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1744164895.50263 "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/HW1/hw1.tex" "hw1.pdf" "hw1" 1744164896.26565 0
-  "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/HW1/hw1.tex" 1744164895.32114 3390 8e718c191a51d6ec78104fafff3887f8 ""
+["pdflatex"] 1745121761.42877 "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/HW1/hw1.tex" "hw1.pdf" "hw1" 1745121762.23572 0
+  "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/HW1/hw1.tex" 1745121761.24956 3430 eb472c50d1be603e78c5c79d15a38f9e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -94,8 +94,8 @@
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "ex2.png" 1744164811.85506 347878 4551fce5f772980527cf183cfb1498ff ""
   "ex3.jpg" 1744163406 1055717 94d3801b5c9e7bfad41a4fd3fc31c5e7 ""
-  "hw1.aux" 1744164896.21306 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
-  "hw1.tex" 1744164895.32114 3390 8e718c191a51d6ec78104fafff3887f8 ""
+  "hw1.aux" 1745121762.1799 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
+  "hw1.tex" 1745121761.24956 3430 eb472c50d1be603e78c5c79d15a38f9e ""
   (generated)
   "hw1.aux"
   "hw1.log"
