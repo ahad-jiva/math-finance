@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{mathalfa}
+\usepackage{blindtext}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage{amssymb}
+\usepackage{epsf, subfigure, verbatim, epsfig}
+\usepackage{fancyhdr}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{layout}
+\usepackage{fancybox}
+\usepackage{eurosym}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{dsfont,mathrsfs}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{float}
+
+\title{Homework 4 \\ \large MATH 476}
+\author{Ahad Jiva}
+\date{May 2, 2025}
+
+\begin{document}
+
+\maketitle
+\section*{Exercise 45}
+\begin{flushleft}
+    $S_0 = 19$, $c=1$, $K=20$, $r=0.04$, expiry in 3 months means $T = 1/4$.
+    We can use put-call parity to calculate the price of a put option with same strike price and expiry.
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $1 + 20e^{-0.04 \cdot 0.25} = p + 19$ \\
+        $p = 1 + 20e^{-0.04 * 0.25} - 19$ \\
+        $p = 1.80$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 46}
+\begin{flushleft}
+    $S_0 = 130$, expiry in one year means $T=1$, $c = 20$, $p=5$, $K = 120$.
+    We can use put-call parity to calculate the risk-free interest rate.
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $20 + 120e^{-r \cdot 1} = 5 + 130$ \\
+        $e^{-r} = \frac{5+130-20}{120}$ \\
+        $e^r = \frac{120}{115}$ \\
+        $r = \ln(\frac{120}{115}) = 0.0426$ \\
+    \end{center}
+    Thus the risk-free interest rate is 4.26\%.
+\end{flushleft}
+
+\section*{Exercise 47}
+\begin{flushleft}
+    $S_0 = 31$, $c = 3$, $p = 2.25$, $K = 30$, $T = 0.25$, $r=0.1$.
+    Note that put-call parity does not hold here:
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $3 + 30e^{-0.1 \cdot 0.25} = 2.25 + 31$ \\
+        $32.26 \neq 33.25$
+    \end{center}
+    Thus we should be able to construct an arbitrage opportunity. Consider a portfolio where
+    we buy the call option and short-sell the put option and the stock. At $t=0$, the cash flow is
+    \begin{center}
+        $-c + p + S_0 = \$30.25$
+    \end{center}
+    Thus we have positive cash flow at $t=0$. We can then invest this at the risk-free interest rate. At expiry, this will be worth \$31.02. At expiry, we have two cases.
+    \begin{enumerate}
+        \item $S_T \leq 30$. Then we let the ECO expire, the EPO will be exercised, and we return the stock we shorted. The payoff will be $0 - 30 = -30$,
+                and since we started with \$31.02, we have \$1.02 profit.
+        \item $S_T > 30$. Then we exercise the ECO, the EPO expires worthless, and we return the stock we shorted. The payoff is $-K + S_T - S_T = -30$.
+                Since we started with \$31.02 we have \$1.02 profit.
+    \end{enumerate}
+    Thus in all cases, we make a profit with positive initial cash flow, and this was an arbitrage opportunity.
+\end{flushleft}
+
+\section*{Exercise 54}
+
+\end{document}
