@@ -317,4 +317,59 @@ option has, and as such it must be at least as valuable as a similar European op
     Risk-free interest rate &+&–&+&–\\\hline
 \end{tabular}
 
+\section*{Exercise 21}
+
+The trader will make a profit when the long position in the contract exercises, and the profit will be
+$S_T - K - c$, which in this case is $S_T - 34$. So the investor will make a profit as long as $S_T \geq 34$.
+
+\section*{Exercise 22}
+The holder of the option will make a profit if the price of the stock at maturity is greater than or equal to
+\$52.5. The option will be exercised if the price at maturity is greater than or equal to \$50, which means that
+the condition for exercising does not necessarily result in a profit.
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[xmin=40, xmax=55, ymin=-4, ymax=6.5, axis lines=middle];
+            \addplot[domain=0:50]{-2.5};
+            \addplot[domain=50:55] [->] {x-52.5};
+        \end{axis};
+        \filldraw[black] (0,6.25) circle (0pt) node[anchor=east]{Profit};
+        \filldraw[black] (7.1, 2) circle (0pt) node[anchor=north]{$S_T$};
+    \end{tikzpicture}
+\end{center}
+
+\section*{Exercise 23}
+$K = 20$, $S_0 = 18$, $c = 2$. Suppose that $S_T = 25$. If the option is held until
+September, at which the stock price is \$25, then the long position in the call
+will exercise the option. Then the investor will have to buy a share for \$25 and
+sell it to the long position for \$20, taking a loss of \$5. Since the trader
+wrote the option and sold it for \$2, then the total cash flow is a loss of \$3.
+
+\section*{Exercise 24}
+\begin{enumerate}
+    \item Trader A: forward contract, $K = 1000$, so profit is $S_T - 1000$.
+    \item Trader B: call option, $c = 100$, $K = 1000$, so profit is
+    \begin{center}
+        $\begin{cases}
+            -100 & S_T \leq K \\
+            S_T - 1100 & S_T > K
+        \end{cases}$
+    \end{center}
+\end{enumerate}
+\begin{flushleft}
+    So if $S_T > K$, then Trader A does better, and if $S_T \leq K$, then Trader A loses less money until $S_T = 900$, below which Trader A will lose more money than Trader B.
+\end{flushleft}
+
+\section*{Exercise 25}
+\begin{enumerate}
+    \item Purchasing shares outright: $S_0 = 316.50$, so upfront cost is \$31,650. If $S_T = 400$, then the per share profit is
+    \$83.50, so the total profit is \$8,350. If $S_T = 300$, then the per share loss is \$16.50, so the total loss is \$1,650.
+    \item Purchasing call options: $c = 21.70$, so the upfront cost is \$2,170. 
+    If $S_T = 400$, then the profit is $-2170 + (400 - 320) \cdot 100 = 5,830$.
+    If $S_T = 300$, we can let the options expire worthless. So the loss is \$2,170.
+\end{enumerate}
+
+\section*{Exercise 26}
+
+
 \end{document}
