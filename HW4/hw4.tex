@@ -74,9 +74,45 @@
         \item $S_T > 30$. Then we exercise the ECO, the EPO expires worthless, and we return the stock we shorted. The payoff is $-K + S_T - S_T = -30$.
                 Since we started with \$31.02 we have \$1.02 profit.
     \end{enumerate}
-    Thus in all cases, we make a profit with positive initial cash flow, and this was an arbitrage opportunity.
+    Thus in all cases, we make a profit with positive initial cash flow, and this was an arbitrage opportunity. $\square$
 \end{flushleft}
 
 \section*{Exercise 54}
+We have three call options with prices $c(K_1), c(K_2), c(K_3)$ with $K_1 < K_2 < K_3$.
+We also have three put options with prices $p(K_1), p(K_2), p(K_3)$. All of these options have the same expiry.
+\begin{enumerate}
+    \item Show $c(K_1) \geq c(K_2)$. Suppose not for the sake of contradiction, ie $c(K_1) < c(K_2)$.
+        Consider the portfolio where we are short in $c(K_2)$ and long in $c(K_1)$. The initial cash flow is $c(K_2) - c(K_1) > 0$, and let $CF_0$ represent this amount.
+        \begin{enumerate}
+            \item Case 1: $S_T < K_1 < K_2$. Then none of the call options will be exercised. The payoff is zero and the profit is $0 + CF_0 \cdot e^{rT}$, which is positive.
+            \item Case 2: $K_1 < S_T < K_2$. Then the $c(K_1)$ option will be exercised, which is our long position. So the payoff is $S_T - K_1$ and the profit is $S_T - K_1 + CF_0 \cdot e^{rT}$, which is positive.
+            \item Case 3: $K_1 < K_2 < S_T$. Then both options will be exercised. The payoff will be $S_T - K_1 - S_T + K_2 = K_2 - K_1$, which is positive, and thus the profit is $K_2 - K_1 + CF_0 \cdot e^{rT}$, which is positive.
+        \end{enumerate}
+        Thus in all cases, we have a risk free profit with no initial investment, ie an arbitrage opportunity. Contradition. Thus $c(K_1) \geq c(K_2)$. $\square$
+    \item Show $p(K_2) \geq p(K_1)$. Suppose not for the sake of contradiction, ie $p(K_2) < p(K_1)$ or $p(K_1) - p(K_2) > 0$.
+        Consider the portfolio where we are short in $p(K_1)$ and long in $p(K_2)$. Then the initial cash flow is $p(K_1) - p(K_2) > 0$, and let $CF_0$ represent this amount.
+        \begin{enumerate}
+            \item Case 1: $S_T < K_1 < K_2$. Then both put options will be exercised. The payoff is $S_T - K_1 + K_2 - S_T = K_2 - K_1$. So the profit is $K_2 - K_1 + CF_0 \cdot e^{rT}$, which is positive.
+            \item Case 2: $K_1 < S_T < K_2$. Then the $p(K_2)$ option will be exercised. The payoff is $K_2 - S_T$ and the profit is $K_2 - S_T + CF_0 \cdot e^{rT}$, which is positive.
+            \item Case 3: $K_1 < K_2 < S_T$. Then none of the put options will be exercised and the payoff is zero. Then the profit is $CF_0 \cdot e^{rT}$, which is positive.
+        \end{enumerate}
+        Thus in all cases, we have a risk free profit with no initial investment, ie an arbitrage opportunity. Contradiction. Thus $p(K_2) \geq p(K_1)$. $\square$
+    \item Show $c(K_1) - c(K_2) \leq K_2 - K_1$. Suppose not for the sake of contradiction, ie $c(K_1) - c(K_2) > K_2 - K_1$.
+        Consider the portfolio where we are short in $c(K_1)$ and long in $c(K_2)$, and also we hold cash equivalent to $(K_1 - K_2) \cdot e^{-rT}$. Then the initial cash flow is $c(K_1) - c(K_2) + (K_1 - K_2)\cdot e^{-rT}$, which we denote as $CF_0$, which is positive.
+        \begin{enumerate}
+            \item Case 1: $S_T < K_1 < K_2$. Then neither call option is exercised. The payoff is zero, and the profit is $CF_0 \cdot e^{rT}$.
+            \item Case 2: $K_1 < S_T < K_2$. Then $c(K_1)$ is exercised. The payoff is $K_1 - S_T$, and thus the profit is $K_1 - S_T + CF_0 \cdot e^{rT}$, which is positive.
+            \item Case 3: $K_1 < K_2 < S_T$. Then both call options are exercised. The payoff is $K_2 - K_1$, which when added to $CF_0\cdot e^{rT}$ to get profit is positive.
+        \end{enumerate}
+        Thus in all cases, we have a risk free profit with no initial investment, ie an arbitrage opportunity. Contradition. Then $c(K_1) - c(K_2) \leq K_2 - K_1$. $\square$
+    \item Show $p(K_2) - p(K_1) \leq K_2 - K_1$. Suppose not for the sake of contradiction, ie $p(K_2) - p(K_1) > K_2 - K_1$.
+        Consider the portfolio where we are short in $p(K_1)$ and long in $p(K_2)$, and also we hold cash equivalent to $(K_1 - K_2) \cdot e^{-rT}$. Then the initial cash flow is $p(K_1) - p(K_2) + (K_1 - K_2) \cdot e^{-rT}$, denoted as $CF_0$, which is positive.
+        \begin{enumerate}
+            \item Case 1: $S_T < K_1 < K_2$. Then both put options will be exercised. The payoff will be $K_2 - K_1$, which when added to $CF_0 \cdot e^{rT}$ to get profit, gives us a positive value.
+            \item Case 2: $K_1 < S_T < K_2$. Then $p(K_2)$ is exercised. The payoff will be $K_2 - S_T$, which is positive. When added to $CF_0 \cdot e^{rT}$, we get a positive profit.
+            \item Case 3: $K_1 < K_2 < S_T$. Then neither put option will be exercised. The payoff is zero and the total profit is $CF_0 \cdot e^{rT}$ which is positive.
+        \end{enumerate}
+        Thus in all cases we get a risk free profit will no initial investment, ie an arbitrage opportunity. Contradiction. Then $p(K_2) - p(K_1) \leq K_2 - K_1$. $\square$
+\end{enumerate}
 
 \end{document}
