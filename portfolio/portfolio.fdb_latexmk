@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1745739020.45781 "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" "portfolio.pdf" "portfolio" 1745739021.96815 0
-  "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" 1745739019.77598 15803 d7bdc2c7d6a37d0d8730e6f12da22ad4 ""
+["pdflatex"] 1746492269.43112 "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" "portfolio.pdf" "portfolio" 1746492270.82467 0
+  "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" 1746492269.23276 31113 745841d1583b8d443ac29149196e26ca ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -33,13 +33,18 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1248133631 37912 77d683123f92148345f3fc36a38d9ab1 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1248133631 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1248133631 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb" 1215737283 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/epsf/epsf.sty" 1298075956 27123 4572e7b856182a1e6e9df1c7cc21de80 ""
@@ -206,8 +211,8 @@
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "figures/ex2.png" 1744164811.85506 347878 4551fce5f772980527cf183cfb1498ff ""
   "figures/ex3.jpg" 1744163406 1055717 94d3801b5c9e7bfad41a4fd3fc31c5e7 ""
-  "portfolio.aux" 1745739021.89349 32 f852561997c05a7d986acd1deeb530ec "pdflatex"
-  "portfolio.tex" 1745739019.77598 15803 d7bdc2c7d6a37d0d8730e6f12da22ad4 ""
+  "portfolio.aux" 1746492270.73894 33 caafbda2f246531a72f60df9bc4c0d5b "pdflatex"
+  "portfolio.tex" 1746492269.23276 31113 745841d1583b8d443ac29149196e26ca ""
   (generated)
   "portfolio.aux"
   "portfolio.log"

@@ -172,7 +172,7 @@
 \end{center}
 
 \section*{Exercise 15}
-Investor buys EPO for \$3, current price is \$42, and $K=\$40$. The profit is calculated as \\
+Investor buys EPO for \$3, current price is \$42, and $K=\$40$. The profit is calculated as
     \begin{center}
         $\begin{cases}
             40 - S_T - 3 & S_T < 40 \\
@@ -195,7 +195,7 @@ The profit diagram is as follows:
 \break
 
 \section*{Exercise 16}
-Investor sells ECO for \$4, $K = \$50$, current price is \$47. The profit is calculated as \\
+Investor sells ECO for \$4, $K = \$50$, current price is \$47. The profit is calculated as
 \begin{center}
     $\begin{cases}
         0 + 4 & S_T \leq 0 \\
@@ -218,7 +218,7 @@ The profit diagram is as follows:
 \section*{Exercise 17}
 The investor has a short position on an ECO and a long position on an EPO. There are two cases to consider:
 \begin{enumerate}
-    \item The long position will exercise if $S_T > K$. Thus, the investor will have to sell to the long position for $K$. At time $t=T$, the payoff is \\
+    \item The long position will exercise if $S_T > K$. Thus, the investor will have to sell to the long position for $K$. At time $t=T$, the payoff is
     
     $\begin{cases}
         0 & S_T \leq K \\
@@ -227,7 +227,7 @@ The investor has a short position on an ECO and a long position on an EPO. There
 
     or $-\text{max}\{S_T-K, 0\}$.
 
-    \item The investor will exercise their long position on the EPO if $S_T < K$. At time $t=T$ the payoff is \\
+    \item The investor will exercise their long position on the EPO if $S_T < K$. At time $t=T$ the payoff is
     
     $\begin{cases}
         K-S_T & S_T < K \\
@@ -370,6 +370,328 @@ wrote the option and sold it for \$2, then the total cash flow is a loss of \$3.
 \end{enumerate}
 
 \section*{Exercise 26}
+On May 21, 2020, an investor owns 100 Apple shares. The investor is comparing two alternatives to limit risk. The first involves buying one December put option contract
+with a strike price of \$290. The second involves instructing a broker to sell the 100 shares as soon as Apple’s
+price reaches \$290. Discuss the advantages and disadvantages of the two strategies.
 
+\textbf{Solution:} Let's look at the two possible choices separately:
+\begin{enumerate}
+    \item Buying a put option: $K = \$290, c = \$21.30$. Then the profit is
+    \begin{center}
+        $\begin{cases}
+        -(21.30)(1000) & S_T > K \\
+        K - S_T - 2130 & S_T \leq K
+        \end{cases}$
+    \end{center}
+    \item Use a stop-loss to sell AAPL at \$290. This option is less risky, but it could lose out on profits if the market is volatile.
+\end{enumerate}
+Using a stop-loss is a less risky and simpler strategy that will ensure an investor will receive an exact amount for their shares. On the other hand,
+using a put option could allow the investor to make a profit in the future if the stock price is predicted to decline. Given that the investor holds shares
+at this instant, using a put option allows them to spend a portion of the value of the shares as "insurance", bounding the maximum possible loss. Also, if the market
+is volatile, the stop-loss could be triggered before a breakout rally, causing the investor to lose out on potential profits.
+
+
+\section*{Exercise 27}
+Find the payoff from a bull spread.
+\begin{enumerate}
+    \item Case 1: $S_T > K_2$. Then the payoff is $(S_T - K_1) + (K_2 - S_T) = K_2 - K_1$.
+    \item Case 2: $K_2 > S_T > K_1$. Then the payoff is $(0 + S_T - K_1) = S_T - K_1$.
+    \item Case 3: $S_T < K_1$. Then the payoff is zero.
+\end{enumerate}
+So a trader that uses a bull spread is hoping that the stock price will increase.
+
+\section*{Exercise 28} 
+An investor buys for \$3 a 3-month European call with a strike price of \$30 and sells for \$1 a 3-month
+European call with a strike price of \$35. Find the profit from this bull spread in each of the following cases:
+\begin{enumerate}
+    \item $S_T = \$25$. We know that $K_1 = \$30$ since it is the long position and that $K_2 = \$35$ since it is the short position.
+    Then $S_T < K_1 < K_2$. Using the payoff form a bull spread from exercise 27, we know the payoff is 0. Then the profit is $-\$2$.
+    \item $S_T = \$34$. Then $K_1 < S_T < K_2$. So we know that the payoff is $S_T - K_1$. So the payoff is \$4. Then the profit is \$2.
+    \item $S_T = \$40$. Then $S_T > K_2$. So the payoff is $K_2 - K_1$, or \$5. Then the profit is \$3. 
+\end{enumerate}
+
+\section*{Exercise 29}
+Find the payoff from a bear spread.
+\begin{enumerate}
+    \item Case 1: $S_T < K_2 < K_1$. Then the payoff is $(K_1 - S_T) + (S_T - K_2) = K_1 - K_2$.
+    \item Case 2: $K_2 < S_T < K_1$. Then the payoff is $K_1 - S_T$.
+    \item Case 3: $S_T > K_1$. Then the payoff is zero.
+\end{enumerate}
+So a trader using a bear spread is hoping that the stock price will decrease.
+
+\section*{Exercise 30}
+Long EPO, $K_1 = 35$, $c=3$. Short EPO, $K_2 =30$, $c=1$
+\begin{enumerate}
+    \item $S_T = 25$. Then the payoff is $K_1 - K_2 = 35-30 = 5$. The profit is $5 - 3 + 1 = \$3$.
+    \item $S_T = 34$. Then the payoff is $K_1 - S_T = 35-34 = 1$. The profit is $1 - 2 = -\$1$.
+    \item $S_T = 40$. Then the payoff is 0, and the profit is -\$2.
+\end{enumerate}
+
+\section*{Exercise 31}
+\begin{flushleft}
+Find the payoff from a straddle (long on an ECO and long on an EPO, both same strike price and expiry).
+We know the payoff from the long ECO is 
+\begin{center}
+    $\begin{cases}
+        S_T - K & S_T > K \\
+        0 & S_T \leq K
+    \end{cases}$
+\end{center}
+and the payoff from the long EPO is
+\begin{center}
+    $\begin{cases}
+        K-S_T & S_T < K \\
+        0 & S_T \geq K
+    \end{cases}$
+\end{center}
+Then the total payoff is
+\begin{center}
+    $\begin{cases}
+        S_T - K & S_T > K \\
+        K - S_T & S_T \leq K
+    \end{cases}$
+\end{center}
+This can be represented with the following payoff diagram
+\begin{center}
+    \begin{tikzpicture}
+        \draw[black, thick] [->] (-5,1) -- (-5, 5);
+        \draw[black, thick] [->] (-5,2) -- (0,2);
+        \filldraw[black] (-5,4) circle (2pt) node[anchor=east]{K};
+        \filldraw[black] (-3,2) circle (2pt) node[anchor=north]{K};
+        \draw[gray, thick] (-5,4) -- (-3,2);
+        \draw[gray, thick] [->] (-3,2) -- (-1,4);
+        \filldraw[black] (0,2) circle (0pt) node[anchor=west]{$S_T$};
+        \filldraw[black] (-5,5) circle (0pt) node[anchor=south]{Payoff};
+    \end{tikzpicture}
+\end{center}
+\end{flushleft}
+
+\section*{Exercise 32}
+Long ECO with $K= 60$, $c=6$, and long EPO with $K = 60$, $c = 4$
+\begin{enumerate}
+    \item The profit from the ECO is 
+        $\begin{cases}
+            -6 & S_T \leq 60 \\
+            S_T - 66 & S_T > 60
+        \end{cases}$
+    \item The profit from the EPO is
+        $\begin{cases}
+            56 - S_T & S_T \leq 60 \\
+            -4 & S_T > 60
+        \end{cases}$
+\end{enumerate}
+Then the total profit is
+\begin{center}
+    $\begin{cases}
+        50 - S_T & S_T \leq 60 \\
+        S_T - 70 & S_T > 60
+    \end{cases}$
+\end{center}
+Thus there will be a loss when $50 < S_T < 70$.
+
+\section*{Exercise 33}
+Initial = 150, $r = 0.08$, find value after 20 days (365 days in a year). We use the usual formula:
+$V(t) = (1 + tr)P$. Plugging in the given numbers, we get \$150.66.
+
+\section*{Exercise 34}
+We need \$1000 after 3 months with annual interest at 8\%. Using the usual formula:
+$V(t) = (1 + tr)P$. We plug in the given values and isolate P to get \$980.39 of initial capital.
+
+\section*{Exercise 35}
+Initial deposit of \$100, annual interest of 10\%, find value after two years when compounded
+\begin{enumerate}
+    \item Annually: Then we have $V(2) = (1 + \frac{10}{1})^{2\cdot1} \cdot 100 = \$121$
+    \item Monthly: Then we have $V(2) = (1 + \frac{10}{12})^{2\cdot12} \cdot 100 = \$122.03$
+\end{enumerate}
+
+\section*{Exercise 36}
+Show if $m < k$, then
+\begin{center}
+    $(1 + \frac{r}{m})^m < (1 + \frac{r}{k})^k$
+\end{center}
+\begin{flushleft}
+    Proof: Let $f(x) = (1 + \frac{r}{x})^x$ for $x > 0$. It is enough to show that $f(x)$ is increasing. Take the natural log of both sides and use log rules to get:
+    \begin{center}
+        $\ln(f(x)) = \ln((1 + \frac{r}{x})^x) = x\ln(1 + \frac{r}{x})$
+    \end{center}
+    Now take the derivative of both sides and simplify:
+    \begin{center}
+        $\frac{1}{f(x)} f'(x) = \ln(1 + \frac{r}{x}) + x(\frac{1}{1+\frac{r}{x}})(-\frac{r}{x^2})$ \\
+        $f'(x) = f(x) \big(\ln(1 + \frac{r}{x}) - \frac{r}{x+r}\big)$
+    \end{center}
+    Observe that $f(x) > 0$, so we just need to show that the other term is positive.
+    \begin{center}
+        $\ln(1 + \frac{r}{x}) - \frac{r}{x+r} > 0$ \\
+        $(x + r) \cdot \ln(1 + \frac{r}{x}) > r$ \\
+        $e^{x+r} + (1 + \frac{r}{x}) > e^{x+r}$
+    \end{center}
+    We know this must be true, therefore $f'(x)$ is indeed greater than zero. So $f(x)$ is indeed increasing and we are done. $\square$
+\end{flushleft}
+
+\section*{Exercise 37}
+Solve $\frac{dV}{dt} = r \cdot V$
+\begin{flushleft}
+    We can use separation of variables to solve this differential equation.
+    \begin{center}
+        $\frac{dV}{V} = r \cdot dt$
+    \end{center}
+    Integrate both sides:
+    \begin{center}
+        $\int \frac{dV}{V} = \int r \cdot dt$ \\
+        $\ln(|v|) = rt + C$ \\
+        $V = e^{rt + C} = Ce^{rt}$
+    \end{center}
+    Now we can use our initial condition to find a specific solution.
+    \begin{center}
+        $V(0) = 0$ \\
+        $V(0) = Ce^0$ \\
+        $P = C$
+    \end{center}
+    Thus $V = Pe^{rt}$.
+\end{flushleft}
+
+\section*{Exercise 38}
+Continous compounding is given by $V(t)=\lim_{m\rightarrow\infty}\left(1+\frac{r}{m}\right)^{tm}P.$
+\begin{enumerate}
+    \item Show that $e=\lim_{x\rightarrow\infty}\left(1+\frac{1}{x}\right)^x.$ To start, we can take the natural log of both sides:
+        \begin{center}
+            $\ln(e) = \ln(\lim_{x\rightarrow\infty}(1 + \frac{1}{x})^x)$ \\
+            $1 = \lim_{x\rightarrow\infty}(\ln(1 + \frac{1}{x})^x)$ \\
+            $1 = \lim_{x\rightarrow\infty}(x\ln(1 + \frac{1}{x}))$ \\
+            $1 = \lim_{x\rightarrow\infty}\left( \frac{\ln(1 + \frac{1}{x})}{\frac{1}{x}}\right)$
+        \end{center}
+        Now we can use L'Hopital's Rule to evaluate this limit:
+        \begin{center}
+            $1 = \lim_{x\rightarrow\infty}\left( \frac{\frac{1}{1 + \frac{1}{x}} (\frac{-1}{x^2})}{(\frac{-1}{x^2})} \right)$ \\
+            $1 = \lim_{x\rightarrow\infty}(\frac{1}{1 + \frac{1}{x}}) = \frac{1}{1} = 1$
+        \end{center}
+        Thus we achieve the desired result.
+    \item Now we want to obtain a closed form expression for $V(t)$. By using the proof above, we can assert that
+        \begin{center}
+            $e^r = \lim_{x\rightarrow\infty}(1 + \frac{r}{x})^x$
+        \end{center}
+        We know that $V(t)=\displaystyle \lim_{m\rightarrow\infty}\left(1+\frac{r}{m}\right)^{tm}P$. We can rewrite this as
+        \begin{center}
+            $\left( \lim_{m\rightarrow\infty} (1 + \frac{r}{m})^m \right)^t \cdot P = $ \\
+            $e^{rt} \cdot P = Pe^{rt}$
+        \end{center}
+        Thus the closed form for $V(t)$ is $V(t) = Pe^{rt}$, and this matches our result from solving the differential equation.
+\end{enumerate}
+
+\section*{Exercise 39}
+\begin{flushleft}
+    Prove that $c \leq S_0$. Suppose not, for the sake of contradiction. Then $S_0 < c$. Consider the portfolio where we are short one ECO and long one share of stock.
+    Then the initial cash flow is $c - S_0$, which is positive. Consider the two cases:
+    \begin{enumerate}
+        \item $S_T \leq K$. Then the long position in the ECO will not exercise. The payoff to the investor is $c$, which is positive.
+        \item $S_T > K$. Then the long position will exercise the ECO. Then the payoff to the investor is $K - S_T + S_T = K$, which is positive.
+    \end{enumerate}
+    Thus we have an arbitrage opportunity, which is a contradition. Thus $c \leq S_0$. $\square$
+\end{flushleft}
+
+\section*{Exercise 40}
+\begin{flushleft}
+    Prove that $p \leq Ke^{-rT}$. Suppose not, for the sake of contradiction. Then $p > Ke^{-rT}$. Consider the portfolio where we are short one EPO and have $Ke^{-rT}$ in cash. Then the initial cash flow is positive.
+    \begin{enumerate}
+        \item Case 1: $S_T < K$. Then the payoff is $p - Ke^{-rT}$, which is positive.
+        \item Case 2: $S_T \geq K$. Then the payoff is $(p - Ke^{-rT}) + K$, which is also positive.
+    \end{enumerate}
+    Thus we have an arbitrage opportunity, which is a contradiction. Thus $p \leq Ke^{-rT}$. $\square$
+\end{flushleft}
+
+\section*{Exercise 41}
+\begin{flushleft}
+    Prove that $c \geq S_0 - Ke^{-rT}$. Consider the following portfolios:
+    \begin{enumerate}
+        \item Portfolio A: one ECO and cash equal to $Ke^{-rT}$
+        \item Portfolio B: one share of the underlying stock
+    \end{enumerate}
+    At expiry, the value of each portfolio is
+    \begin{enumerate}
+        \item Portfolio A: $\max{(S_T - K, 0)} + Ke^{-rT}e^{rT}$
+        \item Portfolio B: $S_T$.
+    \end{enumerate}
+    Note that in all cases, the value of Portfolio A is greater than Portfolio B. So by the No-Arbitrage property, $V_0(A) \geq V_0(B)$.
+    Then $c + Ke^{-rT} \geq S_0$, so $c \geq S_0 - Ke^{-rT}$. $\square$
+\end{flushleft}
+
+\section*{Exercise 42}
+\begin{flushleft}
+    Prove that $p \geq Ke^{-rT} - S_0$. Consider the portfolio where we are long one EPO, long one share, and borrow $Ke^{-rT}$ in cash. The initial cash flow is therefore positive. Suppose, for the sake of contradiction, that
+    $p < Ke^{-rT} - S_0$. Then at expiry, the payoff will be $\max(K-S_T, 0) + S_T - Ke^{-rT}e^{rT}$, which can be simplified to $\max(0, S_T - K)$, which we know is postive. Thus we have a contradiction to the no arbitrage principle.
+    Thus $p \geq Ke^{-rT} - S_0$. $\square$
+\end{flushleft}
+
+\section*{Exercise 43}
+Find the lower bound of a 2-month EPO with $S_0 = 58$, $K = 65$, and $r = 0.05$.
+We use the formula from above for a put option: $p \geq Ke^{-rT} - S_0$. Plugging in the given values, we find that the lower bound for this put is \$6.46.
+
+\section*{Exercise 44}
+Show that $c + Ke{-rT} = p + S_0$, i.e. show put-call parity.
+\begin{flushleft}
+    Consider the following portfolios:
+    \begin{enumerate}
+        \item Portfolio A: Long one ECO and cash equal to $Ke^{-rT}$
+        \item Portfolio B: Long one EPO and one share of stock
+    \end{enumerate}
+    At expiry, the portfolios will be worth:
+    \begin{enumerate}
+        \item Portfolio A: $\max(S_T - K, 0) + Ke^{-rT}e^{-rT}$, which can be simplified to $\max(S_T, K)$.
+        \item Portfolio B: $\max(K - S_T, 0) + S_T$, which can be simplified to $\max(S_T, K)$.
+    \end{enumerate}
+    Thus at expiry, both the portfolios are worth the same. By no-arbitrage, they must be worth the same at $t=0$, thus $c + Ke{-rT} = p + S_0$. $\square$
+\end{flushleft}
+
+\section*{Exercise 45}
+\begin{flushleft}
+    $S_0 = 19$, $c=1$, $K=20$, $r=0.04$, expiry in 3 months means $T = 1/4$.
+    We can use put-call parity to calculate the price of a put option with same strike price and expiry.
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $1 + 20e^{-0.04 \cdot 0.25} = p + 19$ \\
+        $p = 1 + 20e^{-0.04 * 0.25} - 19$ \\
+        $p = 1.80$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 46}
+\begin{flushleft}
+    $S_0 = 130$, expiry in one year means $T=1$, $c = 20$, $p=5$, $K = 120$.
+    We can use put-call parity to calculate the risk-free interest rate.
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $20 + 120e^{-r \cdot 1} = 5 + 130$ \\
+        $e^{-r} = \frac{5+130-20}{120}$ \\
+        $e^r = \frac{120}{115}$ \\
+        $r = \ln(\frac{120}{115}) = 0.0426$ \\
+    \end{center}
+    Thus the risk-free interest rate is 4.26\%.
+\end{flushleft}
+
+\section*{Exercise 47}
+\begin{flushleft}
+    $S_0 = 31$, $c = 3$, $p = 2.25$, $K = 30$, $T = 0.25$, $r=0.1$.
+    Note that put-call parity does not hold here:
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $3 + 30e^{-0.1 \cdot 0.25} = 2.25 + 31$ \\
+        $32.26 \neq 33.25$
+    \end{center}
+    Thus we should be able to construct an arbitrage opportunity. Consider a portfolio where
+    we buy the call option and short-sell the put option and the stock. At $t=0$, the cash flow is
+    \begin{center}
+        $-c + p + S_0 = \$30.25$
+    \end{center}
+    Thus we have positive cash flow at $t=0$. We can then invest this at the risk-free interest rate. At expiry, this will be worth \$31.02. At expiry, we have two cases.
+    \begin{enumerate}
+        \item $S_T \leq 30$. Then we let the ECO expire, the EPO will be exercised, and we return the stock we shorted. The payoff will be $0 - 30 = -30$,
+                and since we started with \$31.02, we have \$1.02 profit.
+        \item $S_T > 30$. Then we exercise the ECO, the EPO expires worthless, and we return the stock we shorted. The payoff is $-K + S_T - S_T = -30$.
+                Since we started with \$31.02 we have \$1.02 profit.
+    \end{enumerate}
+    Thus in all cases, we make a profit with positive initial cash flow, and this was an arbitrage opportunity. $\square$
+\end{flushleft}
+
+\section*{Exercise 48}
 
 \end{document}
