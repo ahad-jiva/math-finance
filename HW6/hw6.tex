@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{mathalfa}
+\usepackage{blindtext}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage{amssymb}
+\usepackage{epsf, subfigure, verbatim, epsfig}
+\usepackage{fancyhdr}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{layout}
+\usepackage{fancybox}
+\usepackage{eurosym}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{dsfont,mathrsfs}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\title{Homework 6 \\ \large MATH 476}
+\author{Ahad Jiva}
+\date{May 15, 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 72}
+\begin{flushleft}
+    Show that $\mathbb{E}[S_n] = np$. \\
+    First note that we can break up $S_n$ Bernoulli trials into $n$ $S_1$ trials, ie the number of successes in $n$ Bernoulli trials is the same as the number of successes in one Bernoulli trial $n$ times, ie
+    $S_n = S_1 + S_1 + ... + S_1$. By the linearity of expected value, we can write
+    \begin{equation*}
+        \mathbb{E}[S_n] = \mathbb{E}[S_1] + \mathbb{E}[S_1] + \mathbb{E}[S_1] + ... + \mathbb{E}[S_1].
+    \end{equation*}
+    Let's assign a value of 1 to a success in a Bernoulli trial and a value of 0 to a failure. We know the expected value for $S_1$ is \\
+    \begin{equation*}
+        \sum_{x \in \Omega}{x \cdot p(x)}
+    \end{equation*}
+    In this case, there are only two possible outcomes, with a success having probability $p$ and failure $1-p$. So the expected value is $(1 \cdot p) + (0 \cdot (1-p)) = p$. 
+    Then we have
+    \begin{equation*}
+        \mathbb{E}[S_n] = \mathbb{E}[S_1] + \mathbb{E}[S_1] + \mathbb{E}[S_1] + ... + \mathbb{E}[S_1] = p + p + p + ... + p = np
+    \end{equation*}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 74}
+\begin{flushleft}
+    Show that $\mathbb{V}[S_n] = \sigma^2 = npq$. \\
+    First note $\mathbb{E}[X^2] = ((1^2)p + (0^2)(1-p))$. Observe that for a Bernoulli trial, $\mu = p$, or $\mu ^2 = p^2$. So then $\text{Var}(X) = p - p^2$ since variance = $\mathbb{E}[X^2] - (\mathbb{E}[X])^2$. Then we have
+    \begin{equation*}
+        \text{Var}(S_n) = \text{Var}(\sum_{i=1}^{n}{X_i}) = \sum_{i=1}^{n}{\text{Var}(X_i)} = n(p-p^2) = np(1-p) = npq
+    \end{equation*}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 75}
+\begin{flushleft}
+    Show that $\int_{-\infty}^{\infty}{\phi(x)dx} = 1$, where $\phi(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}$. \\
+    Suppose that $I$ is equal to this integral. We will switch to polar coordinates to prove the identity.
+    \begin{equation*}
+        I^2 = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}dx} \cdot \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}y^2}dy}
+        = \frac{1}{2\pi}\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}{e^{-\frac{1}{2}(x^2 + y^2)}dxdy}
+    \end{equation*}
+    Now we can make the substitution $x^2 + y^2 = r^2$ and change the bounds of integration accordingly.
+    \begin{equation*}
+        \frac{1}{2\pi} \int_{0}^{2\pi} \int_{0}^{\infty}{e^{-\frac{1}{2}r^2}rdrd\theta}
+    \end{equation*}
+    Since the integrand is entirely in $r$, we can separate the integrals and cancel the $d\theta$ integral from 0 to $2\pi$ with the $\frac{1}{2\pi}$ outside.
+    \begin{equation*}
+        \int_{0}^{\infty}{e^{-\frac{1}{2}r^2}}rdr
+    \end{equation*}
+    Now we can use u-substitution to finish the improper integral.
+    \begin{equation*}
+        u = \frac{1}{2}r^2, du = rdr \rightarrow \int_{0}^{\infty}{e^{-u}du}
+    \end{equation*}
+    \begin{equation*}
+        -e^{-u} \rvert_{0}^{\infty} = 0 + 1 = 1
+    \end{equation*}
+    as desired. $\square$
+\end{flushleft}
+
+\end{document}
