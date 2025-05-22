@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{mathalfa}
+\usepackage{blindtext}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage{amssymb}
+\usepackage{epsf, subfigure, verbatim, epsfig}
+\usepackage{fancyhdr}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{layout}
+\usepackage{fancybox}
+\usepackage{eurosym}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{dsfont,mathrsfs}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\title{Homework 7 \\ \large MATH 476}
+\author{Ahad Jiva}
+\date{May 21, 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 78}
+\begin{flushleft}
+    $X$ a normal distribution with $\mu = 70$ and $\sigma = 10$
+    \begin{enumerate}
+        \item $P(X>50) = 1-P(X\leq 50) = 1-P(z \leq \frac{50-70}{10}) = 1-P(z\leq -2) = 0.9773$
+        \item $P(X<60) = P(z<\frac{60-70}{10}) = P(z<-1) = N(-1) = 1 - N(1) = 0.1587$
+        \item $P(X>90) = 1 - P(X\leq 90) = 1-P(z\leq \frac{90-70}{10}) = 1-P(z\leq 2) = 1-0.9973 = 0.0027$
+        \item $P(60<X<80)$
+            \begin{enumerate}
+                \item $P(X<80) = P(z < \frac{80-70}{10}) = N(1) = 0.8413$
+                \item $P(60<X) = 1-P(X\leq 60) = N(-1) = 1-N(1)= 0.1587$
+            \end{enumerate}
+            Thus $P(60<X<80) = P(X<80) - P(X\leq60) = 0.6826$
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 80}
+\begin{flushleft}
+    Show that the terms of $c = e^{-rT} \sum_{j=0}^{n} \binom{n}{j} p^j (1-p)^{n-j} \max{(S_0u^jd^{n-j} - K, 0)}$ are nonzero if and only if \\
+    $j>a = \frac{n}{2} - \frac{\ln(S_0 / K)}{2\sigma \sqrt{T/n}}$. \\
+    When are the terms of this sum nonzero? It is when $S_0u^jd^{n-j} - K >0$, otherwise the max term makes everything zero. Let's move $K$ over the inequality and take the natural log: \\
+    \begin{center}
+        $\ln(S_0u^jd^{n-j}) > \ln(K)$ \\
+        $\ln(S_0) + j\ln(u) + (n-j)\ln(d) > \ln(K)$ since $u = e^{\sigma \sqrt{T/n}}$ and $d = e^{-\sigma \sqrt{T/n}}$ \\
+        $\ln(S_0 /K) > -j\sigma \sqrt{T/n} - (n-j)(- \sigma \sqrt{T/n})$
+    \end{center}
+    Thus the terms of the sum are nonzero iff $\ln(S_0/K) > n\sigma \sqrt{T/n} - 2j\sigma \sqrt{T/n}$, or if $j > \frac{n}{2} - \frac{\ln(S_0/K)}{2\sigma \sqrt{T/n}}$. Let that quantity equal $a$.
+    Then we have achieved the desired result. It follows that $c = e^{-rT} \sum_{j>a}^{} \binom{n}{j} p^j (1-p)^{n-j} (S_0u^jd^{n-j} - K) = e^{-rT}(S_0U_1 - KU_2)$. $\square$
+\end{flushleft}
+
+
+\section*{Exercise 81}
+Compute the following limits
+\begin{enumerate}
+    \item $\lim_{n \rightarrow \infty} p(1-p) = \frac{1}{4}$
+        \begin{flushleft}
+            We know that $p = \frac{e^{r\Delta t} - d}{u-d}$ where $u = e^{\sigma \sqrt{\Delta}t}$ and $d = e^{- \sigma \sqrt{\Delta}t}$. Then
+            \begin{center}
+                $1-p = 1 - \frac{e^{r\Delta t} - d}{u-d} = \frac{u - e^{r \Delta t}}{u-d}$. Then \\
+                $p(1-p) = \frac{(e^{r\Delta t} - d)(u - e^{r \Delta t})}{(u-d)^2}$
+            \end{center}
+            In our limit, as $n \rightarrow \infty$, $\Delta t \rightarrow 0$, $d \rightarrow 1$, $u \rightarrow 1$. This means that the limit is $\frac{0}{0}$, an indeterminate form.
+            Note that we can use power series representations to find the limit. Consider
+            \begin{center}
+                $e^{-r\Delta t} - d = (1 + r\Delta t + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$ \\
+                $u - e^{r\Delta t} = (1 + \sigma \sqrt{\Delta t} + ...) - (1 + r\Delta t + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$
+            \end{center}
+            Then $N(\Delta t) = (\sigma \sqrt{\Delta t} + O(\Delta t))^2 = \sigma^2 \Delta t + O(\Delta t^2)$ and $(u-d) = 4\sigma^2\Delta t + O(\Delta t^2)$. Then finally,
+            \begin{center}
+                $\lim_{\Delta t \rightarrow 0} \frac{N(\Delta t)}{(u-d)} = \lim_{\Delta t \rightarrow 0} \frac{\sigma^2 \Delta t + O(\Delta t^2)}{4\sigma^2\Delta t + O(\Delta t^2)} = \frac{\sigma^2}{4\sigma^2} = \frac{1}{4}$
+            \end{center}
+            as desired. $\square$
+        \end{flushleft}
+    \item $\lim_{n \rightarrow \infty} \sqrt{n}(p - \frac{1}{2}) = \frac{(r-\sigma^2/2)\sqrt{T}}{2\sigma}$
+        \begin{flushleft}
+            Again, we can start by substituting $p = \frac{e^{r\Delta t} - d}{u-d}$ where $u = e^{\sigma \sqrt{\Delta}t}$ and $d = e^{- \sigma \sqrt{\Delta}t}$.
+        \end{flushleft}
+\end{enumerate}
+
+\end{document}
