@@ -75,7 +75,7 @@ Compute the following limits
             In our limit, as $n \rightarrow \infty$, $\Delta t \rightarrow 0$, $d \rightarrow 1$, $u \rightarrow 1$. This means that the limit is $\frac{0}{0}$, an indeterminate form.
             Note that we can use power series representations to find the limit. Consider
             \begin{center}
-                $e^{-r\Delta t} - d = (1 + r\Delta t + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$ \\
+                $e^{r\Delta t} - d = (1 + r\Delta t + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$ \\
                 $u - e^{r\Delta t} = (1 + \sigma \sqrt{\Delta t} + ...) - (1 + r\Delta t + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$
             \end{center}
             Then $N(\Delta t) = (\sigma \sqrt{\Delta t} + O(\Delta t))^2 = \sigma^2 \Delta t + O(\Delta t^2)$ and $(u-d) = 4\sigma^2\Delta t + O(\Delta t^2)$. Then finally,
@@ -86,7 +86,24 @@ Compute the following limits
         \end{flushleft}
     \item $\lim_{n \rightarrow \infty} \sqrt{n}(p - \frac{1}{2}) = \frac{(r-\sigma^2/2)\sqrt{T}}{2\sigma}$
         \begin{flushleft}
-            Again, we can start by substituting $p = \frac{e^{r\Delta t} - d}{u-d}$ where $u = e^{\sigma \sqrt{\Delta}t}$ and $d = e^{- \sigma \sqrt{\Delta}t}$.
+            Again, we can start by substituting $p = \frac{e^{r\Delta t} - d}{u-d}$ where $u = e^{\sigma \sqrt{\Delta}t}$ and $d = e^{- \sigma \sqrt{\Delta}t}$. This results in
+            \begin{center}
+                $\sqrt{n} \left(\frac{e^{r \Delta t} - d}{u-d} - \frac{1}{2}\right)$
+            \end{center}
+            As $n \rightarrow \infty$, we have $\Delta t \rightarrow 0, d \rightarrow 1, u \rightarrow 1$, which results in the limit having an indeterminate form. We can use a similar trick as in part 1 as follows
+            \begin{center}
+                $e^{r\Delta t} - d = (1 + r\Delta t + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$ \\
+                $u - d = (1 + \sigma \sqrt{\Delta t} + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = 2\sigma \sqrt{\Delta t} + O(\Delta t)$
+            \end{center}
+            Then when we divide, we have
+            \begin{center}
+                $\sqrt{n}\left(\frac{\sigma \sqrt{\Delta t}}{2\sigma \sqrt{\Delta t}} - \frac{1}{2}\right)$ \\
+                $\sqrt{n}\left(\frac{\sigma \sqrt{\Delta t} - 2\sigma \sqrt{\Delta t}}{2\sigma \sqrt{\Delta t}}\right)$ \\
+                $\left(\frac{\sigma \sqrt{T} - 2\sigma\sqrt{T}}{2\sigma}\right)$ \\
+                $\frac{(-\sigma)\sqrt{T}}{2\sigma}$ \\
+                $\frac{(r - \sigma^2/2)}{2\sigma}$
+            \end{center}
+            as desired. $\square$
         \end{flushleft}
 \end{enumerate}
 
