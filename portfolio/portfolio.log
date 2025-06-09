@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  5 MAY 2025 22:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  8 JUN 2025 17:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -774,25 +774,94 @@ Missing character: There is no ; in font nullfont!
 
 [15]
 
-[16] (./portfolio.aux)
+[16]
+
+[17]
+
+[18]
+
+[19]
+
+[20]
+
+[21]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 1130.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1130--1131
+
+ []
+
+
+
+[22]
+
+[23]
+
+[24]
+
+[25]
+<figures/mc1.png, id=107, 439.6425pt x 264.99pt>
+File: figures/mc1.png Graphic file (type png)
+<use figures/mc1.png>
+Package pdftex.def Info: figures/mc1.png  used on input line 1316.
+(pdftex.def)             Requested size: 252.94499pt x 152.45702pt.
+<figures/mc2.png, id=108, 443.6575pt x 266.9975pt>
+File: figures/mc2.png Graphic file (type png)
+<use figures/mc2.png>
+Package pdftex.def Info: figures/mc2.png  used on input line 1317.
+(pdftex.def)             Requested size: 252.94499pt x 152.22273pt.
+<figures/mc3.png, id=109, 442.65375pt x 268.00125pt>
+File: figures/mc3.png Graphic file (type png)
+<use figures/mc3.png>
+Package pdftex.def Info: figures/mc3.png  used on input line 1318.
+(pdftex.def)             Requested size: 252.94499pt x 153.14668pt.
+
+
+[26 <./figures/mc1.png> <./figures/mc2.png> <./figures/mc3.png>]
+<figures/ex101.png, id=116, 445.665pt x 268.00125pt>
+File: figures/ex101.png Graphic file (type png)
+<use figures/ex101.png>
+Package pdftex.def Info: figures/ex101.png  used on input line 1337.
+(pdftex.def)             Requested size: 252.94499pt x 152.10799pt.
+
+
+[27 <./figures/ex101.png>]
+
+[28]
+
+[29]
+
+[30]
+
+[31]
+
+[32]
+
+[33]
+
+[34] (./portfolio.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 26238 strings out of 473190
- 661405 string characters out of 5715801
- 1193162 words of memory out of 5000000
- 49036 multiletter control sequences out of 15000+600000
+ 26270 strings out of 473190
+ 662111 string characters out of 5715801
+ 1194162 words of memory out of 5000000
+ 49068 multiletter control sequences out of 15000+600000
  568063 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,9n,91p,806b,2134s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on portfolio.pdf (16 pages, 1446352 bytes).
+Output written on portfolio.pdf (34 pages, 1616125 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 96 compressed objects within 1 object stream
+ 220 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

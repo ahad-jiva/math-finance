@@ -809,4 +809,890 @@ Same as Ex. 56 but for put options, ie show that $p(K_2) \leq \frac{p(K_1) + p(K
 \end{enumerate}
 Thus in all cases we have positive profit from a positive initial cash flow, which contradicts the no-arbitrage principle. Thus $p(K_2) \leq \frac{p(K_1) + p(K_3)}{2}$ as desired. $\square$
 
+\section*{Exercise 58}
+Show at time $T$, the value of the option is either \$1 or \$0. \\
+If $S_T$ = 22, then the payoff is \$1, so the value of the option will be \$1. If $S_T$ = 18, then the payoff is zero and the option will be worth zero.
+
+\section*{Exercise 59}
+Consider the portfolio where we are long in $\Delta$ shares and short 1 ECO. If $S_T$ = 22, then the payoff will be $22\Delta - 1$.
+
+\section*{Exercise 60}
+Consider the same portfolio as in exercise 59. If $S_T = 18$, then we have $\Delta$ shares worth 18 each and the ECO is worthless. So we have $18\Delta$.
+
+\section*{Exercise 61}
+To find a value of $\Delta$ that makes this portfolio riskless, we simply set the two values equal to each other and find $\Delta$.
+\begin{center}
+    $22\Delta - 1 = 18\Delta$ \\
+    $\Delta = 0.25$
+\end{center}
+Then the value of the portfolio is always \$4.5 at time T.
+
+\section*{Exercise 62}
+$r = 12\%$, $T = 3/12 = 0.25$. $V(0) = 4.5 \cdot e^{-0.12 \cdot 0.25} = 4.367$.
+
+\section*{Exercise 63}
+Let $f$ denote the price of an ECO at $t=0$. Consider the portfolio where we are long 1/n shares and short one ECO.
+Then at $t=0$, the value of the portfolio is $20\Delta - f = 4.367$, so then $f = 0.633$.
+
+\section*{Exercise 64}
+If $S_T = S_0u$, the portfolio is equal to $\Delta S_0u - f_u$. \\
+If $S_T = S_0d$, the portfolio is equal to $\Delta S_0d - f_d$. \\
+The portfolio is riskless if $\Delta S_0d - f_d = \Delta S_0u - f_u$, i.e. $\Delta = \frac{f_u - f_d}{S_0(u-d)}$.
+
+\section*{Exercise 65}
+\begin{flushleft}
+    At $t=0$, the portfolio is worth $\Delta S_0 - f$. At expiry, the portfolio is worth $\Delta S_0d - f_d = \Delta S_0u - f_u$, where $\Delta = \frac{f_u - f_d}{S_0(u-d)}$.
+    In the absence of arbitrage, $\Delta S_0 - f = (\Delta S_0u - f_u)e^{-rT}$. Now isolate $f$.
+    \begin{center}
+        $\Delta S_0 - \Delta S_0ue^{-rT} + f_ue^{-rT} = f$ \\
+        $f = \Delta S_0 (1-ue^{-rT}) + f_ue^{-rT}$. Now sub in our expression for $\Delta$. \\
+        $f = S_0 \left( \frac{f_u - f_d}{S_0(u-d)} \right) (1-ue^{-rT}) + f_ue^{-rT}$ \\
+        $f = \frac{f_u (1-de^{-rT}) + f_d(ue^{-rT}) - 1}{u-d}$, where $f_u = \max(S_0u-K, 0)$ and $f_d = \max(S_0d-K, 0)$
+    \end{center}
+    Now, let's make the algebraic substitution $p = \frac{e^{rT} - d}{u-d}$. So $1 - p = \frac{u-e^{rT}}{u-d}$. Then
+    \begin{center}
+        $f = \frac{f_u (1 - de^{-rT}) + f_d(ue^{-rT} - 1)}{u-d}$ \\
+        $f = e^{-rT}(pf_u + (1-p)f_d)$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 66}
+From Exercise 62 we have $r = 12\%$, $T = 3/12 = 0.25$. We will use the formula from the previous exercise. 
+\begin{center}
+    $f = e^{-rT} (pf_u + (1-p)f_d)$ \\
+    $f = e^{-0.12 \cdot 0.25} (p(1) + (1-p)(0))$ \\
+\end{center}
+We can calculate p using the formula from Exercise 65 and plug in the given values
+\begin{center}
+    $p = \frac{e^{rT} - d}{u-d}$ \\
+    $p = \frac{e^{0.12 \cdot 0.25} - 0.9}{1.1-0.9}$ \\
+    $f = \$0.633$
+\end{center}
+as desired. $\square$
+
+\section*{Exercise 67}
+\begin{flushleft}
+    $S_0 = 100$, in 6 months expected to increase or decrease by 10\%, $r=8\%$ compounded continously. \\
+    Using the formula for $p$ from before, we get $p = 0.887$. Then using the formula for $f$ from before
+    \begin{center}
+        $f = e^{-rT} (pf_u + (1-p)f_d)$
+    \end{center}
+    Substituting in our known values, we get $f = 9.61$.
+\end{flushleft}
+
+\section*{Exercise 68}
+Same situation as the previous exercise, but now we are pricing a put option. We can use put-call parity in this case.
+\begin{center}
+    $c + Ke^{-rT} = p + S_0$ \\
+    $9.61 + 100e^{-0.08 \cdot 0.25} = p + 100$ \\
+    $p = 1.92$
+\end{center}
+
+\section*{Exercise 69}
+\begin{flushleft}
+    $S_0 = 25$, after 2 months the stock price will be either 23 or 27. $r=10\%$, continuous compounding. What is the value of a derivative that pays $S^{2}_T$ at this time? \\
+    Using the formula for $p$, we get $p = 1.157$. Then using the formula for $f$ we have $f = e^{-0.1}(1.157(27)^2 + (1-1.157)(23)^2) = 639.3$
+\end{flushleft}
+
+\section*{Exercise 70}
+Show that $f = e^{-2r\Delta t}[p^2f_{uu} + 2p(1-p)f_{ud} + (1-p)^2f_{dd}]$.
+\begin{flushleft}
+    Using the one-step binomial tree, we know that $f = e^{-rT} (pf_u + (1-p)f_d)$. We can then use this formula as $f_u$ and $f_d$ in the second step of the two-step binomial tree.
+    \begin{center}
+        $f = e^{-rT} (pe^{-rT} (pf_u + (1-p)f_d) + (1-p)e^{-rT} (pf_u + (1-p)f_d))$ \\
+        $f = e^{-2r\Delta t}(p(pf_{uu}) + p(1-p)f_{ud} + p(1-p)f_{du} + (1-p)(1-p)f_{dd})$ \\
+        $f = e^{-2r\Delta t} (p^2f_{uu} + 2(1-p)f_{ud} + (1-p)^2f_{dd})$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 71}
+$S_0 = 50$, over each of the next two 3-month periods it is expected to up by 6\% or down by 5\%. The risk free interest rate is 5\% with continuous compounding. What is the value of a 6-month ECO with a strike price of \$51?
+\begin{flushleft}
+    We can use the formula from the previous exercise and plug in the appropriate values.
+    First let's calculate $p$
+    \begin{center}
+        $p = \frac{e^{0.05 \cdot 0.25} - 0.95}{1.06 - 0.95}$ \\
+        $p = 0.5689$
+    \end{center}
+    Now we can plug this into our formula for $f$ to get
+   \begin{center}
+        $f = e^{-2r\Delta t}[p^2f_{uu} + 2p(1-p)f_{ud} + (1-p)^2f_{dd}]$ \\
+        $f = e^{-2 \cdot 0.05 \cdot 0.25} (0.5689^2 \cdot 5.18 + 2 \cdot 0.5689 \cdot (1 - 0.5689) \cdot (-0.65) + (1-0.5689)^2 \cdot 0)$ \\
+        $f = 1.635$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 72}
+\begin{flushleft}
+    Show that $\mathbb{E}[S_n] = np$. \\
+    First note that we can break up $S_n$ Bernoulli trials into $n$ $S_1$ trials, ie the number of successes in $n$ Bernoulli trials is the same as the number of successes in one Bernoulli trial $n$ times, ie
+    $S_n = S_1 + S_1 + ... + S_1$. By the linearity of expected value, we can write
+    \begin{equation*}
+        \mathbb{E}[S_n] = \mathbb{E}[S_1] + \mathbb{E}[S_1] + \mathbb{E}[S_1] + ... + \mathbb{E}[S_1].
+    \end{equation*}
+    Let's assign a value of 1 to a success in a Bernoulli trial and a value of 0 to a failure. We know the expected value for $S_1$ is \\
+    \begin{equation*}
+        \sum_{x \in \Omega}{x \cdot p(x)}
+    \end{equation*}
+    In this case, there are only two possible outcomes, with a success having probability $p$ and failure $1-p$. So the expected value is $(1 \cdot p) + (0 \cdot (1-p)) = p$. 
+    Then we have
+    \begin{equation*}
+        \mathbb{E}[S_n] = \mathbb{E}[S_1] + \mathbb{E}[S_1] + \mathbb{E}[S_1] + ... + \mathbb{E}[S_1] = p + p + p + ... + p = np
+    \end{equation*}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 73}
+Show that $V(X) = \mathbb{E}[X^2] - \mu^2$.
+\begin{flushleft}
+    $V(X) = \mathbb{E}[X^2 - 2\mu X + \mu^2]$ \\
+    $V(X) = \mathbb{E}[X^2] - \mathbb{E}[2\mu X] + \mathbb{E}[\mu^2]$ \\
+    $V(X) = \mathbb{E}[X^2] + \mu^2 - 2\mu \mathbb{E}[X]$ \\
+    $V(X) = \mathbb{E}[X^2] + \mu^2 - 2\mu^2 = \mathbb{E}[X^2] - \mu^2$ as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 74}
+\begin{flushleft}
+    Show that $\mathbb{V}[S_n] = \sigma^2 = npq$. \\
+    First note $\mathbb{E}[X^2] = ((1^2)p + (0^2)(1-p))$. Observe that for a Bernoulli trial, $\mu = p$, or $\mu ^2 = p^2$. So then $\text{Var}(X) = p - p^2$ since variance = $\mathbb{E}[X^2] - (\mathbb{E}[X])^2$. Then we have
+    \begin{equation*}
+        \text{Var}(S_n) = \text{Var}(\sum_{i=1}^{n}{X_i}) = \sum_{i=1}^{n}{\text{Var}(X_i)} = n(p-p^2) = np(1-p) = npq
+    \end{equation*}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 75}
+\begin{flushleft}
+    Show that $\int_{-\infty}^{\infty}{\phi(x)dx} = 1$, where $\phi(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}$. \\
+    Suppose that $I$ is equal to this integral. We will switch to polar coordinates to prove the identity.
+    \begin{equation*}
+        I^2 = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}dx} \cdot \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}y^2}dy}
+        = \frac{1}{2\pi}\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}{e^{-\frac{1}{2}(x^2 + y^2)}dxdy}
+    \end{equation*}
+    Now we can make the substitution $x^2 + y^2 = r^2$ and change the bounds of integration accordingly.
+    \begin{equation*}
+        \frac{1}{2\pi} \int_{0}^{2\pi} \int_{0}^{\infty}{e^{-\frac{1}{2}r^2}rdrd\theta}
+    \end{equation*}
+    Since the integrand is entirely in $r$, we can separate the integrals and cancel the $d\theta$ integral from 0 to $2\pi$ with the $\frac{1}{2\pi}$ outside.
+    \begin{equation*}
+        \int_{0}^{\infty}{e^{-\frac{1}{2}r^2}}rdr
+    \end{equation*}
+    Now we can use u-substitution to finish the improper integral.
+    \begin{equation*}
+        u = \frac{1}{2}r^2, du = rdr \rightarrow \int_{0}^{\infty}{e^{-u}du}
+    \end{equation*}
+    \begin{equation*}
+        -e^{-u} \rvert_{0}^{\infty} = 0 + 1 = 1
+    \end{equation*}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 76}
+For a standard normal distribution, show that $\mu = 0$ and $\sigma = 1$
+\begin{flushleft}
+    First let's calculate the mean.
+    \begin{center}
+        $\int_{-\infty}^{\infty} x \phi(x)dx = \int_{-\infty}^{0} x \phi(x)dx + \int_{0}^{\infty} x \phi(x)dx$ \\
+        Note that $f(x) = \phi(x)$ and $f(-x) = -f(x)$, where $\phi(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} x^2}$ \\
+        So $\int_{-\infty}^{0}f(x)dx + \int_{0}^{\infty}f(x)dx = \int_{0}^{\infty}f(-x)dx + \int_{0}^{\infty}f(x)dx = -\int_{0}^{\infty}f(x)dx + \int_{0}^{\infty}f(x)dx = 0$
+    \end{center}
+    as desired. Now we can calculate the standard deviation as follows:
+    \begin{center}
+        $\int_{-\infty}^{\infty} (x-\mu)^2 \phi(x)dx = \int_{-infty}^{\infty} x^2 \phi(x)dx$. \\
+        Note that $x^2 \phi(x)$ is an even function, so \\
+        $2 \int_{0}^{\infty} x^2 \phi(x)dx = 2\int_{0}^{\infty} x^2 (\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2} x^2})$
+    \end{center}
+    Recall that $\Gamma(x) = \int_{0}^{\infty}e^{-t}t^{x-1}dt$ (This is the gamma function). Consider the substitution $t = \frac{1}{2}x^2$, $dt = xdx$. Then
+    \begin{center}
+        $2 \int_{0}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-t} \frac{1}{2}tdt = 2\int_{0}^{\infty}\frac{1}{\sqrt{2\pi}}e^{-t} (t^{3/2 - 1}) (\frac{1}{\sqrt{1/2}}) dt =$ \\
+        $\sqrt{2} \Gamma(3/2) = \frac{\sqrt{2\pi}}{2} \frac{2}{\sqrt{2\pi}} = 1$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 77}
+Show that for any $x$, $1-N(x) = N(-x)$.
+\begin{flushleft}
+    Note that $1-N(x) = 1 - \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}$. Also, note that $\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} = 1$. Then
+    \begin{center}
+        $1 - N(x) = 1 - \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} - \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} = $ \\
+        $\int_{x}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} = N(x)$    
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 78}
+\begin{flushleft}
+    $X$ a normal distribution with $\mu = 70$ and $\sigma = 10$
+    \begin{enumerate}
+        \item $P(X>50) = 1-P(X\leq 50) = 1-P(z \leq \frac{50-70}{10}) = 1-P(z\leq -2) = 0.9773$
+        \item $P(X<60) = P(z<\frac{60-70}{10}) = P(z<-1) = N(-1) = 1 - N(1) = 0.1587$
+        \item $P(X>90) = 1 - P(X\leq 90) = 1-P(z\leq \frac{90-70}{10}) = 1-P(z\leq 2) = 1-0.9973 = 0.0027$
+        \item $P(60<X<80)$
+            \begin{enumerate}
+                \item $P(X<80) = P(z < \frac{80-70}{10}) = N(1) = 0.8413$
+                \item $P(60<X) = 1-P(X\leq 60) = N(-1) = 1-N(1)= 0.1587$
+            \end{enumerate}
+            Thus $P(60<X<80) = P(X<80) - P(X\leq60) = 0.6826$
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 79}
+Show that $c = e^{-rT}\sum_{j=0}^{n} \binom{n}{j}p^j (1-p)^{n-j} \max(S_0u^jd^{m-j} - K, 0)$.
+\begin{flushleft}
+    Using the binomial tree model, if there have been $j$ up movements and $n-j$ down movements in an n-step tree,
+    then $S_T = S_0u^jd^{n-j}$. The value of the ECO at $t = T$ is $\max(S_0u^jd^{n-j}-K, 0)$.
+    Consider each movement of the stock (each step in the binomial tree) as a Bernoulli trial with probability of an up movement as $p$
+    and the probability of a down movement as $1-p$. Then the probability of exactly $j$ ups and $n-j$ downs is 
+    $\binom{n}{j}p^j(1-p)^{n-j}$. Thus the expected value of the payoff of the ECO at expiry is
+    \begin{center}
+        $\mathbb{E}[\text{payoff}] = \sum_{j=0}^{n}\binom{n}{j}p^j(1-p)^{n-j} \cdot \max(S_0u^jd^{n-j} - K, 0)$.
+    \end{center}
+    By no arbitrage, $c = e^{-rT}\sum_{j=0}^{n} \binom{n}{j}p^j (1-p)^{n-j} \max(S_0u^jd^{m-j} - K, 0)$, as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 80}
+\begin{flushleft}
+    Show that the terms of $c = e^{-rT} \sum_{j=0}^{n} \binom{n}{j} p^j (1-p)^{n-j} \max{(S_0u^jd^{n-j} - K, 0)}$ are nonzero if and only if \\
+    $j>a = \frac{n}{2} - \frac{\ln(S_0 / K)}{2\sigma \sqrt{T/n}}$. \\
+    When are the terms of this sum nonzero? It is when $S_0u^jd^{n-j} - K >0$, otherwise the max term makes everything zero. Let's move $K$ over the inequality and take the natural log: \\
+    \begin{center}
+        $\ln(S_0u^jd^{n-j}) > \ln(K)$ \\
+        $\ln(S_0) + j\ln(u) + (n-j)\ln(d) > \ln(K)$ since $u = e^{\sigma \sqrt{T/n}}$ and $d = e^{-\sigma \sqrt{T/n}}$ \\
+        $\ln(S_0 /K) > -j\sigma \sqrt{T/n} - (n-j)(- \sigma \sqrt{T/n})$
+    \end{center}
+    Thus the terms of the sum are nonzero iff $\ln(S_0/K) > n\sigma \sqrt{T/n} - 2j\sigma \sqrt{T/n}$, or if $j > \frac{n}{2} - \frac{\ln(S_0/K)}{2\sigma \sqrt{T/n}}$. Let that quantity equal $a$.
+    Then we have achieved the desired result. It follows that $c = e^{-rT} \sum_{j>a}^{} \binom{n}{j} p^j (1-p)^{n-j} (S_0u^jd^{n-j} - K) = e^{-rT}(S_0U_1 - KU_2)$. $\square$
+\end{flushleft}
+
+\section*{Exercise 81}
+Compute the following limits
+\begin{enumerate}
+    \item $\lim_{n \rightarrow \infty} p(1-p) = \frac{1}{4}$
+        \begin{flushleft}
+            We know that $p = \frac{e^{r\Delta t} - d}{u-d}$ where $u = e^{\sigma \sqrt{\Delta}t}$ and $d = e^{- \sigma \sqrt{\Delta}t}$. Then
+            \begin{center}
+                $1-p = 1 - \frac{e^{r\Delta t} - d}{u-d} = \frac{u - e^{r \Delta t}}{u-d}$. Then \\
+                $p(1-p) = \frac{(e^{r\Delta t} - d)(u - e^{r \Delta t})}{(u-d)^2}$
+            \end{center}
+            In our limit, as $n \rightarrow \infty$, $\Delta t \rightarrow 0$, $d \rightarrow 1$, $u \rightarrow 1$. This means that the limit is $\frac{0}{0}$, an indeterminate form.
+            Note that we can use power series representations to find the limit. Consider
+            \begin{center}
+                $e^{r\Delta t} - d = (1 + r\Delta t + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$ \\
+                $u - e^{r\Delta t} = (1 + \sigma \sqrt{\Delta t} + ...) - (1 + r\Delta t + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$
+            \end{center}
+            Then $N(\Delta t) = (\sigma \sqrt{\Delta t} + O(\Delta t))^2 = \sigma^2 \Delta t + O(\Delta t^2)$ and $(u-d) = 4\sigma^2\Delta t + O(\Delta t^2)$. Then finally,
+            \begin{center}
+                $\lim_{\Delta t \rightarrow 0} \frac{N(\Delta t)}{(u-d)} = \lim_{\Delta t \rightarrow 0} \frac{\sigma^2 \Delta t + O(\Delta t^2)}{4\sigma^2\Delta t + O(\Delta t^2)} = \frac{\sigma^2}{4\sigma^2} = \frac{1}{4}$
+            \end{center}
+            as desired. $\square$
+        \end{flushleft}
+    \item $\lim_{n \rightarrow \infty} \sqrt{n}(p - \frac{1}{2}) = \frac{(r-\sigma^2/2)\sqrt{T}}{2\sigma}$
+        \begin{flushleft}
+            Again, we can start by substituting $p = \frac{e^{r\Delta t} - d}{u-d}$ where $u = e^{\sigma \sqrt{\Delta}t}$ and $d = e^{- \sigma \sqrt{\Delta}t}$. This results in
+            \begin{center}
+                $\sqrt{n} \left(\frac{e^{r \Delta t} - d}{u-d} - \frac{1}{2}\right)$
+            \end{center}
+            As $n \rightarrow \infty$, we have $\Delta t \rightarrow 0, d \rightarrow 1, u \rightarrow 1$, which results in the limit having an indeterminate form. We can use a similar trick as in part 1 as follows
+            \begin{center}
+                $e^{r\Delta t} - d = (1 + r\Delta t + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = \sigma \sqrt{\Delta t} + O(\Delta t)$ \\
+                $u - d = (1 + \sigma \sqrt{\Delta t} + ...) - (1 - \sigma \sqrt{\Delta t} + ...) = 2\sigma \sqrt{\Delta t} + O(\Delta t)$
+            \end{center}
+            Then when we divide, we have
+            \begin{center}
+                $\sqrt{n}\left(\frac{\sigma \sqrt{\Delta t}}{2\sigma \sqrt{\Delta t}} - \frac{1}{2}\right)$ \\
+                $\sqrt{n}\left(\frac{\sigma \sqrt{\Delta t} - 2\sigma \sqrt{\Delta t}}{2\sigma \sqrt{\Delta t}}\right)$ \\
+                $\left(\frac{\sigma \sqrt{T} - 2\sigma\sqrt{T}}{2\sigma}\right)$ \\
+                $\frac{(-\sigma)\sqrt{T}}{2\sigma}$ \\
+                $\frac{(r - \sigma^2/2)}{2\sigma}$
+            \end{center}
+            as desired. $\square$
+        \end{flushleft}
+\end{enumerate}
+
+\section*{Exercise 82}
+Use the Central Limit Theorem to show that $U_2 = N(d_2)$
+\begin{flushleft}
+    Consider that $U_2 = \lim_{n \rightarrow \infty} \sum_{j>\alpha}^{} \binom{n}{j}p^j (1-p)^{n-j}$. Let $S_n$ equal the number of successes in $n$ Bernoulli trials with probability of success $p$.
+    Then $U_2= P(S_n > \alpha) = 1-P(S_n \leq \alpha)$. Recall that $\mathbb{E}[S_n] = np$, $V[S_n] = np(1-p)$. So then
+    $P(S_n \leq \alpha) = P(\frac{S_n - np}{\sqrt{np(1-p)}} \leq \frac{\alpha - np}{\sqrt{np(1-p)}}) = N(\frac{\alpha - np}{\sqrt{np(1-p)}})$ by the Central Limit Theorem. Finally,
+    \begin{center}
+        $U_2 = P(S_N > \alpha) = 1-P(S_N \leq \alpha) = 1-N(\frac{\alpha - np}{\sqrt{np(1-p)}}) = $ \\
+        $N(\frac{np-\alpha}{\sqrt{np(1-p)}})$. Now we can substitute $\alpha$ in to get \\
+        $U_2 = N(d_2)$ where $d_2= \frac{\ln(S_0 / K) + (r + \sigma^2 / 2)T}{\sigma \sqrt{T}}$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 83}
+Show that $U_1=[pu+(1-p)d]^n\sum{j>\alpha}{}{n\choose j}(p^{\star})^j(1-p^{\star})^{n-j}=e^{rT}\sum{j>\alpha}{}{n\choose j}(p^{\star})^j(1-p^{\star})^{n-j}\\$
+\begin{flushleft}
+    It is enough to show that $[pu + (1-p)d]^n$ is equal to $e^{rT}$. Let's make the appropriate substitutions and simplify
+    \begin{center}
+        $[pu + (1-p)d]^n = [\frac{e^{r \cdot T/n} - e^{-\sigma \sqrt{T/n}}}{e^{\sigma \sqrt{T/n}}-e^{-\sigma \sqrt{T/n}}} \cdot e^{\sigma \sqrt{T/n}} + \frac{e^{\sigma \sqrt{T/n}} - e^{r \cdot T/n}}{e^{\sigma \sqrt{T/n}}-e^{-\sigma \sqrt{T/n}}} \cdot e^{-\sigma \sqrt{T/n}}]^n$ \\
+        $[\frac{e^{r \cdot T/n + \sigma \sqrt{T/n}} - 1}{e^{\sigma \sqrt{T/n}}-e^{-\sigma \sqrt{T/n}}} + \frac{1 - e^{r \cdot T/n - \sigma \sqrt{T/n}}}{e^{\sigma \sqrt{T/n}}-e^{-\sigma \sqrt{T/n}}}]^n$ \\
+        $[\frac{e^{r \cdot T/n + \sigma \sqrt{T/n}} - e^{r \cdot T/n - \sigma \sqrt{T/n}}}{e^{\sigma \sqrt{T/n}}-e^{-\sigma \sqrt{T/n}}}]^n$ \\
+        $[\frac{e^{r \cdot T/n (e^{\sigma \sqrt{T/n}} - e^{-\sigma \sqrt{T/n}})}}{e^{\sigma \sqrt{T/n}}-e^{-\sigma \sqrt{T/n}}}]^n$ \\
+        $[e^{rT/n}]^n = $ \\
+        $e^{rT}$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 84}
+Conclude that $c = S_0N(d_1) - Ke^{-rT}N(d_2)$.
+\begin{flushleft}
+    We know that $c = e^{-rT}(S_0U_1 - KU_2)$ from exercise 80. We also know that $U_2 = N(d_2)$ from exercise 82. So already we have $c = e^{-rT}(S_0U_1 - KN(d_2))$, or equivalently, 
+    $c = S_0 \cdot e^{-rT}U_1 - Ke^{-rT}N(d_2)$. When multiplying $e^{-rT}$ and $U_1$, observe that the $e^{rT}$ term outside of the sum is cancelled away and we are left with the expression for $U_2$, just with $p^\star$.
+    We can write this as $N(d_1)$, so finally we get $c = S_0N(d_1) - Ke^{-rT}N(d_2)$.
+\end{flushleft}
+
+\section*{Exercise 85}
+\begin{flushleft}
+    Show that the price of a European put option on a non-dividend paying stock with strike price $K$ and expiry $T$ is 
+    \begin{center}
+        $p=Ke^{-rT}N(-d_2)-S_0N(-d_1)$.
+    \end{center}
+\underbar{Proof:} We will prove this using put-call parity. Recall that put-call parity states
+\begin{center}
+    $c + Ke^{-rT} = p + S_0$.
+\end{center}
+We also know that $c = S_0N(d_1) - Ke^{-rT}N(d_2)$. Plugging in this value of $c$ into the formula for put-call parity and isolating $p$, we get
+\begin{center}
+    $S_0N(d_1) - Ke^{-rT}N(d_2) + Ke^{-rT} = p + S_0$ \\
+    $p = S_0N(d_1) - Ke^{-rT}N(d_2)+Ke^{-rT} - S_0$ \\
+    $p = S_0 (N(d_1) - 1) + Ke^{-rT}(1-N(d_2))$ \\
+    $p = S_0(-N(-d_1)) + Ke^{-rT}(N(-d_2))$ \\
+    $p = Ke^{-rT}N(-d_2) - S_0N(-d_1)$
+\end{center}
+as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 86}
+$S_0 = 41, \sigma = 0.3, r = 0.08, K=40, T=3$. Find the price of the ECO.
+\begin{flushleft}
+    We use the Black-Scholes-Merton formula with the above values to get $c = 3.399$.
+\end{flushleft}
+
+\section*{Exercise 87}
+Find the price of an EPO with the same characteristics as the previous exercise.
+\begin{flushleft}
+    We can use put-call parity and isolate $p$ to get the value of the EPO.
+    \begin{center}
+        $c + Ke^{-rT} = p + S_0$ \\
+        $3.399 + 40e^{-0.08 \cdot 0.25} = p + 41$ \\
+        $p = 1.607$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 88}
+Find the binomial approximation for the call option in exercise 86 with $n = 1, 2, 10, 12, 100$. What happens as $n$ increases?
+\begin{flushleft}
+    Observe that with the given values, we have
+    \begin{center}
+        $u = e^{\sigma \sqrt{T/n}} = 1.162$ \\
+        $d = e^{-\sigma \sqrt{T/n}} = 0.861$ \\
+        $p = \frac{e^{0.08 \cdot 0.25} - 0.861}{1.162-0.861} = 0.5297$ \\
+        $1-p = 0.4703$
+    \end{center}
+    Then, using the binomial approximation for $c$,
+    \begin{center}
+        $c = e^{-0.08 \cdot 0.25} \sum_{j=0}^{1} \binom{1}{j} 0.5297^j (0.4703)^{1-j} \max{(41 \cdot (1.162)^j(0.861)^{1-j} - 40, 0)}$ \\
+        $c = 3.964$
+    \end{center}
+    For other values of $n$, we get
+    \begin{center}
+        $n = 2 \rightarrow c = 3.331$ \\
+        $n = 10 \rightarrow c = 3.427$ \\
+        $n = 12 \rightarrow c = 3.427$ \\
+        $n = 100 \rightarrow c = 3.400$
+    \end{center}
+    As $n$ increases, the calculated value of $c$ approaches the value that BSM gives us.
+\end{flushleft}
+
+\section*{Exercise 89}
+$S_0 = 120, r = 0.08, \sigma = 0.3, K = 100, T = 1$
+\begin{flushleft}
+    \begin{enumerate}
+        \item We use BSM to calculate $c$. First, observe $d_1 = \frac{ln(S_0/K) + (r + \frac{\sigma^2}{2})T}{\sigma \sqrt{T}} = 1.024$ and $d_2 = d_1 - \sigma \sqrt{T} = 0.724$. Then $N(d_1) = 0.8461$ and $N(d_2) = 0.7642$.
+            Then $c = 120(0.8461) - 100e^{-0.08 \cdot 1}(0.7642) = 30.984$
+        \item Using several values of $T$, we get
+            \begin{center}
+                $T = 50 \rightarrow c = 118.35$ \\
+                $T = 100 \rightarrow c = 119.97$ \\
+                $T = 1000 \rightarrow c = 120$
+            \end{center}
+            As $T \rightarrow \infty$, the price of the call option approaches $S_0$.
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 90}
+Consider a bull spread where we buy a 40-strike call and sell a 45-strike call. $S_0 = 40, \sigma = 0.3, r = 0.08, T = 0.5$.
+\begin{flushleft}
+    Using BSM, we can calculate that $c_1 = 4.16, c_2 = 2.13$, so there is a difference of $-2.03$.
+    \begin{center}
+        \begin{tikzpicture}
+        \draw[black, thick] [<->] (-4,1) -- (-4, 5);
+        \draw[black, thick] [<->] (-5,2.5) -- (0,2.5);
+        \filldraw[black] (-4,1.5) circle (2pt) node[anchor=east]{$-2.03$};
+        \filldraw[black] (-4,4) circle (2pt) node[anchor=east]{$2.97$};
+        \filldraw[black] (-3,2.5) circle (2pt) node[anchor=north]{$40$};
+        \filldraw[black] (-2,2.5) circle (2pt) node[anchor=north]{$45$};
+        \draw[gray, thick] (-4,1.5) -- (-3,1.5);
+        \draw[gray, thick] (-3,1.5) -- (-2,4);
+        \draw[gray, thick] [->] (-2,4) -- (-1,4);
+        \filldraw[black] (0,2.5) circle (0pt) node[anchor=west]{$S_T$};
+        \filldraw[black] (-5,5) circle (0pt) node[anchor=south]{Payoff};
+    \end{tikzpicture}
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 91}
+Suppose that $\sigma = 0.3, S_0 = 50$. Find the standard deviation of the stock price in 1 week and 4 weeks.
+\begin{flushleft}
+    We know that the standard deviation of the stock return is $\sigma \sqrt{T}$.
+    \begin{enumerate}
+        \item For 1 week, we have $T = 1/52$. So then the standard deviation is 4.16\%
+        \item For 4 weeks, we have $T = 4/52$. So then the standard deviation is 8.32\%
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 92}
+We have a table of values representing the daily returns for 21 days. If we assume there are 252 trading days in a year, then $T = 21/252$. Given the data, we can calculate its standard deviation to get $0.0557$. Then we have
+$0.0557 = \sigma \sqrt{21/252}$. Simplifying, we get $\sigma = 0.193$ or 19.3\%
+
+\section*{Exercise 93}
+We are given stock closing prices for 15 consecutive weeks. We assume that there are 52 trading weeks in a year. Using the data,
+we calculate the standard deviation to be 0.1116. Then $0.1116 = \sigma \sqrt{15/52}$, so $\sigma = 0.2079$ or 20.79\%
+
+\section*{Exercise 94}
+A call option on a non-dividend paying stock has a price of 2.50. The stock is \$15, the strike price is 13, time to maturity is 3 months, and the risk free rate is 5\%. Find the implied volatility.
+\begin{flushleft}
+    We can use the BSM formula and isolate $\sigma$ to find the implied volatility.
+    \begin{center}
+        $c = S_0N(d_1) - Ke^{-rT}N(d_2)$ \\
+        $2.50 = 15N(\frac{ln(15/13) + (0.05 + \frac{\sigma^2}{2})0.25}{\sigma \sqrt{0.25}}) - 13e^{-0.05 \cdot 0.25}N(d_1 - \sigma \sqrt{0.25})$ \\
+        $\sigma = 0.3960$ or 39.60\%
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 95}
+Calculating implied volatility of AAPL from 21 consecutive days of trading between May 8 2025 and June 6 2025.
+Standard deviation is 3.59, and $\sqrt{T} = \sqrt{21/252} = 0.288$. So then the implied volatility $\sigma = 12.46\%$
+
+\section*{Exercise 96}
+$S_0 = 100, K=50, r = 0.06, T=0.01$
+\begin{flushleft}
+    \begin{enumerate}
+        \item Find $c$ for $\sigma \in \{ 0.05, 0.1, 0.15, ... , 1 \}$. For each value of $\sigma$, we calculate (using BSM) $c \approx 50.029$
+        \item Since the value of $T$ is so small, buying this call option is just like buying the stock itself.
+        \item If $\sigma = 5$, then $c = 51.23$.
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 97}
+$\sigma = 0.3$, expected return of 15\% per year with continuous compounding. Find the process that describes $\Delta S$ over one week.
+\begin{flushleft}
+    Observe that $\Delta t = 1/52$. Then $\Delta S = 0.15(S)(1/52) + \epsilon(S)(0.3)(\sqrt{1/52})$, or $\Delta S = 0.00288(S) + 0.0416(S)(\epsilon)$.
+\end{flushleft}
+
+\section*{Exercise 98}
+$\mu = 0.1, \sigma = 0.3, S_0 = 100, T = 1/252$
+\begin{flushleft}
+    \begin{enumerate}
+        \item $S_0e^{\mu T} = 100e^{0.1 \cdot 1/252} = 100.08$
+        \item $\sigma \sqrt{\Delta T} = 0.3 \sqrt{1/252} = 0.02$
+        \item Mean ± 2 standard deviations = 100.04 - 100.12
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 99}
+\begin{flushleft}
+    Consider a stock that pays no dividends, has a volatility of 30\% per annum, and provides an expected return of 15\% per annum with continous compounding. The initial stock price is \$100. Use Monte Carlo simulation to simulate the stock price during one week periods for one year. \\
+    Using the Monte Carlo method three separate times, we get
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{figures/mc1.png}
+        \includegraphics[width=0.5\textwidth]{figures/mc2.png}
+        \includegraphics[width=0.5\textwidth]{figures/mc3.png}
+    \end{center}
+    With each simulation, we get different results due to the random nature of the way we sample the normal distribution. The first simulation, the stock price nearly touches \$300, in the second, it barely cracks \$220, and in the last it fails to finish the year above \$150.
+\end{flushleft}
+
+\section*{Exercise 100}
+\begin{flushleft}
+    The Ito process for the stock price is $\Delta S = \mu S \Delta t + \sigma S \epsilon \sqrt{\Delta t}$. Explain the difference between this model and each of the following.
+    \begin{enumerate}
+        \item $\Delta S = \mu \Delta t + \sigma \epsilon \sqrt{\Delta t}$. This model is indifferent to the stock price, meaning that with this model, a stock worth \$5 and a stock worth \$50000 would move by the same amounts, which is not accurate.
+        \item $\Delta S = \mu S \Delta t + \sigma \epsilon \sqrt{\Delta t}$. Although this model will take into account the stock's initial price, it does not adjust the drift term over time, meaning that in the long run, stock price changes will not vary. For example, if a stock starts at \$5, this model may work for some time, but as the stock increases to many multiples of 5, the model will become less and less accurate.
+        \item $\Delta S = \mu \Delta t + \sigma S \epsilon \sqrt{\Delta t}$. With this model, $\Delta S$ will always be constant (plus or minus a "chaos" term). This would not be accurate in the long term as the stock price changes.
+    \end{enumerate}
+    It is also important to note that all three of these models violate the no-arbitrage principle. Consider a stock worth \$0. Then all three of these models imply that $\Delta S$ will be a nonzero value, which violates the no-arbitrage principle.
+\end{flushleft}
+
+\section*{Exercise 101}
+Using the Monte Carlo simulation with initial price 30, return 9\%, and volatility 20\%, we get the following
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{figures/ex101.png}
+\end{center}
+
+\section*{Exercise 102}
+Show that $\Delta(call) = N(d_1)$
+\begin{flushleft}
+    We know that $\Delta = \frac{\partial C}{\partial S}$. We apply this to BSM to get
+    \begin{center}
+        $\Delta(call) = \frac{\partial}{\partial S}[S_0N(d_1) - Ke^{-rT}N(d_2)]$
+    \end{center}
+    Since the $d_1$ and $d_2$ terms both have $S$ terms in them, we have to employ the chain rule. Observe that
+    \begin{center}
+        $\frac{\partial d_1}{\partial S} = \frac{\partial}{\partial S}[\frac{ln(S)}{\sigma \sqrt{T}} - \frac{ln(K) + (r + \sigma^2 / 2)T}{\sigma \sqrt{T}}] = \frac{1}{S\sigma \sqrt{T}}$ \\
+        $\frac{\partial d_2}{\partial S} = \frac{\partial}{\partial S}[d_1 - \sigma \sqrt{T}] = \frac{1}{S\sigma \sqrt{T}}$ \\
+        Thus, $\Delta = N(d_1) + SN'(d_1)(\frac{1}{s\sigma \sqrt{T}}) - Ke^{-rT}N'(d_2)(\frac{1}{S\sigma \sqrt{T}}) = $\\
+        $= N(d_1) + \frac{N'(d_1)}{\sigma \sqrt{T}} - \frac{Ke^{-rT}N'(d_2)}{S\sigma \sqrt{T}}$
+    \end{center}
+    At this point, it suffices to show that the second and third terms in that expression are equal, so that we are left with $N(d_1)$
+    So, we have
+    \begin{center}
+        $SN'(d_1) = Ke^{-rT}N'(d_2)$ \\
+        $S \frac{1}{\sqrt{2\pi}}e^{-d_1^2/2} = Ke^{-rT}\frac{1}{\sqrt{2\pi}}e^{-d_2^2/2}$ \\
+        $\ln(Se^{-d_1^2/2}) = \ln(Ke^{-rT}e^{-d_2^2/2})$ \\
+        $\ln(S) + \ln(e^{-d_1^2/2}) = \ln(Ke^{-rT}) + \ln(e^{-d_2^2/2})$ \\
+        $\ln(S) - d_1^2/2 = \ln(K) - rT - d_2^2/2$ \\
+        $\ln(S) - \ln(K) + rT = \frac{d_1^2-d_2^2}{2} = \frac{(\sigma \sqrt{T})(2d_1 - \sigma\sqrt{T})}{2} = d_1 \sigma \sqrt{T} - \frac{\sigma^2 \sqrt{T}}{2}$ \\
+        $\ln(S) - \ln(K) + rT = \ln(S) - \ln(K) + rT + \frac{\sigma^2T}{2} - \frac{\sigma^2T}{2} = \ln(S) - \ln(K) + rT$
+    \end{center}
+    Thus $\frac{N'(d_1)}{\sigma \sqrt{T}} = \frac{Ke^{-rT}N'(d_2)}{S\sigma \sqrt{T}}$. So then $\Delta = N(d_1)$ as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 103}
+Show that $\Delta (put) = N(d_1) - 1$.
+\begin{flushleft}
+    Observe that using BSM we know $p = Ke^{-rT}N(-d_2) - S_0N(-d_1)$. We can approach this the same way as the previous exercise.
+    \begin{center}
+        $\Delta p = \frac{\partial}{\partial S}[Ke^{-rT}N(-d_2) - S_0N(-d_1)] = $ \\
+        $= -N(-d_1) - \frac{Ke^{-rT} \phi(d_2)}{S_0 \sigma \sqrt{T}} + \frac{\phi(d_1)}{\sigma \sqrt{T}} = $ \\
+        $= -N(-d_1) = -(1-N(d_1)) = N(d_1) - 1$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 104}
+Show that $\Theta(\text{call})=-\frac{S_0N'(d_1)\sigma}{2\sqrt{T}}-rKe^{-rT}N(d_2)$.
+\begin{flushleft}
+    From BSM, we know $c = S_0N(d_1) - Ke^{-rT}N(d_2)$. Then
+    \begin{center}
+        $\Theta(c) = \frac{\partial}{\partial t}[S_0N(d_1) - Ke^{-rT}n(d_2)] = $ \\
+        $S_0N'(d_1) \frac{\partial d_1}{\partial t} - rKe^{-rT}N(d_2) - Ke^{-rT}N'(d_2) \frac{\partial d_2}{\partial t} = $ \\
+        $(S_0N'(d_1) - rKe^{-rT}N'(d_2)) \frac{\partial d_1}{\partial t} - rKe^{-rT}N(d_2) = Ke^{-rT}N'(d_2) \frac{\sigma}{2\sqrt{T}}$ \\
+        $\Theta(\text{call})=-\frac{S_0N'(d_1)\sigma}{2\sqrt{T}}-rKe^{-rT}N(d_2)$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 105}
+Consider a call option where $S_0 = 49, K=50, r = 0.05, T = 0.3846, \sigma = 0.2$. Find the theta of the option.
+\begin{flushleft}
+    Using the formula derived in the previous exercise, we have
+    \begin{center}
+        $\Theta(\text{call})=-\frac{49 \cdot N'(d_1) \cdot 0.2}{2\sqrt{0.3846}}-0.05 \cdot 50e^{-0.05 \cdot 0.3846}N(d_2)$ \\
+        $d_1 = \frac{\ln(49/50) + (0.05 + 0.2^2/2)0.3846}{0.2 \sqrt{0.3846}}$ \\
+        $d_2 = d_1 - 0.2 \sqrt{0.3846}$ \\
+        $\Theta = -4.31$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 106}
+Show that $\Gamma(call) = \frac{N'(d_1)}{S_0\sigma \sqrt{T}}$.
+\begin{flushleft}
+    Recall that gamma is the second derivative with respect to S, or the derivative of delta. From exercise 102, we know that $\Delta (call) = N(d_1)$. Then
+    \begin{center}
+        $\Gamma(call) = \frac{\partial}{\partial S} \Delta (call)$ \\
+        $\frac{\partial}{\partial S} (N(d_1)) = N'(d_1) \cdot \frac{\partial}{\partial S}d_1$ \\
+        $= N'(d_1) \cdot \frac{1}{S_0\sigma \sqrt{T}} = \frac{N'(d_1)}{S_0\sigma \sqrt{T}}$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 107}
+Consider a call option where $S_0 = 49, K=50, r = 0.05, T = 0.3846, \sigma = 0.2$. Find the gamma of the option.
+\begin{flushleft}
+    Using the formula from the previous exercise, we have
+    \begin{center}
+        $\Gamma(call) = \frac{N'(d_1)}{49 \cdot 0.2 \sqrt{0.3846}}$ \\
+        $d_1 = \frac{\ln(49/50) + (0.05 + 0.2^2/2)0.3846}{0.2 \sqrt{0.3846}}$ \\
+        $\Gamma (call) = 0.066$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 108}
+Consider a call option where $S_0 = 49, K=50, r = 0.05, T = 0.3846, \sigma = 0.2$. Find the vega of the option.
+\begin{flushleft}
+    Observe that vega is the derivative of the option price with respect to volatility. So
+    \begin{center}
+        $\nu (call) = \frac{\partial}{\partial \sigma}[S_0N(d_1) - Ke^{-rT}N(d_2)] = $ \\
+        $= S_0N'(d_1)\frac{\partial d_1}{\partial \sigma} - Ke^{-rT}N'(d_2) \frac{\partial d_2}{\partial \sigma} = $ \\
+        $= S_0 \sqrt{\frac{T}{2\pi}} e^{-(\ln(S_0/K) + (r + \sigma^2/2)T)^2/(2\sigma^2T)} = $ \\
+        $= S_0 \sqrt{T} \phi(d_1)$
+    \end{center}
+    Then using the given quantities,
+    \begin{center}
+        $\nu = 49 \cdot \sqrt{0.3846} \phi(d_1)$ \\
+        $d_1 = \frac{\ln(49/50) + (0.05 + 0.2^2/2)0.3846}{0.2 \sqrt{0.3846}}$ \\
+        $\nu = 12.1$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 109}
+Show that $\rho(call) = KTe^{-rT}N(d_2)$
+\begin{flushleft}
+    Recall that $c = S_0N(d_1) - Ke^{-rT}N(d_2)$ and $\rho$ is the derivative of option price with respect to $r$.
+    \begin{center}
+        $\frac{\partial d_1}{\partial r} = \frac{T}{\sigma \sqrt{T}}$ \\
+        $d_2 = d_1 - \sigma \sqrt{T} = \frac{\sqrt{T}}{\sigma}$ \\
+        $\frac{\partial c}{\partial r} = S_0N'(d_1)\frac{\sqrt{T}}{\sigma} - KTe^{-rT}N(d_2) + Ke^{-rT}N'(d_2)\frac{\sqrt{T}}{\sigma} = $ \\
+        $S_0N'(d_1) = Ke^{-rT}N'(d_2) = KTe^{-rT}N(d_2)$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 110}
+Use put-call parity to derive the relationship between the Greeks.
+\begin{flushleft}
+    Recall that delta is the derivative with respect to $S$, gamma is the second derivative with respect to $S$, vega is with respect to $\sigma$, and theta with respect to $T$. Also recall that $c + Ke^{-rT} = p + S_0$
+    \begin{enumerate}
+        \item $\Delta$: $\Delta c + 0 = \Delta p + 1$, so $\Delta c = \Delta p + 1$
+        \item $\Gamma$: $\Gamma c = \Gamma p$
+        \item $\nu$: $\nu c + 0 = \nu p + 0$, so $\nu c = \nu p$
+        \item $\Theta$: $\Theta_c - Kre^{-r(T-t)} = \Theta_p + 0$, so $\Theta_c = \Theta_p - Kre^{-r(T-t)}$
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 111}
+Find the mean, standard deviation, and variance of $\Delta x$
+\begin{flushleft}
+    $\Delta x = a\Delta t + b\Delta z$. Then $\mathbb{E} = \mathbb{E}[a\Delta t] + \mathbb{E}[b\Delta z] = a\Delta t$.
+    Also, $V[\Delta x] = b^2\Delta t$. So then the standard deviation equals $b\sqrt{\Delta t}$.
+\end{flushleft}
+
+\section*{Exercise 112}
+Find $S(t)$ if $\sigma = 0$.
+\begin{flushleft}
+    If volatility is zero, then there is no random "chaos" term. Then $dS$ is determined entirely by the expected return and the stock price, ie $\mu S$. Then we can integrate to find $S(t)$ and we get $\mu/2 S^2$.
+\end{flushleft}
+
+\section*{Exercise 113}
+Find the process followed by a function $G$ of the stock price $S$ and time $t$.
+\begin{flushleft}
+    If $G(S,t)$ is a function of stock price and time, then $dG = (\frac{\partial G}{\partial S}\mu S + \frac{\partial G}{\partial t} + \frac{1}{2}\frac{\partial^2G}{\partial S^2}\sigma^2S^2)dt + \frac{\partial G}{\partial S}\sigma S dz$ with
+    \begin{center}
+        $\frac{dS}{S} = \mu dt + \sigma dz$ and $dz = \epsilon \sqrt{dt}$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 114}
+The Lognormal property
+\begin{flushleft}
+    $G(S,t) = \ln(S)$, then $\ln(S_T) \sim \phi[\ln(S_0) + (\mu - \sigma^2/2)T, \sigma^2T]$.
+    Observe that in this case, $\ln(S_T)$ is normally distributed with mean $\ln(S_0) + (\mu - \sigma^2/2)T$ and standard distribution $\sigma^2T$.
+\end{flushleft}
+
+\section*{Exercise 115}
+$S_0 = 40, \mu = 0.16, \sigma = 0.2, T = 0.5$
+\begin{flushleft}
+    From the previous exercise, we have $\ln(S_0) + (\mu - \sigma^2/2)T$. Plugging in our given values, we have $\ln(40) + (0.16 - (0.2)^2/2)(0.5) = 3.759$.
+    Also, $\sigma \sqrt{T} = 0.2\sqrt{0.5} = 0.141$. To find the 95\% interval, we add and subtract 2 standard deviations from the mean to get $[3.477, 4.041]$. But we have to remember that we need to exponentiate in order to find the actual interval
+    of the stock price itself, which is $[32.36, 56.88]$
+\end{flushleft}
+
+\section*{Exercise 116}
+Suppose that a stock price $S$ follows the Brownian motion process $dS = \mu S dt + \sigma S dz$. Find the process by the variable $S^n$ and its expected value.
+\begin{flushleft}
+    First we apply Itô's Lemma. Let $G=S^n$ to obtain
+    \begin{center}
+        $dG = f'(S) dS + \frac{1}{2} f''(S) (dS)^2$ \\
+        $f(S) = S^n, \quad f'(S) = n S^{n-1}, \quad f''(S) = n(n-1) S^{n-2}$
+    \end{center}
+    Then
+    \begin{center}
+        $d(S^n) = n S^{n-1} \, dS + \frac{1}{2} n(n-1) S^{n-2} \cdot (dS)^2$ \\
+        $= n S^{n-1} (\mu S \, dt + \sigma S \, dz) + \frac{1}{2} n(n-1) S^{n-2} \cdot \sigma^2 S^2 \, dt $\\
+        $= n \mu S^n \, dt + n \sigma S^n \, dz + \frac{1}{2} n(n-1) \sigma^2 S^n \, dt$ \\
+        $= S^n \left( n \mu + \frac{1}{2} n(n-1) \sigma^2 \right) dt + n \sigma S^n \, dz$
+    \end{center}
+    and finally,
+    \begin{center}
+        $d(S^n) = S^n \left( n \mu + \frac{1}{2} n(n-1) \sigma^2 \right) dt + n \sigma S^n \, dZ$
+    \end{center}
+    Now we can calculate the expected value. Since we know that $S(T)$ follows geometric Brownian motion, $S(t) = S(0) e^{\left( \left( \mu - \frac{1}{2} \sigma^2 \right)t + \sigma z_t \right)}$. Then
+    \begin{center}
+        $S^n(t) = S(0)^n e^{\left( n\left( \mu - \frac{1}{2} \sigma^2 \right)t + n \sigma z_t \right)}$ \\
+        $\mathbb{E}[S^n(t)] = S(0)^n \exp\left( n\left( \mu - \frac{1}{2} \sigma^2 \right)t \right) \mathbb{E}\left[ \exp(n \sigma Z_t) \right] $ \\
+        $= S(0)^n \exp\left( n\left( \mu - \frac{1}{2} \sigma^2 \right)t \right) \exp\left( \frac{1}{2} n^2 \sigma^2 t \right) $ \\
+        $= S(0)^n \exp\left( n \mu t + \frac{1}{2} n(n-1) \sigma^2 t \right)$
+    \end{center}
+    Thus, the expected value is
+    \begin{center}
+        $\mathbb{E}[S^n(t)] = S(0)^n e^{\left( n \mu t + \frac{1}{2} n(n-1) \sigma^2 t \right)}$.
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 117}
+Find the expected value and variance of $S_T$
+\begin{flushleft}
+    As mentioned in class, we can simply state the following:
+    \begin{center}
+        $\mathbb{E}[S_T] = S_0e^{\mu T}$ \\
+        $V[S_T] = S_0^2 e^{2\mu T}(e^{\sigma^2T - 1})$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 118}
+Consider a stock with $S_0 = 20, \mu = 0.2, \sigma = 0.4$. Find expected value and variance at $T=1$.
+\begin{flushleft}
+    Using the formulas from the previous exercise, we have
+    \begin{center}
+        $\mathbb{E}[S_T] = S_0e^{\mu T} = 20 \cdot e^{0.2 \cdot 1} = 24.43$ \\
+        $V[S_T] = S_0^2 e^{2\mu T}(e^{\sigma^2T - 1}) = 20^2 \cdot e^{2 \cdot 0.2 \cdot 1}(e^{0.4^2 \cdot 1 - 1}) = 103.54$
+    \end{center}
+\end{flushleft}
+
+\section*{Exercise 119}
+Show that $\Delta \Pi = \left( -\frac{\partial f}{\partial t} - \frac{1}{2}\frac{\partial ^2 f}{\partial S^2} \sigma^2 S^2 \right) \Delta t$.
+\begin{flushleft}
+    Recall that $\Delta \Pi = -\Delta f + \frac{\partial f}{\partial S} \Delta S$. Then, with some algebra,
+    \begin{center}
+        $-\left( \frac{\partial f}{\partial S}\mu S + \frac{\partial f}{\partial t} + \frac{1}{2} \frac{\partial^2f}{\partial S^2}\sigma^2S^2 \right)dt - \frac{\partial f}{\partial S}\sigma S dz + \frac{\partial f}{\partial S}\left( \mu S \Delta t + \sigma S \Delta z \right) = $ \\
+        $ = \left( -\frac{\partial f}{\partial t} - \frac{1}{2}\frac{\partial^2f}{\partial S^2}\sigma^2 S^2 \right)dt$
+    \end{center}
+    and so $\Delta \Pi = \left( -\frac{\partial f}{\partial t} - \frac{1}{2}\frac{\partial ^2 f}{\partial S^2} \sigma^2 S^2 \right) \Delta t$ as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 120}
+Show that $\frac{\partial f}{\partial t}+rS\frac{\partial f}{\partial S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2f}{\partial S^2}=rf$.
+\begin{flushleft}
+    Consider $r\Pi\Delta t$. From the previous exercise, this gives us
+    \begin{center}
+        $-\frac{\partial f}{\partial t} - \frac{1}{2}\frac{\partial^2f}{\partial S^2} = r(-f + \frac{\partial f}{\partial S}S)$
+    \end{center}
+    Then,
+    \begin{center}
+        $\frac{\partial f}{\partial t} + rS \frac{\partial f}{\partial S} + \frac{1}{2} \sigma^2S^2 \frac{\partial^2 f}{\partial S^2} = rf$
+    \end{center}
+    For an ECO, we have $f(S, T) = \max(S_T - K, 0)$ and for an EPO, we have $f(S,T) = \max(K-S_T, 0)$.
+\end{flushleft}
+
+\section*{Exercise 121}
+Show the price of a forward contract with delivery price $K$, $f = S - Ke^{-r(T-t)}$, satisfies the BSM PDE.
+\begin{flushleft}
+    Recall that the BSM PDE tells us $\frac{\partial f}{\partial t}+rS\frac{\partial f}{\partial S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2f}{\partial S^2}=rf$.
+    From our given $f$, we calculate
+    \begin{center}
+        $\frac{\partial f}{\partial t} = -rKe^{-r(T-t)}$ \\
+        $\frac{\partial f}{\partial S} = 1$ \\
+        $\frac{\partial^2f}{\partial S^2} = 0$
+    \end{center}
+    We plug these values into the BSM PDE to get
+    \begin{center}
+        $-rKe^{-r(T-t)} + rS(1) + \frac{1}{2} \sigma^2 S^2 (0) = r(S-Ke^{-r(T-t)})$ \\
+        $rf = rS - rKe^{-r(T-t)}$ \\
+        $f = S-Ke^{-r(T-t)}$
+    \end{center}
+    as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 122}
+Show that $c = S_0N(d_1) - Ke^{-rT}N(d_2)$ satsfies the BSM PDE.
+\begin{flushleft}
+    \begin{enumerate}
+        \item Find $N'(x)$. From previous exercises, we know that $N'(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}$.
+        \item Show that $SN'(d_1)=Ke^{-r(T-t)}N'(d_2)$. Refer to exercise 102.
+        \item Find $\frac{\partial d_1}{\partial S}$ and $\frac{\partial d_2}{\partial S}$. From exercise 102, we know that $\frac{\partial d_1}{\partial S} = \frac{1}{S\sigma \sqrt{T}}$ and $\frac{\partial d_2}{\partial S} = \frac{1}{S\sigma \sqrt{T}}$
+        \item Show that if $c=SN(d_1)-Ke^{-r(T-t)}N(d_2)$, then $\frac{\partial c}{\partial t}=-rKe^{-r(T-t)}N(d_2)-SN'(d_1)\frac{\sigma}{2\sqrt{T-t}}$. This is the same as calculating the theta of an option. Refer to exercise 104.
+        \item Show that $\frac{\partial c}{\partial S} = N(d_1)$. This is the same as calculating the delta of a call option. Refer to exercise 102.
+        \item Show that $c$ satisfies the BSM PDE. We have
+            \begin{center}
+                $\frac{\partial c}{\partial S} = N(d_1)$ \\
+                $\frac{\partial c}{\partial t}=-rKe^{-r(T-t)}N(d_2)-SN'(d_1)\frac{\sigma}{2\sqrt{T-t}}$ \\
+                $\frac{\partial^2 c}{\partial S^2} = \frac{N'(d_1)}{S_0\sigma \sqrt{T}}$
+            \end{center}
+            Then we plug this into the BSM PDE to get
+            \begin{center}
+                $-rKe^{-r(T-t)}N(d_2)-SN'(d_1)\frac{\sigma}{2\sqrt{T-t}} + rS N(d_1) + \frac{1}{2} \sigma^2 S^2 \cdot \frac{N'(d_1)}{S_0\sigma \sqrt{T}} = rf$
+            \end{center}
+            With some algebra, we can achieve
+            \begin{center}
+                $rf = rf$
+            \end{center}
+            and so $c$ satisfies the BSM PDE as desired. $\square$
+        \item Show that $c$ satisfies the boundary conditions for an ECO, ie $c = \max(S-K, 0)$ as $t \rightarrow T$.
+            \begin{center}
+                As $t \rightarrow T$, $Ke^{-r(T-t)} \rightarrow 1$, so $c = \max(S-K, 0)$
+            \end{center}
+            as desired. $\square$
+    \end{enumerate}
+\end{flushleft}
+
+\section*{Exercise 123}
+\begin{enumerate}
+    \item Find the price of the derivative at $t$. We have $dS = \mu S dt + \sigma S dz$ and $\mathbb{E}[\ln(S_T)] = \ln(S_0) + (\mu - \sigma^2/2)T$.
+        In a risk-neutral valuation, $\mu = r$, so then $\mathbb{E}[\ln(S_T)] = \ln(S_0) + (r - \sigma^2/2)T$. Then
+        \begin{center}
+            $\mathbb{E}[\ln(S_T)] = \ln(S_T) + (r - \sigma^2/2)(T-t) = f(S, T)$ \\
+            $f(S,T) = e^{-r(T-t)}\mathbb{E}[\ln(S_t)] = e^{-r(T-t)}[\ln(S_T) + (r - \sigma^2/2)(T-t)]$
+        \end{center}
+    \item Show that this result satisfies the BSM PDE. We have
+        \begin{center}
+            $\frac{\partial f}{\partial t} = re^{-r(T-t)}[\ln(S)+(r - \sigma^2/2)(T-t)] + e^{-r(T-t)}(r-\sigma^2/2)(-1)$ \\
+            $\frac{\partial f}{\partial S} = e^{-r(T-t)} \cdot \frac{1}{S}$ \\
+            $\frac{\partial^2f}{\partial S^2} = e^{-r(T-t)} \cdot \frac{-1}{S^2}$
+        \end{center}
+        Then we plug these values into the PDE to get
+        \begin{center}
+            $re^{-r(T-t)}[\ln(S)+(r - \sigma^2/2)(T-t)] + e^{-r(T-t)}(r-\sigma^2/2)(-1) + rS \cdot e^{-r(T-t)} \cdot \frac{1}{S} + \frac{1}{2}\sigma^2S^2 \cdot e^{-r(T-t)} \cdot \frac{-1}{S^2} = rf$
+        \end{center}
+        With a lot of algebra, we can conclude that the left side of this equation is equal to $rf$ and thus the PDE is satisfied, as desired. $\square$
+\end{enumerate}
+
+\section*{Exercise 124}
+Show that $\Theta+rS\Delta+\frac{1}{2}\sigma^2S^2\Gamma=r\Pi$.
+\begin{flushleft}
+    We can replace each derivative in the BSM PDE with its respective Greek, ie $\frac{\partial f}{\partial t}$ is theta, $\frac{\partial f}{\partial S}$ is delta, and $\frac{\partial^2f}{\partial S^2}$ is gamma.
+    Substituting into the BSM PDE, we have $\Theta+rS\Delta+\frac{1}{2}\sigma^2S^2\Gamma=r\Pi$ as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 125}
+Show that $\lim_{S_0\rightarrow\infty}c=S_0-Ke^{-rT}$.
+\begin{flushleft}
+    Recall that $N(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}e^{(-1/2) t^2} dt$, $d_1 = \frac{\ln(S_0/K) + (r + \sigma^2/2)T}{\sigma \sqrt{T}}$. Then observe that
+    $\lim_{S_0 \rightarrow \infty}d_1 = \infty$, and $\lim_{S_0 \rightarrow \infty}d_2 = \infty$.
+    Then note that $\lim_{S_0 \rightarrow \infty}N(d_1) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{(-1/2) t^2} dt = 1$ and $\lim_{S_0 \rightarrow \infty}N(d_2) =1$.
+    Then, $c = S_0N(d_1) - Ke^{-rT}N(d_2)$, so $\lim_{S_0 \rightarrow \infty}c = S_0(1) - Ke^{-rT}(1) = S_0 - Ke^{-rT}$ as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 126}
+Show that $\lim_{S_0 \rightarrow \infty}p = 0$.
+\begin{flushleft}
+    Recall that $p = Ke^{-rT}N(-d_2) - S_0N(-d_1)$. Then $p = Ke^{-rT}(1 - N(d_2)) - S_0(1-N(d_1))$. Then finally, $\lim_{S_0 \rightarrow \infty}p = Ke^{-rT}(1-1) - S_0(1-1) = 0$ as desired. $\square$
+\end{flushleft}
+
+\section*{Exercise 127}
+Show that $\lim_{\sigma\rightarrow 0}c=\text{max}(S_0-Ke^{-rT},0)$.
+\begin{flushleft}
+    Recall that $c = S_0N(d_1) - Ke^{-rT}N(d_2)$, $d_1 = \frac{\ln(S_0/K) + (r + \sigma^2/2)T}{\sigma \sqrt{T}}$, and $d_2 = d_1 - \sigma \sqrt{T}$.
+    So then $c = S_0 N(\lim_{\sigma \rightarrow 0}d_1) - Ke^{-rT}N(\lim_{\sigma \rightarrow 0}d_2)$. We need to consider three cases:
+    \begin{enumerate}
+        \item $\ln(S_0/K) + rT > 0$. Then $d_1, d_2 \rightarrow \infty$.
+        \item $\ln(S_0/K) + rT < 0$. Then $d_1, d_2 \rightarrow -\infty$.
+        \item $\ln(S_0/K) + rT = 0$. Then $d_1, d_2 \rightarrow 0$.
+    \end{enumerate}
+    Then we can look at $c$ in each case:
+    \begin{enumerate}
+        \item $\lim_{\sigma \rightarrow 0}c = S_0(1) - Ke^{-rT}(1) = S_0 - Ke^{-rT}$.
+        \item $\lim_{\sigma \rightarrow 0}c = S_0(0) - Ke^{-rT}(0) = 0$.
+        \item $\lim_{\sigma \rightarrow 0}c = S_0(1/2) - Ke^{-rT}(1/2) = \frac{1}{2}(S_0 - Ke^{-rT})$. In this case, $e^{\ln(S_0/K) + rT} = e^0$, so $Ke^{-rT} = 0$.
+    \end{enumerate}
+    Thus, $\lim_{\sigma \rightarrow 0}c =\max(S_0 - Ke^{-rT}, 0)$ as desired. $\square$
+\end{flushleft}
+
 \end{document}

@@ -1,0 +1,3043 @@
+\documentclass[letterpaper,10pt]{article}
+\usepackage{amsmath}
+\usepackage{epsf, subfigure, verbatim, epsfig}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{layout}
+\usepackage{fancybox}
+\usepackage{eurosym}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{dsfont,mathrsfs}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage{multicol}
+\usepackage{float}
+
+\pagestyle{fancy}
+
+\topmargin-0.5in
+
+\oddsidemargin-0.2in
+\evensidemargin-0.5in
+\textwidth6.8in
+\textheight9in
+
+\headheight0.2in
+\fancyhfoffset[R]{0in}
+
+\newcommand{\Sum}[2]{\ensuremath{\sum\limits}_{#1}^{#2}}
+\newcommand{\bvec}[1]{\ensuremath{\mathbf{#1}}}
+
+\theorempreskipamount .5cm \theorempostskipamount .5cm
+\theoremheaderfont{\bfseries}
+\theorembodyfont{\normalfont}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{df}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{lm}{Lemma}%[section]
+\newtheorem{exa}{Example}[section]
+\newtheorem{cor}{Corollary}%[section]
+\newtheorem{alg}{Algorithm}%[section]
+\newtheorem{inv}{Investigation}
+\newtheorem{proj}{Project}
+
+
+
+\lhead{Cal Poly} \chead{} \rhead{dpaquin@calpoly.edu}
+\lfoot{MATH 476} \rfoot{Mathematical Finance}
+
+\begin{document}
+
+
+
+
+
+
+
+\setcounter{tocdepth}{2}
+
+
+
+\begin{center}
+
+\Large
+
+{\bf Dr. Dana Paquin}\\
+
+{\bf dpaquin@calpoly.edu}\\
+
+{\bf MATH 476: Special Topics in Applied Mathematics\\Mathematical Finance}\\
+
+{\bf California Polytechnic State University}\\
+
+{\bf Department of Mathematics}
+
+\end{center}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+
+\tableofcontents
+
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\newpage
+
+
+
+\section{Introduction to Financial Derivatives: Forwards, Futures, and Options}
+
+
+
+\subsection{Financial Derivatives}
+
+
+\begin{df}{\bf Financial Derivative}
+A {\bf financial derivative} is a financial instrument that has a value determined by (or {\em derived from}) the value of other underlying variables (i.e. the price of something else).  A derivative involves two parties agreeing to a future transaction.
+\end{df}
+
+\begin{itemize}
+
+\item The derivatives market is much larger than the stock market when measured in terms of value of underlying assets. 
+
+\item The value of the assets underlying outstanding derivatives transactions is several times the world gross domestic product. 
+
+\item As we shall see in this unit, derivatives can be used for hedging or speculation or arbitrage. They can transfer a wide range of risks in the economy from one entity to another.
+
+\item Often, the variables underlying derivatives are the prices of traded assets.  
+
+\item For example, a stock option is a derivative whose value is dependent on the price of a stock.
+
+\item However, derivatives can be dependent on almost any variable.  Examples include the price of gold, the value of a foreign currency, the price of corn, and  the amount of snow falling at a certain ski resort.
+
+\item In general, derivatives provide an alternative to a simple sale or purchase, and thus increase the range of possibilities for an investor or manager seeking to accomplish some goal.  Derivatives are traded for a variety of reasons:
+
+\begin{itemize}
+
+\item {\bf Risk management}
+
+\item {\bf Hedging}
+
+\item {\bf Speculation}
+
+\item {\bf Reduced transaction costs}
+
+\item {\bf Regulatory arbitrage}
+
+\end{itemize}
+
+\item It is generally possible to create a given payoff in multiple ways. The construction of a given financial product from other products is called {\bf financial engineering}.
+
+\item In recent years, and especially following the 2008 financial crisis, there have been many significant developments in the derivatives market.
+
+\begin{itemize}
+
+\item Many new instruments such as credit derivatives, electricity derivatives, weather derivatives, and insurance derivatives have been developed.
+
+\item Many new types of interest rate, foreign exchange, and equity derivatives now trade.
+
+\item There have been many new ideas in risk management and risk measurement.
+
+\item Many regulations affecting the over-the-counter derivatives market have been introduced.
+
+\item The {\em risk-free} discount rate used to value derivatives has changed and the decision has been taken to phase out LIBOR.
+
+\item Derivatives dealers now adjust the way they price derivatives to allow for credit risks, funding costs, and capital requirements.
+
+\item Collateral and credit issues are now given much more attention and have led to changes in the way derivatives are traded.
+
+\item Machine learning is now becoming widely used for managing derivatives portfolios.
+
+\end{itemize}
+
+\end{itemize}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Financial Markets}
+
+The trading of a financial asset contains (at least) four discrete steps:
+
+\begin{enumerate}
+
+\item The buyer and seller must locate one another and agree on a price. Stock exchanges, derivatives exchanges, and dealers all facilitate trading, providing buyers and sellers a means to find one another.
+
+\item Once the buyer and seller agree on a price, the trade must be {\em cleared}, i.e., the obligations of each party are specified. In the case of a stock transaction, the buyer will be required to deliver cash and the seller to deliver the stock. In the case of some
+derivatives transactions, both parties must post collateral.
+
+\item The trade must be settled, that is, the buyer and seller must deliver in the required period of time the cash or securities necessary to satisfy their obligations.
+
+\item Once the trade is complete, records are updated.
+
+\end{enumerate}
+
+Trading of financial claims often takes place on organized {\bf exchanges}. 
+
+\begin{df}{\bf Exchange}
+An {\bf exchange} is an organization that provides a venue for trading, and that sets rules governing what is traded and how trading occurs. 
+\end{df}
+
+\begin{itemize}
+
+\item A given exchange will trade a particular set of financial instruments.
+
+\item The New York Stock Exchange (NYSE) is an example of an exchange.
+
+\item The Chicago Board of Trade (CBOT) was established in 1848 to bring farmers and merchants together. Initially its main task was to standardize the quantities and qualities of the grains that were traded. Within a few years, the first futures-type contract was developed. It was known as a to-arrive contract. Speculators soon became interested in the contract and found trading the contract to be an attractive alternative to trading the grain itself.
+
+\item The Chicago Board Options Exchange (CBOE, www.cboe.com) started trading call option contracts on 16 stocks in 1973. Options had traded prior to 1973, but the CBOE succeeded in creating an orderly market with well-defined contracts. Put option contracts started trading on the exchange in 1977. The CBOE now trades options on thousands of stocks and many different stock indices.
+
+\item Traditionally derivatives exchanges have used what is known as the {\bf open outcry system}. This involves traders physically meeting on the floor of the exchange, shouting, and using a complicated set of hand signals to indicate the trades they would like to carry out. 
+
+\item Exchanges have largely replaced the open outcry system by {\bf electronic trading}. This involves traders entering their desired trades at a keyboard and a computer being used to match buyers and sellers. 
+
+\item Electronic trading has led to a growth in {\bf high-frequency trading}. This involves the use of algorithms to initiate trades, often without human intervention, and has become an important feature of derivatives markets.
+
+
+\item After a trade has taken place, a {\bf clearinghouse} matches the buyers and sellers, keeping track of their obligations and payments. The traders who deal directly with a clearinghouse are called clearing members. If you buy a share of stock as an individual, your transaction ultimately is cleared through the account of a clearing member.
+
+\item With stock and bond trades, after the trade has cleared and settled, the buyer and seller have no continuing obligations to one another. However, with derivatives trades, one party may have to pay another in the future. To facilitate these payments and to help manage credit risk, a derivatives clearinghouse typically interposes itself in the transaction, becoming the buyer to all sellers and the seller to all buyers. This substitution of one counterparty for another is known as {\bf novation}.
+
+
+\end{itemize}
+
+\begin{df}{\bf Over The Counter (OTC ) Markets}
+It is possible for large traders to trade many financial claims directly with a dealer, bypassing organized exchanges. Such trading is said to occur in the {\bf over-the-counter (OTC) market}.
+\end{df}
+
+\begin{itemize}
+
+\item Most of the trading volume numbers we see reported in the newspaper/online pertain to exchange-based trading. 
+
+\item Exchange activity is public and highly regulated. Over-the-counter trading is not easy to observe or measure and is generally less regulated. 
+
+\item For many categories of financial claims, the value of OTC trading is greater than the value traded on exchanges.
+
+\item The number of derivatives transactions per year in OTC markets is smaller than in exchange- traded markets, but the average size of the transactions is much greater. 
+
+\item Although the statistics that are collected for the two markets are not exactly comparable, it is clear that the volume of business in the over-the-counter market is much larger than in the exchange-traded market. 
+
+\end{itemize}
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.5]{markets.png}
+\caption{Size of over-the-counter and exchange-traded derivatives markets.}
+\end{center}
+\end{figure}
+
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Buying and Short-Selling Financial Assets}
+
+\begin{df}{\bf Ask Price}
+The price at which you can buy a financial asset is called the {\bf offer price} or {\bf ask price}.
+\end{df}
+
+\begin{df}{\bf Bid Price}
+The price at which you can sell a financial asset is called the {\bf bid price}.
+\end{df}
+
+\begin{df}{\bf Bid-Ask Spread}
+The difference between the price at which you can buy and the price at which you can sell is called the {\bf bid-ask spread}.
+\end{df}
+
+\begin{df}{\bf Short Sale}
+The sale of a financial derivative that you do not currently own is called a {\bf short sale}.  Short sales can be used for {\em speculation}, {\em financing}, or {\em hedging}.
+\end{df}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Forwards and Futures}
+
+\begin{df}{\bf Spot Contract}
+A {\bf spot contract} is an agreement to buy or sell an asset (almost) immediately. 
+\end{df}
+
+\begin{df}{\bf Forward Contract}
+A {\bf forward contract} is an agreement to buy or sell an asset at a certain future time for a certain price.  The {\em long position} (the purchaser of the forward contract) in the forward contract agrees to {\em buy} the asset on a specified future date for a specified price, and the {\em short position} (the seller of the forward contract) agrees to sell the asset on that date for the specified price.  Forwards contracts are traded in the over-the-counter market.
+\end{df}
+
+\begin{df}{\bf Futures Contract}
+A {\bf futures contract} is an agreement between two parties to buy or sell an asset at a certain time in the future for a certain price. Futures contracts are normally traded on an exchange.
+\end{df}
+
+\noindent We use the following notation:
+
+\begin{itemize}
+
+\item $K=$ delivery price of the forward contract (the price at which the long position agrees to buy the asset)
+
+\item $S_T=$ spot price of the asset at maturity of the contract (time $T$)
+
+\end{itemize}
+
+\begin{ex}{\bf Forward Contract Payoff}
+
+
+\begin{itemize}
+
+\item Find the payoff from a long position in a forward contract on one unit of an asset.
+
+\item Find the payoff from a short position in a forward contract on one unit of an asset.
+
+\end{itemize}
+
+
+\end{ex}
+
+
+\begin{ex}{\bf Forward Contract on Stock Index}
+Suppose that the S\&R 500 index has a current price of \$1000, and the $6$-month forward price is \$1020.  What happens if the index price is \$950 in $6$ months?  \$1200 in $6$ months?  Construct payoff diagrams for the long and short positions on this contract.  What would be an advantage of using the forward contract to buy the index in $6$ months, as opposed to buying it outright at time $t=0$?  
+\end{ex}
+
+
+\begin{ex}{\bf Payoff Diagrams for Forward Contract}
+Construct payoff diagrams for the long and short positions in a forward contract with delivery price $K$ and spot price $S_T$.
+\end{ex}
+
+
+
+\begin{ex}{\bf Forward Contract on Foreign Exchange}
+Forward contracts on foreign exchange are very popular. Most large banks employ both spot and forward foreign-exchange traders.   The table below shows quotes for the exchange rate between the British pound (GBP) and the U.S. dollar (USD) in May 2020. The quote is for the number of USD per GBP.
+
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{|c|c|c|}\hline
+&Bid&Ask\\\hline
+Spot & 1.2217&1.2220\\\hline
+$1$-month forward & 1.2218&1.2222\\\hline
+$3$-month forward & 1.2220&1.2225\\\hline
+$6$-month forward & 1.2224&1.2230\\\hline
+\end{tabular}
+\caption{Forward contract on foreign exchange USD per GBP, May 2020}
+\end{table}
+\end{center}
+
+\noindent Suppose that the treasurer of a U.S. corporation knows that it will pay $1$ million GBP in $6$ months, and wants to hedge against exchange rate changes.  Suppose that the bank agrees to a $6$-month forward contract to purchase $1$ million GBP in $6$ months.  What happens if the spot exchange rate is 1.3000 in 6 months?  What if the spot exchange rate is 1.2000 in 6 months?
+
+\end{ex}
+
+\begin{ex}
+An investor enters into a short forward contract to sell 100,000 British pounds for U.S. dollars at an exchange rate of 1.3000 USD per pound. How much does the investor gain or lose if the exchange rate at the end of the contract is (a) 1.2900 and (b) 1.3200?
+\end{ex}
+
+\begin{ex}
+A trader enters into a short forward contract on 100 million yen. The forward exchange rate is \$0.0090 per yen. How much does the trader gain or lose if the exchange rate at the end of the contract is (a) \$0.0084 per yen and (b) \$0.0101 per yen?
+\end{ex}
+
+\newpage
+
+
+\section{Introduction to Options}
+
+\subsection{Call and Put Options}
+
+\begin{df}{\bf European call option}
+A {\bf European call option} is a contract that gives the holder the {\em right to buy} an {\em underlying asset} for a certain fixed price $K$, called the {\bf exercise price}, or {\bf strike price}, at a specified future time $T$, called the {\bf exercise time} or {\bf expiry time}. 
+\end{df}
+
+\begin{df}{\bf European put option}
+A {\bf European put option} gives the holder the {\em right to sell} an underlying asset for the strike price $K$ at the exercise time $T$.
+\end{df}
+
+\begin{df}{\bf American call option}
+An American call option gives the holder the right to buy the underlying asset at the strike price $K$ at any time {\em between} now and the expiry time $T$.
+\end{df}
+
+\begin{df}{\bf American put option}
+An American put option gives the holder the right to sell the underlying asset at the strike price $K$ at any time {\em between} now and the expiry time $T$.
+\end{df}
+
+\noindent Our initial focus will be on European options.  It should be emphasized that an option gives the holder the {\em right} to do something; the holder does not have to exercise this right.  The other party involved, who is known as the {\em writer}, does have a potential obligation:  in the case of a call option, he {\em must} sell the asset if the holder chooses to buy it, and in the case of a put option, he must buy the asset if the holder chooses to sell it.  Since the option confers on its holder a right with no obligation, it has some value.  Moreover, it must be paid for at the time of opening the contract.  Conversely, the writer of the option most be compensated for the obligation he has assumed.  Two of our main areas of exploration throughout this section are:
+
+\begin{itemize}
+
+\item How much would one pay for this right, i.e. what is the value of an option?
+
+\item How can the writer minimize the risk associated with this obligation?
+
+\end{itemize}
+
+
+
+\begin{ex}\label{call-ex}{\bf A Call Option}
+Consider the following European call option.  Let $T$ denote the date exctly 10 days from now.  At time $T$, the holder of the option {\em may} purchase one share of XYZ stock for \$250.  To gain an understanding of how call options work and what might be reasonable for the price of this option, we will consider two possible situations that might occur on the expiry time $T$.  Let $S_T$ denote the price of one share of XYZ stock at time $T$.
+
+\begin{itemize}
+
+\item What happens if $S_T=\$270$?
+
+
+
+\item What happens if $S_T=\$230$?
+
+
+\end{itemize}
+
+\end{ex}
+
+\begin{ex}\label{expected-payoff}
+Suppose that the XYZ share in example \ref{call-ex} only takes the values \$230 or \$270 with equal probability.  Find the expected payoff at time $T$ on the call option.  This expected value is a useful approximation for what a reasonable amount to pay for the call option would be.  
+\end{ex}
+
+\begin{ex}
+Let $c$ denote the expected payofft that you obtained in Exercise \ref{expected-payoff}.  Although option pricing is, in general, more complicated, suppose that the holder of the option did pay \$c for this option.  
+\begin{enumerate}
+\item[(a)] What is his net profit or loss if $S_T=\$270$?  Express the net profit or loss in this case as a percentage of the initial cost of the option.
+
+\item[(b)] What is his net profit or loss if $S_T=\$230$?  Express the net profit or loss in this case as a percentage of the initial cost of the option.
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+Suppose that, instead, the investor purchased the share for \$250 instead of purchasing the option.  Express his net profit or loss in each case (i.e. $S_T=\$230$ or $S_T=\$270$) as a percentage of the initial cost of purchasing the share.  Compare with the results of the previous exercise.
+\end{ex}  
+%
+\begin{center} {\bf The key idea behind the results of the previous two exercises is that options respond in an exaggerated way to changes in the underlying asset price.}
+\end{center}
+
+\begin{itemize}
+
+\item From this simple example, we see that the greater the share price at time $T$, the greater the profit.  However, we do not, of course, know that price in advance.  
+
+\item However, it is reasonable to assume that the higher the share price is now (a quantity we {\em do} know) then the higher the price is likely to be in the future.  
+
+\item Thus, the value of a call option {\em today} should depend on today's share price.  
+
+\item Similarly, the value of the call option also depends on the exercise price:  the lower the exercise price, the less that has to be paid on exercise, and so the higher the option value.  
+
+\item Observe that just before the option is to expire, there is little time for the asset price to change, so in that case, the price at expiry is known with a fair degree of certainty.  Thus, we can conclude that the price of the call option should also depend on the time to expiry.
+
+\item Additionally, we will see that the option price depends on the ``randomness" of the stock price--this randomness is known as the {\em volatility}.  The larger the volatility, the more ``jagged" the graph of the stock price is as a function of time.  
+
+\item Finally, the option price should depend on interest rates, as the option is paid for at the time of purchase (rather than at the time of expiry).  The payoff (if any) does not come until later (at expiry), so the option price should reflect the income that would otherwise have been earned by investing the premium (the cost of the option) in the bank and earning interest.  
+
+\end{itemize}
+
+Thus, we conclude in this introductory section that the price of an option should depend on (at least) the following:
+
+\begin{itemize}
+
+\item The current price of the stock, $S_0=S(0)$
+
+\item The strike price, $K$
+
+\item The time to expiration, $T$
+
+\item The volatility of the stock price, $\sigma$
+
+\item The interest rate, $r$
+
+\end{itemize}
+
+
+
+\begin{ex}{\bf A Put Option}
+Consider an investor who buys a European put option to sell 100 shares of stock XYZ with a strike price of \$70.  Suppose that the current stock price is \$65.   What happens if $S_T=\$55$?
+
+
+
+\end{ex}
+
+\begin{ex}
+It is important to observe that sometimes an investor chooses to exercise an option even though he may make a loss overall.  For example, suppose that an investor buys a European call option with a strike price of \$100 per share to buy 100 shares of XYS stock, and that the current stock price is \$98 per share.  The price of the option to purchase these 100 shares is \$500.  Suppose that the price of the stock is \$102 per share at expiry.  Explain why it is preferable for the investor to exercise the option in this case, even though he makes a loss overall.
+\end{ex}
+
+
+
+
+Note that there are two sides to every option contract.  On one side, there is the investor that has bought the option; this is called taking the {\em long position} in the option.  On the other side, there is the investor that has sold or written the option; this is called taking the {\em short position} in the option.  The investor in the short position receives cash up front (for selling the option), but has potential liabilities later.  
+
+To summarize, there are four types of option positions:
+
+\begin{enumerate}
+
+\item A long position in a call option
+
+\item A long position in a put option
+
+\item A short position in a call option
+
+\item A short position in a put option
+
+\end{enumerate}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Option Payoffs}
+
+It is often useful to characterize European option positions in terms of the terminal value or {\em payoff} to the investor at maturity.  The initial cost of the option is not included in this calculation.  Let $K$ denote the strike price and let $S_T$ denote the price of the stock at the expiry of the option.  
+
+\begin{ex}{\bf Payoffs from Positions in European Call Options}
+Find each of the following.
+\begin{enumerate}
+\item[(a)] The payoff to the holder of a long position in a European call option.
+
+\item[(b)] The payoff to the holder of a short position in a European call option.
+
+
+\item[(c)] The payoff to the holder of a long position in a European put option.
+
+
+\item[(d)] The payoff to the holder of a short position in a European put option.
+
+
+
+\end{enumerate}
+\end{ex}
+
+\begin{ex}{\bf Payoff Diagrams for Positions in European Call Options}
+Construct payoff diagrams for each of the four positions above (long call, short call, long pout, short put).
+\end{ex}
+
+
+
+\begin{ex}
+An investor buys a European put on a share for \$3.  The stock price is \$42, and the strike price is \$40.  Under what circumstances does the investor make a profit?  Under what circumstances will the option be exercised?  Draw a profit diagram illustrating the variation of the investor's {\em profit} (not the payoff) with the stock price at the maturity of the option.
+\end{ex}
+
+\begin{ex}
+An investor sells a European call on a share for \$4.  The stock price is \$47, and the strike price is \$50. Under what circumstances does the investor make a profit? Under what circumstances will the option be exercised? Draw a diagram showing the variation of the investor's profit with the stock price at the maturity of the option. 
+\end{ex}
+
+\begin{ex}
+An investor sells a European call option with strike price $K$ and maturity $T$, and buys a put with the same strike price and maturity.  Describe the investor's position--describe all of the possible situations at maturity, explain which (if any) of the options the investor should exercise at maturity, and find the investor's payoff in each case.
+\end{ex}
+
+\begin{ex}
+A trader buys a call option with a strike price of \$45 and a put option with a strike price of \$40. Both options have the same maturity. The call costs \$3 and the put costs \$4. Draw a diagram showing the variation of the trader's profit with the asset price.  Note:  this type of trading strategy is known as a {\em strangle}.
+\end{ex}
+
+\begin{ex}
+Explain why an American option is always worth at least as much as a European option on the same asset with the same strike price and exercise date. 
+\end{ex}
+
+\begin{ex}
+Complete the following table to summarize the effect on the price of a stock option of increasing one variable while keeping all others fixed.  Write a $+$ to indicate that an increase in the variable causes the option price to increase, and write a $-$ to indicate that an increase in the variable causes the option price to decrease.  Write a ? if the relationship is uncertain.
+
+\bigskip
+
+\begin{tabular}{|l|l|l|l|l|}\hline
+{\em Variable} & {\em European call} & {\em European put} & {\em American call} & {\em American put}\\\hline
+Current stock price &&&&\\\hline
+Strike price &&&&\\\hline
+Time to expiration &&&&\\\hline
+Volatility &&&&\\\hline
+Risk-free interest rate &&&&\\\hline
+\end{tabular}
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Option Prices and Profits}
+
+\noindent As discussed before, the payoff does not take account of the initial cost of acquiring the position. For a purchased option, the premium is paid at the time the option is acquired.  The largest exchange in the world for trading stock options is the Chicago Board Options Exchange (CBOE; www.cboe.com).  One of the most fundamental questions in an undergraduate or early graduate course in mathematical finance is determining the {\em price} of a call option: what is the {\em fair} price of a call option with strike price $K$ with expiry $T$ on a stock whose present value is $S(0)=S_0$?  What does {\em fair} mean in this context?
+
+\begin{ex}
+A trader writes a December put option with a strike price of \$30.  The price of the option is \$4.  Under what circumstances does the trader make a profit?
+\end{ex}
+
+\begin{ex}
+Suppose that a March call option to buy a share for \$50 costs \$2.50 and is held until March. Under what circumstances will the holder of the option make a profit? Under what circumstances will the option be exercised? Draw a diagram illustrating how the profit from a long position in the option depends on the stock price at maturity of the option.
+\end{ex}
+
+\begin{ex}
+It is May and a trader writes a September call option with a strike price of \$20. The stock price is \$18 and the option price is \$2. Describe the trader’s cash flows if the option is held until September and the stock price is \$25 at that time.
+\end{ex}
+
+\begin{ex}
+Trader A enters into a forward contract to buy an asset for \$1,000 in one year. Trader B buys a call option to buy the asset for \$1,000 in one year. The cost of the option is \$100. What is the difference between the positions of the traders? Show the profit as a function of the price of the asset in one year for the two traders.
+\end{ex}
+
+
+The tables bellow illustrate the bid and ask quotes for some of the call and put options trading on Apple (ticker symbol: AAPL), on May 21, 2020. The quotes are taken from the CBOE website. The Apple stock price at the time of the quotes was bid 316.23, ask 316.50. The bid–ask spread for an option (as a percent of the price) is usually much greater than that for the underlying stock and depends on the volume of trading.
+
+\begin{center}
+\begin{table}[H]
+\includegraphics[scale=0.5]{call-AAPL.png}
+\caption{Call option prices on AAPL, May 21, 2020}
+\label{call-AAPL}
+\end{table}
+\end{center}
+
+\begin{center}
+\begin{table}[H]]
+\includegraphics[scale=0.5]{put-AAPL.png}
+\caption{Put option prices on AAPL, May 21, 2020}
+\label{put-AAPL}
+\end{table}
+\end{center}
+
+These tables illustrate a number of properties of option prices.
+
+\begin{itemize}
+
+\item The price of a call option decreases as the strike price increases.
+
+\item The price of a put option increases as the strike price increases. 
+
+\item Both types of option tend to become more valuable as their time to maturity increases. 
+
+\end{itemize}
+
+\begin{ex}
+Use Table \ref{call-AAPL} to solve this problem.  A trader is considering two alternatives: buy 100 shares of the stock and buy 100 September call options with a strike price of \$320.  For each alternative, find each of the following:
+\begin{enumerate}
+\item[(a)] the upfront cost,
+\item[(b)] the total profit if the stock price in September is \$400, and 
+\item[(c)] the total loss if the stock price in September is \$300. 
+\end{enumerate}
+\end{ex}
+
+\begin{ex}
+Use Table \ref{put-AAPL} to solve this problem.  On May 21, 2020, an investor owns 100 Apple shares.  The investor is comparing two alternatives to limit risk. The first involves buying one December put option contract with a strike price of \$290. The second involves instructing a broker to sell the 100 shares as soon as Apple’s price reaches \$290. Discuss the advantages and disadvantages of the two strategies.
+\end{ex}
+
+%\bigskip
+%
+%\hrule
+%
+%\bigskip
+%
+%\subsection{Spreads}
+%
+%\begin{df}{\bf Spread}
+%An option {\bf spread} is a position consisting of only calls or only puts, in which some options are purchased and some written.
+%\end{df}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Trading Strategies Involving Options}
+
+\subsubsection{Spreads}
+
+\begin{df}{\bf Spread}
+A {\bf spread} trading strategy involves taking a position in two or more options of the same type (i.e., two or more calls or two or more puts).
+\end{df}
+
+\begin{df}{\bf Bull Spread}
+A {\bf bull spread} consists of a long position on a European call option on a stock with strike price $K_1$ and a short position on a European call option on the same stock with strike price$K_2$, where $K_2>K_1$. Both options have the same expiration date.
+\end{df}
+
+
+\begin{ex}
+Consider a bull spread with strike prices as above.  As usual, let $S_T$ denote the price of the stock at expiry of the options.  Find the payoff from a bull spread. Is an investor who enters into a bull spread hoping that the stock price will increase or decrease?
+\end{ex}
+
+
+\begin{ex}
+An investor buys for \$3 a 3-month European call with a strike price of \$30 and sells for \$1 a 3-month European call with a strike price of \$35. Find the profit from this bull spread in each of the following cases:
+\begin{enumerate}
+\item[(a)] $S_T=\$25$
+\item[(b)] $S_T=\$34$
+\item[(c)] $S_T=\$40$
+\end{enumerate}
+\end{ex}
+
+
+
+\begin{df}{\bf Bear Spread}
+A {\bf bear spread} consists of a long position on a European put option on a stock with strike price $K_1$ and a short position on a European put option on the same stock with strike price$K_2$, where $K_2<K_1$. Both options have the same expiration date.
+\end{df}
+
+
+\begin{ex}
+Consider a bear spread with strike prices as above.  As usual, let $S_T$ denote the price of the stock at expiry of the options.  Find the payoff from a bear spread. Is an investor who enters into a bear spread hoping that the stock price will increase or decrease?
+\end{ex}
+
+
+\noindent Bull and bear spreads limit both the upside profit potential and the downside risk. 
+
+
+\begin{ex}
+An investor buys for \$3 a 3-month European put option with a strike price of \$35 and sells for \$1 a 3-month European put with a strike price of \$30. Find the profit from this bear spread in each of the following cases:
+\begin{enumerate}
+\item[(a)] $S_T=\$25$
+\item[(b)] $S_T=\$34$
+\item[(c)] $S_T=\$40$
+\end{enumerate}
+\end{ex}
+
+\noindent There are a broad range of additional spread strategies, including {\bf box spreads}, {\bf butterfly spreads}, {\bf calendar spreads}, and {\bf diagonal spreads}.
+
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+
+
+\subsubsection{Combinations}
+
+\begin{df}{\bf Combinations}
+A {\bf combination} is an option trading strategy that involves taking a position in both calls and puts on the same stock. 
+\end{df}
+
+\begin{df}{\bf Straddle}
+A {\bf straddle} is a trading strategy that consists of a long position on a European call option and a long position on a European put option with the same strike price and expirty.
+\end{df}
+
+
+\begin{ex}
+Find the payoff from a straddle.  As usual, let $K$ denote the strike price and let $S_T$ denote the price of the stock at expiry.
+\end{ex}
+
+
+\begin{ex}
+A call with a strike price of \$60 costs \$6. A put with the same strike price and expiration date costs \$4. Construct a table that shows the profit from a straddle. For what range of stock prices would the straddle lead to a loss?
+\end{ex}
+
+\noindent There are a broad range of additional combination strategies, including {\bf strips}, {\bf straps}, and {\bf strangles}.
+
+
+
+\newpage
+
+\section{Interest Rates and Time Value of Money}
+
+One of the fundamental issues in mathematical finance is the way in which the value of money changes.  This is a broad and complex topic, and although this will not be the primary subject of this course, it is nonetheless an interesting topic that you may wish to consider for a future research project.  We will summarize here the major ideas that we will need for our study of mathematical finance.  The fundamental questions that we seek to answer are the following:
+
+\begin{itemize}
+
+\item What is the future value of an amount invested or borrowed today?
+
+\item What is the present value of an amount to be paid or received at a certain time in the future?
+
+\item How much would we pay {\em now} to receive a guaranteed amount of money at some specified future time?
+
+\end{itemize}
+
+The answers, of course, depend on a broad range of factors.  This topic is typically referred to as the {\em time value of money}.
+
+\begin{df}{\bf Simple Annual Interest}
+Suppose that an initial deposit $P$ is paid into a bank account, where it earns interest at an annual (constant) rate $r>0$.  In the case of {\bf simple annual interest}, the interest is attracted only to the principal, which remains unchanged during the period of investment.  After one year, the interest earned will be $rP$.  Thus, the value of the investment at time $t=1$ years will be $$V(1)=(1+r)P.$$  The {\em future value} of the investment at time $t$, where $t$ is measured in years, is given by $$V(t)=(1+tr)P,$$ where $t$ is any non-negative real number.
+\end{df}
+
+\begin{ex}
+Suppose that a deposit of \$150 attracts simple annual interest at a rate of 8\%.  Find the value of the deposit after 20 days.  Assume that there are 365 days in one year.  
+\end{ex}
+
+\begin{ex}
+Find the principal to be deposited initially in an account attracting simple annual interest at a rate of 8\% if \$1,000 is needed after three months.  Assume that there are $12$ months in one year.
+\end{ex}
+
+
+
+
+\begin{df}{\bf Periodic Compounding}
+Suppose that an initial deposit $P$ is paid into a bank account, where it earns interest at an annual (constant) rate $r>0$.  In contrast to the simple interest case, suppose now that the interest earned will be added to the principal periodically (annually, semi-annually, quarterly, monthly, or daily).  Let $m$ denote the number of interest payments made per year.  After $t$ years, the {\em future value} of the initial principal $P$ will be $$V(t)=\left(1+\frac{r}{m}\right)^{tm}P.$$  
+\end{df}
+
+\begin{ex}
+Find and compare the future value after two years of a deposit of \$100 attracting interest at an annual interest rate of 10\% is compounded (a) annually and (b) monthly. 
+\end{ex}
+
+\begin{ex}
+Show that if $m<k$, then $$\left(1+\frac{r}{m}\right)^m<\left(1+\frac{r}{k}\right)^k.$$  Interpret this in the context of future value (i.e. write a sentence using financial terms that describes what this inequality tells us in terms of future value of money).  
+\end{ex}
+
+
+\begin{ex}{\bf Continuous Compounding I}
+In the case of {\bf continuously compounded interest}, interest is added {\em continuously} to the principal.  If $V(t)$ is the amount in the bank at time $t$ and if $r$ is the constant interest rate, then we obtain the following differential equation for $V$ as a function of $t$:  $$\frac{dV}{dt}=r\cdot V.$$  Let $P$ denote the initial principal invested (i.e. $P=V(0)$), and solve the differential equation above to find a formula for $V$ as a function of $t$.
+\end{ex}
+
+\begin{ex}{\bf Continuous Compounding II}
+Continuously compounded interest can also be viewed as periodically compounded interest in which we take the {\em limit} as $m$ (the number of interest payments made per year) goes to infinity, i.e. $$V(t)=\lim_{m\rightarrow\infty}\left(1+\frac{r}{m}\right)^{tm}P.$$
+\begin{enumerate}
+\item[(a)] Show that $$e=\lim_{x\rightarrow\infty}\left(1+\frac{1}{x}\right)^x.$$  
+
+\item[(b)] Use the result above and $V(t)=\displaystyle \lim_{m\rightarrow\infty}\left(1+\frac{r}{m}\right)^{tm}P$ to obtain a closed-form (i.e. without a limit) expression for $V(t)$.  You should, of course, obtain the same expression that you obtained by solving the differential equation in Continuous Compounding I.
+\end{enumerate}
+\end{ex}
+
+
+\newpage
+
+\section{Properties of Options}
+
+\subsection{Notation and Market Assumptions}
+
+In this section, we will derive important properties of stock options.  We will use the following notation:
+
+\begin{itemize}
+
+\item $S_0=S(0)$:  current stock price
+
+\item $S_t=S(t)$: stock price at time $t$ 
+
+\item $K$: strike price of option
+
+\item $T$:  time to expiration of option
+
+\item $S_T$:  stock price at maturity
+
+\item $r$:  continuously-compounded risk-free interest rate
+
+\item $c$:  value (price) of European call option to buy one share
+
+\item $p$:  value (price) of European put option to sell one stare
+
+\end{itemize}
+
+
+\begin{df}{\bf Long Position}
+If the number of assets of a particular kind held in a portfolio is positive, we say that the investor has a {\bf long position}.
+\end{df}
+
+\begin{df}{\bf Short Position}
+If the number of assets of a particular kind held in a portfolio is negative, we say that the investor has a {\bf short position}, or that the asset is {\bf shorted}.
+\end{df}
+
+\begin{df}{\bf Short Selling}
+A short position in stock can be obtained by {\bf short selling}.  This means that the investor borrows the stock, sells it, and uses the proceeds to make some other investment. The owner of the stock keeps all the rights to it. In particular, she is entitled to receive any dividends due and may wish to sell the stock at any time. Because of this, the investor must always have sufficient resources to fulfill the resulting obligations and, in particular, to close the short position in risky assets, that is, to repurchase the stock and return it to the owner. 
+\end{df}
+
+
+The current stock price $S(0)$ is known to all investors, but the future price $S(t)$ at time $t$ is unknown: it may go up or down.  We make the following mathematical assumptions about the financial market:
+
+\begin{itemize}
+
+\item {\bf Randomness:} The future stock price $S(t)$ is a {\bf random variable} with at least two different possible values.  
+
+\item {\bf Positivity of Prices:} All stock (and bond prices) are strictly positive:  $S(t)>0$ for all $t$.
+
+
+
+
+
+\item {\bf Divisibility and Liquidity:} An investor may hold any real number $x$ of stock shares and bonds.
+The fact that one can hold a fraction of a share or bond is referred to as {\bf divisibility}.  The fact that no bounds are imposed on $x$ is referred to as {\bf liquidity}, and it means that any asset can be bought or sold on demand at the market price in arbitrary quantities.  
+
+
+
+\item {\bf Discrete Unit Prices:} The future price $S(t)$ of a share of stock is a random variable that takes on only finitely many values.
+
+
+
+\item {\bf No-Arbitrage Principle:} The market does not allow for risk-free profits with no initial investment.  This is the most fundamental assumption of the financial market.  In other words, if the initial value of a portfolio is zero, $V (0) = 0$, then $V (t) = 0$ for $t>0$ with probability $1$. This means that no investor can lock in a profit without risk and with no initial investment. If a portfolio violating this principle did exist, we would say that an arbitrage opportunity was available.  Arbitrage opportunities rarely exist in practice. If and when they do, the gains are typically extremely small as compared to the volume of transactions, making them beyond the reach of small investors. Situations when the No Arbitrage Principle is violated are typically short-lived and difficult to spot. The activities of investors (called {\em arbitrageurs}) pursuing arbitrage profits effectively make the market free of arbitrage opportunities.  Arguments based on the No-Arbitrage Principle are the main tools of financial mathematics.  This assumption will form the foundation for many of our mathematical arguments on pricing options.  One important consequence of the No-Arbitrage Principle is that two portfolios that are worth the same at some time $t$ must also be worth the same at any time $t$.  (If not, an arbitrage opportunity exists.)  Similarly, if there are two portfolios A and B, and if the value of portfolio A is greater than or equal to the value of portfolio B at some time $t0$, then the value of portfolio A is greater than or equal to the value of portfolio B at any time $t$. (If not, an arbitrage opportunity exists.)
+
+
+
+
+\end{itemize}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Upper and Lower Bounds on Option Prices}
+
+
+\begin{ex}{\bf Upper bound on $c$}\\
+Show that the stock price is an upper bound on the option price:  $$c\leq S_0.$$  In other words, the option can never be worth more than the stock.
+Hint:  Argue that if $S_0<c$, an arbitrage opportunity exists. 
+
+\end{ex}
+
+
+\begin{ex}{\bf Upper bound on $p$}\\
+Show that the put option cannot be worth more than the present value of $K$ today:  $$p\leq Ke^{-rT}.$$  
+\end{ex}
+
+
+\begin{ex}{\bf Lower bound on $c$}\\
+Show that $$c\geq S_0-Ke^{-rT}.$$  HInt: consider the following two portfolios:  
+
+\begin{itemize}
+
+\item Portfolio A:  one European call option and an amount of cash equal to $Ke^{-rT}$
+
+\item Portfolio B:  one share of the stock
+
+\end{itemize}
+
+
+
+
+\end{ex}
+
+
+
+\begin{ex}{\bf Lower bound on $p$}\\
+Show that $$p\geq Ke^{-rT}-S_0.$$   
+\end{ex}
+
+
+\begin{ex}
+What is a lower bound for the price of a 2-month European put option on a non- dividend-paying stock when the stock price is \$58, the strike price is \$65, and the risk- free interest rate is 5\% per annum?
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Put-Call Parity}
+
+
+
+
+\begin{ex}{\bf Put-Call Parity}\\
+Show that $$c+Ke^{-rT}=p+S_0.$$  Hint:  construct two portfolios that have the same worth at time $T$.  In particular, consider the following two portfolios:
+
+\begin{itemize}
+
+\item Portfolio I:  one European call option and an amount of cash equal to $Ke^{-rT}$
+
+\item Portfolio II:  one European put option plus one share of the stock
+
+\end{itemize}
+
+This relationship is known as {\em put-call parity}, and it shows that the value of a European call option with a certain strike price and exercise date can be deduced from the strike of a European put option with the same strike price and exercise date, and vice versa.  Put-call parity is perhaps the single most important relationship among option prices.
+\end{ex}
+
+\begin{ex}
+The current price of a stock is $S_0=\$19$ and the price of a 3-month European call option on the stock with a strike price of \$20 is \$1.  The risk-free annual interest rate is 4\%.  What is the price of a 3-month European put option on the stock with strike price \$20?  
+\end{ex}
+
+\begin{ex}
+The prices of European call and put options on a stock with an expiration date in 12 months and a strike price of \$120 are \$20 and \$5, respectively. The current stock price is \$130. What is the implied risk-free interest rate?
+\end{ex}
+
+\noindent In the next exercise, we will demonstrate directly that it is possible to construct an arbitrage opportunity if put-call parity does not hold.
+
+\begin{ex}
+Suppose that the price of a stock is \$31, and that the price of a a European call option on the stock with strike price \$30 is \$3, and that the price of a European put option on the stock with the same strike price and expiry is \$2.25.  The expiry time is $3$ months.  The risk-free interest rate is 10\% per year.  Show that put-call parity does not hold, and construct an arbitrage opportunity.  In particular, show that an arbitrager makes a risk-free profit by buying the call option and short-selling both the put and the stock.  
+\end{ex}
+
+
+
+\begin{ex}
+A 1-month European put option on a non-dividend-paying stock is currently selling for \$2.50. The stock price is \$47, the strike price is \$50, and the risk-free interest rate is 6\% per annum. What opportunities are there for an arbitrageur?
+\end{ex}
+
+
+
+
+
+\noindent Note that put-call parity generally does not hold for American options, which may be exercised prior to maturity.
+
+
+
+\begin{ex}
+Explain why the arguments leading to put–call parity for European options cannot be used to give a similar result for American options.
+\end{ex}
+
+
+
+\begin{ex}
+Show that it is never optimal to exercise an American call option prior to expiry.
+\end{ex}
+
+
+\begin{ex}
+Explain (with an example) why it can be optimal to exercise an American put option prior to expiry.
+\end{ex}
+
+
+
+\begin{ex}
+Give an intuitive explanation for why the early exercise of an American put becomes more attractive as the risk-free rate increases and volatility decreases.
+\end{ex}
+
+
+
+\begin{ex}
+Let $C$ denote the value of an American call option to buy one share of a stock, and let $P$ denote the value of an American put option to sell one share of a stock.  Show that $$S_0-K\leq C-P\leq S_0-Ke^{-rT}.$$
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Convexity}
+
+
+\begin{ex} {\bf Different Strike Prices}
+Suppose that $c(K_1)$, $c(K_2)$, and $c(K_3)$ are the prices of European call options with strike prices $K_1,~K_2,~K_3$, respectively, where $K_1<K_2<K_3$, and that $p(K_1)$, $p(K_2)$, and $p(K_3)$ are the prices of European put options with these strike prices.  All options have the same maturity.  Prove each of the following inequalities.
+
+\begin{enumerate}
+
+\item[(a)] $c(K_1)\geq c(K_2)$
+
+\item[(b)] $p(K_2)\geq p(K_1)$
+
+\item[(c)] $c(K_1)-c(K_2)\leq K_2-K_1$
+
+\item[(d)] $p(K_2)-p(K_1)\leq K_2-K_1$
+
+
+
+
+
+\end{enumerate}
+
+\end{ex}
+
+\begin{ex}{\bf Convexity}
+Suppose that $c(K_1)$, $c(K_2)$, and $c(K_3)$ are the prices of European call options with strike prices $K_1,~K_2,~K_3$, respectively, where $K_1<K_2<K_3$.  All options have the same maturity.  
+
+\begin{enumerate}
+
+\item[(a)] Show that $K_2$ is a convex combination of $K_1$ and $K_3$, i.e. there exists a real number $\lambda$ such that $0<\lambda<1$ and $$K_2=\lambda K_1+(1-\lambda)K_3.$$
+
+
+
+\item[(b)] Show that, with the value of $\lambda$ found above, $$c(K_2)\leq \lambda c(K_1)+(1-\lambda)c(K_3).$$
+
+\end{enumerate}
+
+\end{ex}
+
+\begin{ex}
+Suppose that $c(K_1)$, $c(K_2)$, and $c(K_3)$ are the prices of European call options with strike prices $K_1,~K_2,~K_3$, respectively, where $K_1<K_2<K_3$ and $K_3-K_2=K_2-K_1$.  All options have the same maturity.  Show that $$c(K_2)\leq \frac{c(K_1)+c(K_3)}{2}.$$  Hint:  consider a portfolio that is long on one option with strike price $K_1$, long one option with strike price $K_3$, and short two options with strike price $K_2$.
+\end{ex}
+
+\begin{ex}
+State and prove the result corresponding to the exercise above for European put options.
+\end{ex}
+
+\newpage
+
+
+
+\newpage
+	
+\section{Binomial Tree Option Pricing}
+
+
+
+A useful technique for pricing an option involves constructing a {\em binomial tree}.  A binomial tree is a diagram that represents different possible paths that might be followed by the stock price over the life of the option.  The underlying assumption is that the stock price follows a {\em random walk}.  In each time step, it has a certain probability of moving up by a certain percentage and a probability of moving down by a certain percentage.  In the limit, as the time step becomes infinitely small, this model leads to the {\em lognormal} assumption for stock prices that underlies the {\em Black-Scholes} partial differential equations model of stock prices.  In this section, we will explore the fundamental properties of binomial trees and illustrate how they can be used to value options.  As usual, the only assumption we will make is that arbitrage opportunities do not exist.  
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{One-Step Binomial Trees}
+
+We begin with a simple example to illustrate the idea.  Suppose that a stock price is currently \$20, and that at time $T$, it will be either \$22 or \$18.  In the next series of exercises, we will determine the value of a European call option to buy the stock for \$21 at time $T$. 
+
+
+\begin{ex}
+Show that at time $T$, the value of the option is either \$1 or \$0, as illustrated in the {\em one-step binomial tree} below.
+\end{ex}
+
+\begin{center}
+\begin{figure}[H]
+\includegraphics[scale=0.3]{tree-ex.png}
+\end{figure}
+\end{center}
+
+To price the option, we will construct a portfolio consisting of the stock and the option in such a way that there is no uncertainty about the value of the portfolio at time $T$.  Then, we can argue that since the portfolio has no risk, the return it earns must equal the risk-free interest rate (otherwise, an arbitrage opportunity would exist).
+
+Consider a portfolio consisting of a long position in $\Delta$ shares of the stock and a short position in one call option.  (We will determine the value of $\Delta$.)
+
+\begin{ex}
+Show that if $S_T=22$, then the total value of the portfolio at time $T$ is $22\Delta-1$.
+\end{ex}
+
+\begin{ex}
+Show that if $S_T=18$, then the total value of the portfolio at time $T$ is $18\Delta$.
+\end{ex}
+
+\begin{df} The portfolio is {\bf riskless} if the final value is the same for both cases (i.e. both possible values of $S_T$).
+\end{df}  
+
+\begin{ex}
+Find the value of $\Delta$ that makes this portfolio riskless, and conclude that, regardless of whether the stock price moves up or down, the value of the portfolio is always \$4.5 at time $T$.
+\end{ex}
+
+
+\begin{ex}
+Suppose that the risk-free annual interest rate (compounded continuously) is 12\% and that $T=3$ months.  Show that the value of the portfolio today is \$4.367. 
+\end{ex}
+
+\begin{ex}
+Show that, in the absence of arbitrage, the price of the call option today is \$0.633.
+\end{ex}
+
+\noindent In particular, it is important to observe that if the current value of the option were {\em not} \$0.633, then an arbitrage opportunity would exist.  If the value of the option were more than \$0.633, the portfolio would cost less than \$4.367 to set up and would earn more than the risk-free interest rate.  If the value of the option were less than \$0.633, an investor could short the portfolio to borrow money at less than the risk-free rate, and therefore earn a riskless profit.
+
+\smallskip
+
+We can generalize this no-arbitrage argument in the following way.  Consider a stock whose current price is $S_0$ and a European call option on the stock whose current price is $f$.  Suppose that $T$ is the maturity time of the option and that between the current time ($t=0$) and the expiry of the option ($t=T$), the stock price will either increase to $S_0u$, where $u>1$, or decrease to $S_0d$, where $d<1$.  Let $f_u$ denote the payoff from the option if $S_T=S_0u$, and let $f_d$ denote the payoff from the option if $S_T=S_0d$.  This is illustrated in the following figure.
+
+\begin{center}
+\begin{figure}[H]
+\includegraphics[scale=0.3]{tree-general.png}
+\end{figure}
+\end{center}
+
+As before, consider a portfolio consisting of a long position in $\Delta$ shares of the stock and a short position in one European call option on the stock.
+
+\begin{ex}
+Recall that the portfolio is riskless if the portfolio is worth the same amount at time $T$ in both cases (i.e. $S_T=S_0u$ or $S_T=S_0d$).  Find the value of $\Delta$ that makes the portfolio riskless.
+\end{ex}
+
+\begin{ex}\label{option-price}{\bf One-Step Binomial Tree Option Price}
+Use the present value of the portfolio and the expression for $\Delta$ that you obtained in the previous exercise to show that $$f=e^{-rT}\left[pf_u+(1-p)f_d\right],$$ where $$p=\frac{e^{rT}-d}{u-d}.$$
+\end{ex}
+
+
+Observe that in using binomial trees to price options, no assumptions were required about the probabilities of up and down movements of the stock price at each node of the tree.  This is surprising and somewhat counterintuitive.  For example, we get the same option price when the probability of an upward movement is $0.5$ as we do when it is $0.9$. This is surprising and seems counterintuitive. It is natural to assume that, as the probability of an upward movement in the stock price increases, the value of a call option on the stock increases and the value of a put option on the stock decreases. This is not the case.  The key reason is that we are not valuing the option in absolute terms. We are calculating its value in terms of the price of the underlying stock. The probabilities of future up or down movements are already incorporated into the stock price: we do not need to take them into account again when valuing the option in terms of the stock price.
+
+\begin{ex}
+Use this expression for $f$ to show that $f=\$0.633$ for the numerical example considered previously in this section.
+\end{ex}
+
+\begin{ex}
+A stock price is currently \$100. Over each of the next two 6-month periods it is expected to go up by 10\% or down by 10\%. The risk-free interest rate is 8\% per annum with continuous compounding. What is the value of a 1-year European call option with a strike price of \$100?
+\end{ex}
+
+\begin{ex}
+For the situation considered in the previous exercise, what is the value of a 1-year European put option with a strike price of \$100? 
+\end{ex}
+
+
+
+\begin{ex}
+A stock price is currently \$25. It is known that at the end of 2 months it will be either \$23 or \$27. The risk-free interest rate is 10\% per annum with continuous compounding. Suppose $S_T$ is the stock price at the end of 2 months. What is the value of a derivative that pays $S_T^2$ at this time?
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Two-Step Binomial Trees}
+
+
+\begin{ex}{\bf Two-Step Binomial Tree Option Price}
+Consider a stock whose current price is $S_0$ and a European call option on the stock whose current price is $f$.  Suppose that there are two time steps, each of length $\Delta t$, before expiry, and that during each time step, the stock price either moves up to $u$ times its initial value ($u>1$) or down to $d$ times its initial value ($d<1$).  This is illustrated in the following figure, using the same notation as in the previous figure for the payoff from the option at each stage.  (For example, $f_{uu}$ is the value of the option at time $2\Delta t=T$ if $S_T=u^2S_0$, i.e. if the stock increases in value at each time step.
+
+\begin{center}
+\begin{figure}[H]
+\includegraphics[scale=0.3]{two-step-tree.png}
+\end{figure}
+\end{center}
+
+Show that $$f=e^{-2r\Delta t}\left[p^2f_{uu}+2p(1-p)f_{ud}+(1-p)^2f_{dd}\right].$$
+
+\end{ex}
+
+
+\begin{ex}
+A stock price is currently \$50. Over each of the next two 3-month periods it is expected to go up by 6\% or down by 5\%. The risk-free interest rate is 5\% per annum with continuous compounding. What is the value of a 6-month European call option with a strike price of \$51?
+\end{ex}
+
+
+
+\noindent Clearly, an analyst can expect to obtain only a very rough approximation to an option price by assuming that stock price movements during the life of the option consist of one or two binomial steps. When binomial trees are used in practice, the life of the option is typically divided into $30$ or more time steps, and at each time step, there is a binomial stock price moment.  Although the mathematical methods are exactly the same as those presented here, the number of computations that must be performed becomes extremely large (and requires the use of powerful computing software).  For example, with $30$ time steps, there are $31$ possibilities for the terminal stock price and $2^{30}$, or about $1$ billion, possible paths in the binomial tree.
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Delta}
+
+\begin{df}{\bf Delta}
+The {\bf delta} of a stock option is the ratio of the change in the price of the stock option to the change in the price of the underlying stock.  It is the number of units of the stock we should hold for each option shorted in order to create a riskless portfolio.  
+\end{df}
+
+\begin{itemize}
+
+\item The construction of a riskless portfolio is referred to as {\em delta hedging}.
+
+\item The delta of a call option is positive.
+
+\item The delta of a put option is positive.
+
+\item Note that delta changes over time.
+
+\end{itemize}
+
+\noindent 
+
+\subsection{Risk-Neutral Valuation}
+
+\noindent {\em Risk-neutral valuation} states that, when valuing a derivative, we can make the assumption that investors are {\em risk-neutral}.  This assumption means that investors do not increase the expected return they require from an investment to compensate for increased risk.  A world where investors are risk neutral is referred to as a {\em risk-neutral world}. The world we live in is, of course, not a risk-neutral world. The higher the risks investors take, the higher the expected returns they require. However, it turns out that assuming a risk-neutral world gives us the right option price for the world we live in, as well as for a risk-neutral world. 
+
+Risk-neutral valuation seems a surprising result when it is first encountered. Options are risky investments. Shouldn't a person's risk preferences affect how they are priced? The answer is that, when we are pricing an option in terms of the price of the underlying stock, risk preferences are unimportant. As investors become more risk- averse, stock prices decline, but the formulas relating option prices to stock prices remain the same.
+
+A risk-neutral world has two features that simplify the pricing of derivatives:
+
+\begin{enumerate}
+\item The expected return on a stock (or any other investment) is the risk-free rate.
+\item The discount rate used for the expected payoff on an option (or any other instrument) is the risk-free rate.
+
+\end{enumerate}
+
+\noindent In the equation $$f=e^{-rT}\left[pf_u+(1-p)f_d\right],$$ the parameter $p$ should be interpreted as the probability of an up movement in a risk-neutral world, so that $1-p$ is the probability of a down movement.  Note that we assume $u>e^{rT}$, so that $0<p<1$.  The expression $$pf_u+(1-p)f_d$$ is then the expected future payoff from the option in a risk-neutral world.  The equation $$f=e^{-rT}\left[pf_u+(1-p)f_d\right]$$ states that the value of the option today is its expected future payoff in a risk-neutral world discounted at the risk-free rate.  This is an application of {\bf risk-neutral valuation}.  
+
+\begin{eqnarray*}
+\mathbb{E}[S_T]&=&pS_0u+(1-p)S_0d\\
+&=&pS_0(u-d)+S_0d\\
+&=&S_0e^{rT}\\
+\end{eqnarray*}
+
+\noindent This shows that the stock price grows, on average, at the risk-free rate when $p$ is the probability of an up movement.  Risk-neutral valuation is a very important general result in the pricing of derivatives. It states that, when we assume the world is risk-neutral, we get the right price for a derivative in all worlds, not just in a risk-neutral one. We have shown that risk-neutral valuation is correct when a simple binomial model is assumed for how the price of the the stock evolves. We will prove it when the stock price follows a continuous-time stochastic process when we study the Black-Scholes-Merton Model. It is a result that is true regardless of the assumptions made about the evolution of the stock price.
+
+\noindent To apply risk-neutral valuation to the pricing of a derivative, we first calculate what the probabilities of different outcomes would be if the world were risk-neutral. We then calculate the expected payoff from the derivative and discount that expected payoff at the risk-free rate of interest.
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+
+\newpage
+
+\section{The Black-Scholes-Merton Model I}
+
+\noindent In this section, we will derive the Black-Scholes-Merton model for the price of a European call option on a non-dividend paying stock by taking the limit as the numbre of time steps in a binomial tree goes to infinity.
+
+\subsection{Probability}
+
+\begin{df}{\bf Probability Space}
+A {\bf probability space} is a triple $$(\Omega,\mathcal{F},P),$$ where $\Omega$ is a set of outcomes, $\mathcal{F}$ is a set of events, and $$P:\mathcal{F}\rightarrow[0,1]$$ is a function that assigns probabilities to events.   
+\end{df}
+
+\begin{df}{\bf Random Variable}
+A real-valued function $X$ defined on $\Omega$, i.e. $$X:\Omega\rightarrow\mathbb{R}$$ is a {\bf random variable}.  In other words, a random variable is a variable whose possible values are numerical outcomes associated with a random phenomenon.  The probability that the random variable $X$ is equal to a real number $x$ is denoted $$P(X=x).$$  
+\end{df}
+
+\begin{df}{\bf Discrete Random Variable}
+The random variable $X$ is a {\bf discrete random variable} if its possible values
+form a finite or countably infinite set.
+\end{df}
+
+\begin{df}{\bf Probability Distribution Function}
+If $X$ is a discrete random variable, then the function $$p(x)=P(X=x)$$ is the {\bf probability distribution function} of $X$.
+\end{df}
+
+
+
+\begin{exa} When two (fair) six-sided dice are rolled, the sum $X$ of the numbers shown on the two dice is a random variable.  In this example, $X=4$ is the event $\displaystyle \{(1,3),(2,2),(3,1)\}$, and the probability that $X=4$ is $$P(X=4)=\frac{3}{36}=\frac{1}{12}.$$ 
+\end{exa}
+
+
+\begin{thm}{\bf Basic Properties of Discrete Random Variables}
+Suppose that a random variable $X$ has possible values $$x_1,~x_2,\ldots,x_k,\ldots\text{ with }P(X=x_j)=p(x_j)=p_j,\quad j=1,2,\ldots.$$  The probabilities $p_j$ satisfy the following:
+
+\begin{itemize}
+
+\item $0\leq p_j\leq 1$ for all $j\geq 1$
+
+\item $\displaystyle\Sum{j=1}{\infty}p_j=1$.
+
+\end{itemize}
+
+\end{thm}
+
+\begin{df}{\bf Bernoulli Trial}
+A {\bf Bernoulli trial} is a sequence of chance experiments such that:
+\begin{enumerate}
+\item Each experiment has two possible outcomes, which we may call success and failure.
+\item The probability $p$ of success on each experiment is the same for each experiment, and this probability is not affected by any knowledge of previous outcomes. The probability $q$ of failure is given by $q=1-p$.
+\end{enumerate}
+\end{df}
+
+\begin{thm}{\bf Binomial Distribution}
+The probability that $n$ Bernoulli trials have exactly $k$ successes is $${n\choose k}p^k(1-p)^{n-k}.$$
+\end{thm}
+
+
+\begin{df}{\bf Expected Value of a Discrete Random Variable}
+The {\bf expected value} of a numerically-valued discrete random variable $X$ with sample space $\Omega$ and probability distribution function $p(x)$ is given by $$\mathbb{E}[X]=\Sum{x\in \Omega}{}x\cdot p(x).$$
+\end{df}
+
+\begin{thm}{\bf Expected Value of a Sum}
+Let $X$ and $Y$ be discrete random variables.  Then $$\mathbb{E}[X+Y]=\mathbb{E}[X]+\mathbb{E}[Y].$$
+\end{thm}
+
+\noindent\textbf{Proof.} Let the sample spaces of $X$ and $Y$ be denoted by $\Omega_X$ and $\Omega_Y$, respectively, and suppose that $$\Omega_X=\{x_1,x_2,\ldots\}$$ and $$\Omega_Y=\{y_1,y_2,\ldots\}.$$  Then we can consider the random variable $X + Y$ to be the result of applying the function $$\phi(x, y) = x+y$$ to the joint random variable $(X, Y )$.  Then:
+
+\begin{eqnarray*}
+\mathbb{E}[X+Y]&=&\Sum{j}{}\Sum{k}{}(x_j+y_k)P(X=x_j,Y=y_k)\\
+&=&\Sum{j}{}\Sum{k}{}x_jP(X=x_j,Y=y_k)+\Sum{j}{}\Sum{k}{}y_kP(X=x_j,Y=y_k)\\
+&=&\Sum{j}{}x_jP(X=x_j)+\Sum{k}{}y_kP(Y=y_k)\\
+&=&\mathbb{E}[X]+\mathbb{E}[Y].\\
+\end{eqnarray*}
+
+\begin{ex}{\bf Expected Value of a Binomial Distribution}
+Let $S_n$ be the number of successes in $n$ Bernoulli trials with probability $p$ of success on each trial.  Show that $$\mathbb{E}[S_n]=np.$$
+\end{ex}
+
+\begin{df}{\bf Variance of a Discrete Random Variable}
+Let $X$ be a numerically-valued discrete random variable with expected value $\mu$.  The {\bf variance} of $X$ is given by $$\sigma^2=V(X)=\mathbb{E}[(X-\mu)^2].$$  
+\end{df}
+
+\begin{ex}{\bf Variance of a Discrete Random Variable}
+Let $X$ be a numerically-valued discrete random variable with expected value $\mu$. Show that $$V(X)=\mathbb{E}[X^2]-\mu^2.$$
+\end{ex}
+
+\begin{ex}{\bf Variance of a Binomial Distribution}
+Let $S_n$ be the number of successes in $n$ Bernoulli trials with probability $p$ of success on each trial and $1-p=q$.  Show that $$\mathbb{V}[S_n]=\sigma^2=npq.$$
+\end{ex}
+
+\begin{df}{\bf Standard Deviation of a Discrete Random Variable}
+Let $X$ be a numerically-valued discrete random variable . The standard deviation of $X$ is $$\sigma=\sqrt{V(x)}.$$
+\end{df}
+
+\begin{thm}{\bf Standard Deviation of a Binomial Distribution}
+The standard deviation of a binomial distribution is $$\sigma=\sqrt{npq}.$$
+\end{thm}
+
+
+\begin{df}{\bf Continuous Random Variable}
+The random variable $X$ is a {\bf continuous random variable} if its possible values form an uncountably infinite set, such as an interval on the real line, or a union of disjoint intervals.
+\end{df}
+
+\begin{df}{\bf Probability Density Function}
+If $X$ is a continuous random variable, then a {\bf probability density function} for $X$ is a function $f(x)$ that satisfies $$P(a\leq X\leq b)=\int_a^b f(x)\:dx.$$
+\end{df}
+
+\begin{thm}{\bf Basic Properties of Continuous Random Variables}
+
+\begin{itemize}
+
+\item $f(x)>0$ for all $x$
+
+\item $\displaystyle\int_{-\infty}^{\infty}f(x)\:dx=1$
+
+\end{itemize}
+
+\end{thm}
+
+\begin{df}{\bf Expected Value of a Continuous Random Variable}
+Let $X$ be a real-valued continuous random variable with probability density function $f(x)$.  Then $$\mu=\mathbb{E}[X]=\int_{-\infty}^{\infty}xf(x)\:dx.$$
+\end{df}
+
+\begin{df}{\bf Variance of a Continuous Random Variable}
+Let $X$ be a real-valued continuous random variable with probability density function $f(x)$.  Then $$\sigma^2=\mathbb{V}[X]=\mathbb{E}[(X-\mu)^2].$$
+\end{df}
+
+\begin{thm}{\bf Variance of a Continuous Random Variable}
+Let $X$ be a real-valued continuous random variable with probability density function $f(x)$.  Then $$\sigma^2=\mathbb{V}[X]=\int_{-\infty}^{\infty}(x-\mu)^2 f(x)\:dx.$$
+\end{thm}
+
+\begin{df}{\bf Standard Deviation of a Continuous Random Variable}
+Let $X$ be a real-valued continuous random variable with probability density function $f(x)$.  Then $$\sigma=\sqrt{\mathbb{V}[X]}.$$
+\end{df}
+
+\begin{df}{\bf Cumulative Probability Distribution}
+The {\bf cumulative probability distribution} of a random variable $X$ gives the probability that $X$ is less than or equal to $x$:  $$F_X(x)=P(X\leq x).$$
+\end{df}
+
+\begin{df}{\bf Normal Distribution}
+A continuous random variable has a {\bf normal distribution} $$N(\mu,\sigma)$$ if its probability density function is $$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2},$$ where $\mu$ is the mean (or expectation) of the distribution and $\sigma$ is the standard deviation.  
+\end{df}
+
+\begin{thm}{\bf Mean and Standard Deviation of a Normal Distribution}
+Let $X$ be a random variable with standard normal distribution $N(\mu,\sigma)$. Then the expected value of $X$ is $\mu$ and the standard deviation is $\sigma$.
+\end{thm}
+
+\noindent\textbf{Proof.}
+
+\begin{eqnarray*}
+\mathbb{E}[X]&=&\int_{-\infty}^{\infty} x f(x)\:dx\\
+&=&\int_{-\infty}^{\infty} x \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\:dx\\
+&=&\frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty}xe^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\:dx.\\
+\end{eqnarray*}
+
+\noindent Next, make the substitution $z=x-\mu$.  Then $dz=dx$, so we have:
+
+\begin{eqnarray*}
+\mathbb{E}[X]&=&\frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty}(z+\mu)e^{-\frac{1}{2}\left(\frac{z}{\sigma}\right)^2}\:du\\
+&=&\frac{1}{\sqrt{2 \pi} \sigma} \left( \left[ -\sigma^2 \cdot \exp \left[ -\frac{1}{2 \sigma^2} \cdot z^2 \right] \right]_{-\infty}^{+\infty} + \mu \left[ \sqrt{\frac{\pi}{2}} \sigma \cdot \mathrm{erf} \left[ \frac{1}{\sqrt{2} \sigma} z \right] \right]_{-\infty}^{+\infty} \right) \\
+&= &\frac{1}{\sqrt{2 \pi} \sigma} \left( [0 - 0] + \mu \left[ \sqrt{\frac{\pi}{2}} \sigma - \left(- \sqrt{\frac{\pi}{2}} \sigma \right) \right] \right) \\
+&= &\frac{1}{\sqrt{2 \pi} \sigma} \cdot \mu \cdot 2 \sqrt{\frac{\pi}{2}} \sigma \\
+&=&\mu.\\
+\end{eqnarray*}
+
+To compute the variance of the normal distribution, we use $$\sigma^2=\mathbb{V}[X]=\int_{-\infty}^{\infty}(x-\mu)^2 f(x)\:dx.$$  Then:
+
+\begin{eqnarray*}
+\mathbb{V}[X]&=&\int_{-\infty}^{\infty}(x-\mu)^2 f(x)\:dx\\
+&=&\int_{-\infty}^{\infty} (x-\mu)^2\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\:dx\\
+&=&\frac{2 \sigma^2}{\sqrt{\pi}} \cdot \Gamma\left(\frac{3}{2}\right)\\
+& =& \frac{2 \sigma^2}{\sqrt{\pi}} \cdot \frac{\sqrt{\pi}}{2} \\
+&=& \sigma^2.\\
+\end{eqnarray*}
+
+\begin{df}{\bf Standard Normal Distribution}
+A continuous random variable has a {\bf standard normal distribution} $N(0,1)$ if $\mu=0$ and $\sigma=1$, i.e. its probability density function is $$\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}.$$
+\end{df}
+
+\begin{center}
+\begin{figure}[H]
+\includegraphics[scale=0.2]{normal.png}
+\end{figure}
+\end{center}
+
+\begin{ex} Show that $\phi(x)$ satisfies the conditions to be a probability density function, i.e. $$\int_{-\infty}^{\infty}\phi(x)\:dx=1.$$
+\end{ex}
+
+\begin{ex}{\bf Mean and Standard Deviation of a Standard Normal Distribution}
+Let $X$ be a random variable with standard normal distribution $N(0,1)$.  Show that $$\mu=\mathbb{E}[X]=0\text{ and }\sigma=1.$$
+\end{ex}
+
+
+\begin{thm}{\bf Cumulative Probability Distribution for a Standard Normal Variable}
+The cumulative probability distribution for a standard normal variable ($\mu=0$ and $\sigma=1$) is $$N(x)=P(X\leq x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^xe^{-\frac{1}{2}t^2}\:dt.$$
+\end{thm}
+
+\begin{center}
+\begin{figure}[H]
+\includegraphics[scale=0.8]{cdf-normal.png}
+\end{figure}
+\end{center}
+
+\begin{ex}
+Show that for any $x$, $$1-N(x)=N(-x),$$  i.e. the probability that a random draw from the standard normal distribution is above $x$, $1-N(x)$, equals the probability that the draw is below $-x$, $N(-x)$.  Draw a picture illustrating this result in terms of areas.
+\end{ex}
+
+\begin{exa}
+Suppose that $Z$ is a standard normal random variable.  Find each of the following:
+\begin{enumerate}
+\item[(a)] The probability that $Z\leq 0.76$
+
+\noindent\textbf{Solution.} 
+
+\begin{eqnarray*}
+P(Z\leq 0.76)&=&N(0.76)\\
+&=&0.7764.\\
+\end{eqnarray*}
+
+\item[(b)] The probability that $Z>0.76$.
+
+\noindent\textbf{Solution.} 
+
+\begin{eqnarray*}
+P(Z>0.76)&=&1-P(Z\leq 0.76)\\
+&=&0.2236.
+\end{eqnarray*}
+
+\item[(c)] The probability that $Z\leq -0.76$.
+
+\noindent\textbf{Solution.} 
+
+\begin{eqnarray*}
+P(Z\leq -0.76)&=&P(Z>0.76)\\
+&=&0.2236.\\
+\end{eqnarray*}
+
+\end{enumerate}
+\end{exa}
+
+
+\begin{thm}{\bf Converting Normal to Standard Normal}
+We can convert any normally distributed random variable $X$ with mean $\mu$ and standard deviation $\sigma$ to the standard normal distribution by making the change of variable $$Z=\frac{X-\mu}{\sigma}.$$  
+
+\end{thm}
+
+\noindent\textbf{Proof.}
+
+\begin{eqnarray*}
+P(Z\leq z)&=&P\left(\frac{X-\mu}{\sigma}\leq z\right)\\
+&=&P\left(X\leq \sigma z+\mu\right)\\
+&=&\int_{-\infty}^{\sigma z+\mu}\frac{1}{\sigma\sqrt{2\pi}}\text{exp}\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right)\:dx\\
+\end{eqnarray*}
+
+\noindent Next, we will make the substitution $$t=\frac{x-\mu}{\sigma}.$$  Then $$x=\sigma t+\mu,\text{ so }dx=\sigma\:dt.$$  Then:
+
+\begin{eqnarray*}
+P(Z\leq z)&=&\int_{-\infty}^z\frac{1}{\sigma\sqrt{2\pi}}\text{exp}\left(-\frac{1}{2}t^2\right)\sigma\:dt\\
+&=&\int_{-\infty}^z\frac{1}{\sqrt{2\pi}}\text{exp}\left(-\frac{1}{2}t^2\right)\:dt\\
+&=&N(Z)
+\end{eqnarray*}
+
+
+\begin{exa}
+Suppose that $X$ is a normal random variable with mean $100$ and standard deviation $15$.  Find the probability that $X\geq 140$.
+\end{exa}
+
+\noindent\textbf{Solution.} Let $$Z=\frac{X-100}{15}.$$  Then $Z$ is a standard normal random variable.
+
+\begin{eqnarray*}
+P(X\geq 140)&=&1-P(X<140)\\
+&=&1-P(Z<\frac{140-100}{15}\\
+&=&1-P(Z<\frac{8}{3})\\
+&=&1-0.9962\\
+&=&0.0038.\\
+\end{eqnarray*}
+
+\begin{ex}
+Suppose that $X$ is a normally distributed random variable with expected value $\mu=70$ and standard deviation $\sigma=10$.  Find each of the following.
+\begin{enumerate}
+
+\item $P(X>50)$
+\item $P(X<60)$
+\item $P(X>90)$
+\item $P(60<x<80)$
+
+\end{enumerate}
+\end{ex}
+
+
+\noindent The {\bf Central Limit Theorem} states that as $n$ increases, the binomial distribution with $n$ trials and probability $p$ of success gets closer and closer to a normal distribution. That is, the binomial probability of any event gets closer and closer to the normal probability of the same event.
+
+\begin{thm}{\bf Central Limit Theorem for Bernoulli Trials}
+Let $S_n$ be the number of successes in $n$ Bernoulli trials with probability $p$ of success.  Let $a$ and $b$ be two fixed real numbers.  Then $$\lim_{n\rightarrow\infty}P\left(a\leq \frac{S_n-np}{\sqrt{np(1-p)}}\leq b\right)=\int_a^b\phi(x)\:dx.$$  This means that the probability distribution of the number of successes is approximately normal with mean $np$ and standard deviation $\sqrt{np(1-p)}$.
+\end{thm}
+
+
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Matching Volatility with $u$ and $d$}
+
+
+
+\noindent The three parameters necessary to construct a binomial tree with time step $\Delta t$ are $u$, $d$, and $p$.  Once $u$ and $d$ have been specified, $p$ is chosen so that the expected return is equal to the risk-free rate $r$.  We have shown that $$p=\frac{e^{r\Delta t}-d}{u-d}.$$  The parameters $u$ and $d$ should be chosen to match volatility.  
+
+\begin{df}{\bf Volatility}
+The {\bf volatility} of a stock (or any other asset) is denoted by $\sigma$ and is defined so that the standard deviation of its return in a short period of time $\Delta t$ is given by $\sigma\sqrt{\Delta t}$.  Equivalently, the variance of the return in time $\Delta t$ is $\sigma^2\Delta t$.  \end{df}
+
+\noindent Recall that, during a time step of length $\Delta t$, there is a probability $p$ that the stock will provide a return of $u-1$ and a probability $1-p$ that the stock will provide a return of $d-1$.  Thus, volatility is matched if $$\sigma^2\Delta t=p(u-1)^2+(1-p)(d-1)^2-[p(u-1)+(1-p)(d-1)]^2.$$ Using $$p=\frac{e^{r\Delta t}-d}{u-d},$$ we obtain $$e^{r\Delta t}(u+d)-ud-e^{2r\Delta t}=\sigma^2\Delta t.$$  Finally, using the series expansion for $e^x$ and ignoring quadratic and higher powers of $\Delta t$, we have $$u=e^{\sigma\sqrt{\Delta t}}\text{ and }d=e^{-\sigma\sqrt{\Delta t}}.$$  
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Deriving the Black-Scholes-Merton Formula from the Binomial Tree Model}
+
+\noindent We will derive the following result in the next series of exercises.
+
+\begin{thm}{\bf Price of a Call Option} Suppose that a tree with $n$ time steps is used to value a European call option on a non-dividend paying stock with strike price $K$ and expiry $T$.  As $n\rightarrow\infty$, we obtain $$c=S_0N(d_1)-Ke^{-rT}N(d_2),$$ where $N(x)$ is the cumulative probability distribution for a standard normal distribution, $$d_1=\frac{\ln(S_0/K)+(r+\sigma^2/2)T}{\sigma\sqrt{T}}$$ and $$d_2=d_1-\sigma\sqrt{T}.$$  
+\end{thm}
+
+\noindent As with the binomial model, there are five inputs to the Black-Scholes formula for the price of the call option:
+
+\begin{multicols}{3}
+\begin{itemize}
+\item $S_0=$ value of the stock at $t=0$
+\item $r=$ risk-free interest rate
+\item $T=$ expiry time
+\item $K=$ strike price
+\item $\sigma=$ volatility
+\end{itemize}
+\end{multicols}
+
+\noindent Most spreadsheets have a built-in function for computing $N(x)$. In Excel, the function is ``NormSDist".  The assumptions that we have used in deriving the Black-Scholes formula from the binomial tree model are as follows:
+
+\begin{itemize}
+
+\item Continuously compounded returns on the stock are normally distributed and independent over time. (We assume there are no ``jumps” in the stock price.)
+
+\item The volatility of continuously compounded returns is known and constant.
+
+\item There are no dividends.  (In general, we obtain a straightforward modification of the formula presented above if we assume that future dividends are known, either as a dollar amount or as a fixed dividend yield.
+
+
+\item The risk-free rate is known and constant.
+
+\item There are no transaction costs or taxes.
+
+
+\item It is possible to short-sell without cost and to borrow at the risk-free rate.
+
+\end{itemize}
+
+\noindent Many of these assumptions can easily be relaxed. For example, with a small change in the formula, we can permit the volatility and interest rate to vary over time in a known way.As a practical matter, the first set of assumptions—those about the stock price distribution—are the most crucial. Most academic and practitioner research on option pricing concentrates on relaxing these assumptions.Almost any valuation procedure, including ordinary discounted cash flow, is based on assumptions that appear strong; the interesting question is how well the procedure works in practice.
+
+\bigskip
+
+\noindent In this series of exercises, you will demonstrate the key steps in the derivation of the Black-Scholes-Merton equation for the price of a European call option.  Suppose that a tree with $n$ time steps is used to value a European call option on a non-dividend paying stock with strike price $K$ and expiry $T$.  As usual, let $S_0$ denote the price of the stock at $t=0$, let $r$ denote the risk-free interest rate, and let $\sigma$ denote the volatility of the stock.
+
+\bigskip
+
+\noindent\textbf{Notation:}
+
+\begin{itemize}
+\begin{multicols}{2}
+\item $S_0=$ value of the stock at $t=0$
+\item $r=$ risk-free interest rate
+\item $T=$ expiry time
+\item $K=$ strike price
+\item $\sigma=$ volatility
+\item $\displaystyle d_1=\frac{\ln(S_0/K)+(r+\sigma^2/2)T}{\sigma\sqrt{T}}$
+\item $\displaystyle d_2=d_1-\sigma\sqrt{T}=\frac{\ln(S_0/K)+(r-\sigma^2/2)T}{\sigma\sqrt{T}}$
+\item $\displaystyle\alpha=\frac{n}{2}-\frac{\ln(S_0/K)}{2\sigma\sqrt{T/n}}$
+\item $\displaystyle U_1=\Sum{j>\alpha}{}{n\choose j}p^j(1-p)^{n-j}u^jd^{n-j}$
+\item $\displaystyle U_2=\Sum{j>\alpha}{}{n\choose j}p^j(1-p)^{n-j}$
+\item $\displaystyle u=e^{\sigma\sqrt{T/n}}$
+\item $\displaystyle d=e^{-\sigma\sqrt{T/n}}$
+\item $\displaystyle p=\frac{e^{rT/n}-d}{u-d}$
+\item $\displaystyle p^{\star}=\frac{pu}{pu+(1-p)d}$
+\end{multicols}
+\end{itemize}
+
+
+\begin{ex}
+Show that $$c=e^{-rT}\Sum{j=0}{n}{n\choose j}p^j(1-p)^{n-j}\text{max}(S_0u^jd^{n-j}-K,0).$$
+\end{ex}
+
+\begin{ex} 
+Show that the terms of the summation in the equation above are nonzero if and only if $$j>\alpha=\frac{n}{2}-\frac{\ln(S_0/K)}{2\sigma\sqrt{T/n}}.$$  Thus, 
+
+
+\begin{eqnarray*}
+c&=&e^{-rT}\Sum{j>\alpha}{}{n\choose j}p^j(1-p)^{n-j}(S_0u^jd^{n-j}-K)\\
+&=&e^{-rT}(S_0U_1-KU_2)\\
+\end{eqnarray*}
+\end{ex}
+
+\begin{ex}
+Compute the following limits.  
+
+\begin{enumerate}
+
+\item $\displaystyle\lim_{n\rightarrow\infty}p(1-p)=\frac{1}{4}$
+
+\item $\displaystyle\lim_{n\rightarrow\infty}\sqrt{n}(p-\frac{1}{2})=\frac{(r-\sigma^2/2)\sqrt{T}}{2\sigma}$
+
+\end{enumerate}
+\end{ex}
+
+\begin{ex} Use the Central Limit Theorem to show that $U_2=N(d_2)$.
+\end{ex}
+
+\begin{ex} Show that 
+
+\begin{eqnarray*}
+U_1&=&[pu+(1-p)d]^n\Sum{j>\alpha}{}{n\choose j}(p^{\star})^j(1-p^{\star})^{n-j}\\
+&=&e^{rT}\Sum{j>\alpha}{}{n\choose j}(p^{\star})^j(1-p^{\star})^{n-j}\\
+\end{eqnarray*}
+\end{ex}
+
+\begin{ex} 
+Conclude that $$c=S_0N(d_1)-Ke^{-rT}N(d_2).$$
+
+\end{ex}
+
+\begin{ex}{\bf Price of a Put Option}
+Show that the price of a European put option on a non-dividend paying stock with strike price $K$ and expiry $T$ is $$p=Ke^{-rT}N(-d_2)-S_0N(-d_1).$$
+\end{ex}
+
+
+\begin{ex}\label{call-BS1}
+A non-dividend paying stock has current value $S_0=\$41$. The volatility is $\sigma=0.3$ and the risk-free interest rate is $r=8\%$. Find the price of a European call option on the stock with strike price $K=\$40$ and expiry $T=3$ months.
+\end{ex}
+
+
+\begin{ex}
+Find the price of a European put option on the stock in Exercise \ref{call-BS1}.
+\end{ex}
+
+
+\begin{ex}
+Find the binomial approximation for the call option in Exercise \ref{call-BS1} with $n=1$, $n=2$, $n=10$, $n=12$, and $n=100$.  What happens to the approximation as $n$ increases?
+\end{ex}
+
+
+\begin{ex}
+A non-dividend paying stock has current value $S_0=\$120$. The volatility is $\sigma=0.3$ and the risk-free interest rate is $r=8\%$.  
+
+\begin{enumerate}
+
+\item[(a)] Find the price of a European call option on the stock with strike price $K=\$100$ and expiry $T=1$ year.  
+\item[(b)] Compute the price of the European call option for several values of large $T$.  What happens to the price of the European call option as $T\rightarrow\infty$?
+
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{ex}
+Consider a bull spread in which you buy a $40$-strike call and sell a $45$-strike call. Suppose $$S_0 = \$40, ~\sigma = 0.30, ~r = 0.08, \text{ and } T = 0.5.$$  Draw a graph with stock prices ranging from \$20 to \$60 depicting the profit on the bull spread at expiry.
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Volatility}
+
+\noindent The {\bf volatility}, $\sigma$, of a stock is a measure of uncertainty about the returns provided by the stock.  Stocks typically have a volatility between $15\%$ and $60\%$.  Recall that the volatility of a stock price is defined to be the number $\sigma$ so that the standard deviation of its return in a short period of time $\Delta t$ is $$\sigma\sqrt{\Delta t}.$$   Thus, $$\sigma^2\Delta t$$ is the variance of the return in the stock price in time $\Delta t$.  
+
+\begin{ex}
+Suppose that $\sigma=0.3$ and that the current stock price is \$50.  Find the standard deviation of the return in the stock price in $1$ week, and the standard deviation of the return in the stock price in $4$ weeks.
+\end{ex}
+
+\noindent Uncertainty about a future stock price, as measured by its standard deviation, increases with the {\bf square root} of how far ahead we are looking.  To estimate the volatility of a stock price empirically, the stock price is usually observed at fixed intervals of time (e.g. every day, week, or month).  
+
+\begin{itemize}
+
+\item $n+1=$ number of observations
+
+\item $S_i=$ stock price at the end of the $i$-th interval, $i=0,1,\ldots,n$
+
+\item $\tau=$ length of time interval in years
+
+
+\item $\displaystyle u_i=\ln\left(\frac{S_i}{S_{i-1}}\right),~i=1,2,\ldots,n$
+
+\item $\displaystyle\bar{u}=\frac{\Sum{i=1}{n}u_i}{n}$ is the mean of the $u_i$
+
+
+    \item The standard deviation $s$ of the $u_i$ is thus: \begin{eqnarray*} s&=&\sqrt{\frac{1}{n-1}\Sum{i=1}{n}(u_i-\bar{u})^2}\\
+    &=&\sqrt{\frac{1}{n-1}\Sum{i=1}{n}u_i^2-\frac{1}{n(n-1)}\left(\Sum{i=1}{n}u_i\right)^2}\\
+    \end{eqnarray*}
+
+\item $\displaystyle s=\sigma\sqrt{\tau}$
+
+\item $\displaystyle \sigma=\frac{s}{\sqrt{\tau}}$
+
+\end{itemize}
+
+\begin{ex}
+The table below shows a sequence of stock prices during $21$ consecutive trading days.  Find the estimate $\sigma$ for the volatility per annum.  Assume that there are $252$ trading days per year.
+\end{ex}
+
+\includegraphics[scale=0.75]{volatility-data1.png}
+
+\bigskip
+
+
+
+\begin{itemize} 
+
+\item The prices of actively traded options are not usually calculated from volatilities based on historical data. As we shall see later, implied volatilities are used by traders. However, estimates of volatility based on historical data are used extensively in risk management. Usually risk managers set $\tau$ equal to one day.  
+
+\item One problem that risk managers have to deal with is that volatilities tend to change through time. There are periods of high volatility and periods of low volatility. This affects the amount of data used to estimate volatility (i.e., the choice of $n$). If volatilities were constant, the accuracy of an estimate would increase as $n$ increased. However, data that is too old may not be relevant to current market conditions. A compromise that seems to work reasonably well is to use $90$ to $180$ days of data.
+
+\item An alternative rule of thumb is to set $n$ equal to the number of days to which the volatility is to be applied. If the estimate is to be applied over a two-year future period, two years of historical data would then be used.
+
+\item It is natural to look for a way of giving more weight to recent daily price movements (i.e., values of $u_i$ for recent time periods). The {\bf generalized autoregressive conditional heteroskedasticity (GARCH)} process is an econometric term developed in 1982 by Robert F. Engle, an economist and 2003 winner of the Nobel Memorial Prize for Economics. GARCH describes an approach to estimate volatility in financial markets.
+
+\item An important issue is whether time should be measured in calendar days or trading days when volatility parameters are being estimated and used. Research shows that volatility is much higher when the exchange is open for trading than when it is closed. As a result, practitioners tend to ignore days when the exchange is closed when estimating volatility from historical data and when calculating the life of an option. The volatility per annum is calculated from the volatility per trading day using the formula
+ $$\text{Volatiliy per annum}=\text{Volatility per trading day}\times \sqrt{\text{Number of trading days per annum}}.$$
+ 
+ \item The life of an option is also usually measured using trading days rather than calendar
+days. It is calculated as $T$ years, where $$T=\frac{\text{Number of trading days until option maturity}}{252}.$$
+ 
+
+\item The one parameter in the Black–Scholes–Merton pricing formulas that cannot be directly observed is the volatility of the stock price. We've discussed how $\sigma$ can be estimated from a history of the stock price.
+
+\item  In practice, traders usually work with {\bf implied volatility}. These are the volatilities implied by option prices observed in the market.  
+
+\item To illustrate how implied volatilities are calculated, suppose that the market price of a European call option on a non-dividend-paying stock is $1.875$ when $$S_0 = 21, K = 20, r = 0.1, T = 0.25.$$ The implied volatility is the value of $\sigma$ that, when substituted into the Black-Scholes-Merton equation, gives $c = 1.875$. 
+
+Unfortunately, it is not possible to invert the Black-Scholes-Merton equation so that $\sigma$ is expressed as a function of $S_0, K, r, T, c$. However, an iterative search procedure can be used to find the implied $\sigma$. For example, we can start by trying $\sigma = 0.20.$ This gives a value of $c$ equal to $1.76$, which is too low. Because $c$ is an increasing function of $\sigma$, a higher value of $\sigma$ is required. We can next try a value of $0.30$ for $\sigma$. This gives a value of $c$ equal to $2.10$, which is too high and means that $\sigma$ must lie between $0.20$ and $0.30$. Next, a value of $0.25$ can be tried for $s$. This also proves to be too high, showing that $\sigma$ lies between $0.20$ and $0.25$. Proceeding in this way, we can halve the range for $\sigma$ at each iteration and the correct value of $\sigma$ can be calculated to any required accuracy. In this example, the implied volatility is $0.235$, or $23.5\%$, per annum. 
+
+\item A similar procedure can be used in conjunction with binomial trees to find implied volatilities for American options.
+
+\item Implied volatilities are used to monitor the market’s opinion about the volatility of a particular stock. Whereas historical volatilities are backward looking, implied volatilities are forward looking. Traders often quote the implied volatility of an option rather than its price. This is convenient because the implied volatility tends to be less variable than the option price. The implied volatilities of actively traded options on an asset are often used by traders to estimate appropriate implied volatilities for other options on the asset.
+
+\item The CBOE publishes indices of implied volatility. The most popular index, the SPX VIX, is an index of the implied volatility of 30-day options on the S\&P 500 calculated from a wide range of calls and puts. It is sometimes referred to as the ``fear factor.” An index value of $15$ indicates that the implied volatility of 30-day options on the S\&P 500 is estimated as 15\%. Trading in futures on the VIX started in 2004 and trading in options on the VIX started in 2006. One contract is on \$1,000 times the index.
+
+\end{itemize}
+
+
+
+
+\begin{ex}  Suppose that observations on a stock price (in dollars) at the end of each of 15 consecutive weeks are as follows:
+$$30.2, 32.0, 31.1, 30.1, 30.2, 30.3, 30.6, 33.0, 32.9, 33.0, 33.5, 33.5, 33.7, 33.5, 33.2$$
+Estimate the stock price volatility. Assume that there are 52 trading weeks in one year.
+\end{ex}
+
+\begin{ex} A call option on a non-divident paying stock has a market price of \$2.50.  The stock price is \$15, the exercise price is \$13, the time to maturity is $3$ months, and the risk-free interest rate is 5\% per annum. What is the implied volatility?
+\end{ex}
+\begin{ex}  Choose a stock, and estimate its historical volatility using the closing stock price for $21$ consecutive days of trading.  You may use the Historical Data section on Yahoo Finance to obtain this information (or any other source for historical data on prices of publicly dated stocks).  
+\end{ex}
+
+\begin{ex} Consider a European call option on a stock with current price $S_0=100$, strike price $K=50$, $r=0.06$, and $T=0.01$.  
+\begin{enumerate}
+
+
+\item Find the price of the option for values of $\sigma$ between $0.05$ and $1$ (in increments of $0.05$, i.e. $\sigma=0.05, 0.1, 0.15,\ldots$).  
+
+\item Interpret the results that you obtained in (a) in financial terms.
+
+\item What happens if $\sigma=5$?
+
+\end{enumerate}
+
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Introduction to Geometric Brownian Motion and Monte Carlo Simulation}
+
+\noindent The model of stock price behavior that we have developed is known as {\bf geometric Brownian motion}.  The discrete-time version is $$\frac{\Delta S}{S}=\mu\Delta t+\sigma\epsilon\sqrt{\Delta t},$$ or $$\Delta S=\mu S\Delta t+\sigma S\epsilon\sqrt{\Delta t}.$$  Since $\epsilon$ has a standard normal distribution, $$\frac{\Delta S}{S}$$ is approximately normally distributed with mean $$\mu\Delta t$$ and standard deviation $$\sigma\sqrt{\Delta t},$$ i.e. $$\frac{\Delta S}{S}\sim\phi(\mu\Delta t,\sigma^2\Delta t).$$
+
+
+
+\begin{ex}
+Consider a stock that pays no dividends, has a volatility of $30\%$ per annum, and provides an expected return of $15\%$ per annum with continuous compounding.  Find the process that describes $\Delta S$ over a time interval of $1$ week.
+\end{ex}
+
+\begin{ex}
+Suppose that a stock has an expected return of $10\%$ per annum and a volatility of $30\%$ per annum, and that the current stock price is $S_0=\$100$.  Find each of the following:
+
+\begin{enumerate}
+
+\item[(a)] Find the expected stock price at the end of the next trading day.
+
+\item[(b)] The standard deviation of the stock price at the end of the next trading day
+
+\item[(c)] The $95\%$ confidence limits for the stock price at the end of the next trading day.
+
+\end{enumerate}
+
+\end{ex}
+
+\begin{df}{\bf Monte Carlo Simulation}
+A Monte Carlo simulation of a stochastic process is a procedure for sampling random outcomes for the process. 
+\end{df}
+
+\noindent We will use Monte Carlo simulation as a way of developing some understanding of the nature of the stock price process described by the equation $$\frac{\Delta S}{S}=\mu\Delta t+\sigma\epsilon\sqrt{\Delta t}.$$
+
+\begin{itemize}
+
+\item A path for the stock price over a time interval $T$ can be simulated by sampling repeatedly for $\epsilon$ from $\phi(0,1)$ and substituting into $$\Delta S=\mu S\Delta t+\sigma S\epsilon\sqrt{\Delta t}.$$
+
+\item The expression ``=RAND()" in Excel computes a random sample between $0$ and $1$.
+
+\item The inverse cumulative normal distribution is ``NORMSINV" in Excel.
+
+\item The expression ``=NORMSINV(RAND())" produces a random sample from a standard normal distribution in Excel.
+
+\end{itemize}
+\begin{ex}
+Consider a stock that pays no dividends, has a volatility of $30\%$ per annum, and provides an expected return of $15\%$ per annum with continuous compounding, as in the previous example.  Suppose that the initial stock price is $S_0=100$.  Use Monte Carlo simulation to simulate the stock price during $1$-week periods for $1$ year. 
+
+\begin{center}
+\includegraphics[scale=0.8]{chart.png}
+\end{center}
+
+\end{ex}
+
+\noindent Note that different random samples would lead to different price movements. Any small time interval $\Delta t$ can be used in the simulation. In the limit as $\Delta t\rightarrow 0$, a perfect description of the stochastic process is obtained. The final stock price can be regarded as a random sample from the distribution of stock prices at the end of $52$ weeks. By repeatedly simulating movements in the stock price, a complete probability distribution of the stock price at the end of this time is obtained.
+
+
+
+
+\begin{ex}
+
+
+
+ The Ito process for the stock price is $$\Delta S=\mu S\Delta t+\sigma S\epsilon\sqrt{\Delta t}.$$  Explain the difference between this model and each of the following, and explain why the Ito process is a more appropriate model than any of these three alternatives.
+
+
+
+\begin{enumerate}
+\item[(a)] $\displaystyle \Delta S=\mu\Delta t+\sigma\epsilon\sqrt{\Delta t}$
+\item[(b)] $\displaystyle \Delta S=\mu S\Delta t+\sigma\epsilon\sqrt{\Delta t}$
+\item[(c)] $\displaystyle \Delta S=\mu \Delta t+\sigma S\epsilon\sqrt{\Delta t}$
+
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex} A stock whose price is \$30 has an expected return of $9\%$ and a volatility of $20\%$.  Simulate the stock price path over 5 years using monthly time steps and random samples from a normal distribution. Graph the simulated stock price path.
+
+\end{ex}
+
+
+
+\newpage
+
+\section{The Greeks}
+
+
+\noindent Most traders use more sophisticated hedging procedures than those mentioned so far.
+These hedging procedures involve calculating measures such as delta, gamma, and vega.
+The measures are collectively referred to as Greek letters. They quantify different
+aspects of the risk in an option position. This section considers the properties of some
+of most important Greek letters.
+In order to calculate a Greek letter, it is necessary to assume an option pricing
+model. Traders usually assume the Black–Scholes–Merton model for European options and the binomial tree model for American options. 
+
+\bigskip
+
+\noindent When calculating Greek letters, traders
+normally set the volatility equal to the current implied volatility. This approach, which
+is sometimes referred to as using the “practitioner Black–Scholes model,” is appealing.
+When volatility is set equal to the implied volatility, the model gives the option price at
+a particular time as an exact function of the price of the underlying asset, the implied
+volatility, interest rates, and (possibly) dividends. The only way the option price can
+change in a short time period is if one of these variables changes. A trader naturally
+feels confident if the risks of changes in all these variables have been adequately hedged.
+
+\begin{df}{\bf Delta}
+The delta ($\Delta$) of an option is the rate of
+change of the option price with respect to the price of the underlying asset: $$\Delta=\frac{\partial C}{\partial S}.$$ It is the
+slope of the curve that relates the option price to the underlying asset price.
+\end{df}
+
+\begin{exa}\label{delta-hedging}
+Suppose that the stock price is \$100 and the option price is \$10.
+­ Imagine an investor who has sold call options to buy $2,000$ shares of a stock. The
+­ investor’s position could be hedged by buying $$0.6 \cdot 2,000= 1,200$$ shares. The gain
+(loss) on the stock position would then tend to offset the loss (gain) on the option
+­ position. 
+
+\begin{itemize}
+
+\item If the stock price goes up by \$1 (producing a gain of \$1,200 on
+the shares purchased), the option price will tend to go up by $$0.6 \cdot 1= \$0.60$$
+(producing a loss of \$1,200 on the options written).
+
+\item If the stock price goes down by
+\$1 (producing a loss of \$1,200 on the shares purchased), the option price will tend to go
+down by \$0.60 (producing a gain of \$1,200 on the options written).
+
+\end{itemize} 
+In this example, the delta of the trader’s short position in $2,000$ options is
+$$0.6 \cdot (-2,000)=-1,200.$$
+This means that the trader loses $1200\Delta S$ on the option position when the stock price increases by $\Delta S$. The delta of one share of the stock is $1.0$, so that the long position in
+$1,200$ shares has a delta of $+1,200$. The delta of the trader’s overall position in our
+example is, therefore, zero. The delta of the stock position offsets the delta of the option
+position. A position with a delta of zero is referred to as delta neutral.
+It is important to realize that, since the delta of an option does not remain constant,
+the trader’s position remains delta hedged (or delta neutral) for only a relatively short
+period of time. The hedge has to be adjusted periodically. This is known as rebalancing.
+\end{exa}
+
+\begin{ex}
+Show that $$\Delta(\text{call})=N(d_1).$$
+\end{ex}
+
+\noindent Delta is closely related to the Black–Scholes–Merton analysis. The Black–Scholes–Merton differential equation can be derived by setting
+up a riskless portfolio consisting of a position in an option on a stock and a position in
+the stock. Expressed in terms of $\Delta$, the portfolio is:
+
+\begin{itemize}
+
+\item $-1$ option
+
+\item $+\Delta$ shares of the stock
+
+\end{itemize}
+
+We can say that options can be valued by setting up a delta-
+neutral position and arguing that the return on the position should (instantaneously) be
+the risk-free interest rate.
+
+The table below demonstrates the operation of delta hedging for Example \ref{delta-hedging}, where $100,000$ call options are sold. The hedge is assumed to
+be adjusted or rebalanced weekly and the assumptions underlying the Black–Scholes–
+Merton model are assumed to hold with the volatility staying constant at 20\%. The
+initial value of delta for a single option is calculated in Example \ref{delta-hedging} as $0.522$. This
+means that the delta of the option position is initially $$-100,000 \cdot 0.522= -52,200.$$ As
+soon as the option is written, \$2,557,800 must be borrowed to buy $52,200$ shares at a
+price of \$49 to create a delta-neutral position. The rate of interest is 5\%. An interest
+cost of approximately \$2,500 is therefore incurred in the first week.
+
+In the table below, the stock price falls by the end of the first week to \$48.12. The delta of
+the option declines to $0.458$, so that the new delta of the option position is $-45,800$. This
+means that $6,400$ of the shares initially purchased are sold to maintain the delta-neutral
+hedge. The strategy realizes \$308,000 in cash, and the cumulative borrowings at the end
+of Week 1 are reduced to \$2,252,300. During the second week, the stock price reduces to
+\$47.37, delta declines again, and so on. Toward the end of the life of the option, it
+becomes apparent that the option will be exercised and the delta of the option
+approaches $1.0$. By Week 20, therefore, the hedger has a fully covered position. The hedger receives \$5 million for the stock held, so that the total cost of writing the option
+and hedging it is \$263,300.
+
+\includegraphics[scale=0.75]{delta-hedge.png}
+
+\begin{ex}
+Show that $$\Delta(\text{put})=N(d_1)-1.$$
+\end{ex}
+
+\noindent Note that for a European put option, Delta is negative, which means that a long position in a put option should be hedged
+with a long position in the underlying stock, and a short position in a put option
+should be hedged with a short position in the underlying stock.
+
+\begin{df}{\bf Theta}
+The theta $(\Theta$) of a portfolio of options is the rate of change of the value of the portfolio
+with respect to the passage of time with all else remaining the same. Theta is sometimes
+referred to as the time decay of the portfolio.
+\end{df}
+
+\begin{ex}
+Show that $$\Theta(\text{call})=-\frac{S_0N'(d_1)\sigma}{2\sqrt{T}}-rKe^{-rT}N(d_2).$$
+
+\end{ex}
+
+\noindent Here, time is measured in years. Usually, when theta is quoted, time is
+measured in days, so that theta is the change in the portfolio value when $1$ day passes
+with all else remaining the same. We can measure theta either ``per calendar day” or
+``per trading day.” To obtain the theta per calendar day, the formula for theta must be
+divided by $365$; to obtain theta per trading day, it must be divided by $252$.
+
+
+\begin{ex}
+Consider a call option on a non-dividend-paying stock where
+the stock price is\$49, the strike price is \$50, the risk-free rate is 5\%, the time to
+maturity is $20$ weeks ($= 0.3846$ years), and the volatility is 20\%.  Find the theta of the option.
+\end{ex}
+
+\begin{df}{\bf Gamma}
+The gamma ($\Gamma$) of a portfolio of options on an underlying asset is the rate of change of
+the portfolio’s delta with respect to the price of the underlying asset. It is the second
+partial derivative of the portfolio with respect to asset price:
+$$\Gamma=\frac{\partial^2\Pi}{\partial S^2}.$$
+\end{df}
+
+\noindent If gamma is small, delta changes slowly, and adjustments to keep a portfolio delta
+neutral need to be made only relatively infrequently. However, if gamma is highly
+negative or highly positive, delta is very sensitive to the price of the underlying asset. It
+is then quite risky to leave a delta-neutral portfolio unchanged for any length of time.
+The figure below illustrates this point. When the stock price moves from $S$ to $S'$, delta
+hedging assumes that the option price moves from $C$ to $C'$, when in fact it moves from
+$C$ to $C''$. The difference between $C'$ and $C''$ leads to a hedging error. The size of the
+error depends on the curvature of the relationship between the option price and the
+stock price. Gamma measures this curvature.
+
+\includegraphics[scale=1.0]{gamma.png}
+
+\begin{ex}
+Show that $$\Gamma(\text{call})=\frac{N'(d_1)}{S_0\sigma\sqrt{T}}.$$
+\end{ex}
+
+
+\begin{ex}
+Consider a call option on a non-dividend-paying stock where
+the stock price is\$49, the strike price is \$50, the risk-free rate is 5\%, the time to
+maturity is $20$ weeks ($= 0.3846$ years), and the volatility is 20\%.  Find the gamma of the option.
+\end{ex}
+
+\noindent When Greek letters are calculated the volatility of the
+asset is in practice usually set equal to its implied volatility. The Black–Scholes–Merton
+model assumes that the volatility of the asset underlying an option is constant. This
+means that the implied volatilities of all options on the asset are constant and equal to
+this assumed volatility.
+But in practice the volatility of an asset changes over time. As a result, the value of an
+option is liable to change because of movements in volatility as well as because of
+changes in the asset price and the passage of time. 
+
+\begin{df}{\bf Vega}
+The vega of an option, $\nu$, is the rate
+of change in its value with respect to the volatility of the underlying asset.  $$\nu=\frac{\partial f}{\partial \sigma},$$ where $f$ is the option price and $\sigma$ is volatility.
+\end{df}
+
+\noindent When vega is highly positive or highly negative, there is a high sensitivity to
+changes in volatility. If the vega of an option position is close to zero, volatility changes
+have very little effect on the value of the position.
+
+\begin{ex}
+Consider a call option on a non-dividend-paying stock where
+the stock price is\$49, the strike price is \$50, the risk-free rate is 5\%, the time to
+maturity is $20$ weeks ($= 0.3846$ years), and the volatility is 20\%.  Find the vega of the option.
+\end{ex}
+
+
+\begin{df}{\bf Rho}
+The $\rho$ of an option is the rate of change of its price $f$ with respect to the interest rate $r$:  $$\rho=\frac{\partial f}{\partial r}.$$
+\end{df}
+
+
+\begin{ex}
+Show that $$\rho(\text{call})=KTe^{-rT}N(d_2).$$
+\end{ex}
+
+
+\begin{ex}
+Use the put–call parity relationship to derive, for a non-dividend-paying stock, the
+­ relationship between:
+\begin{enumerate}
+\item The delta of a European call and the delta of a European put
+\item The gamma of a European call and the gamma of a European put
+\item  The vega of a European call and the vega of a European put
+\item  The theta of a European call and the theta of a European put.
+\end{enumerate}
+\end{ex}
+
+
+
+
+\newpage
+
+
+
+
+
+
+
+\section{Stochastic Calculus and It\^{o}'s Lemma}
+
+\subsection{Brownian Motion}
+
+\begin{df}{\bf Stochastic Process}
+
+\begin{itemize}
+
+\item A {\bf stochastic process} is a random variable whose value changes over time, i.e. a variable whose value changes over time in an uncertain way.  
+
+\item A {\bf discrete-time stochastic process} is a stochastic process in which the value of the variable can change only at certain fixed points in time.
+
+\item  A {\bf continuous-time stochastic process} is a stochastic process in which changes can take place at any time.
+
+\item A {\bf continuous-variable stochastic process} is a stochastic process in which the underlying variable can take any value in a given range.
+
+\item A {\bf discrete-variable stochastic process} is a stochastic process in which the underlying variable can take only certain discrete values.
+
+
+\end{itemize}
+
+\end{df}
+
+\noindent In this section, we will develop a continuous-variable, continuous-time stochastic process for stock prices. A similar process is often assumed for the prices of other assets. Learning about this process is the first step to understanding the pricing of options and other more complicated derivatives. It should be noted that, in practice, we do not observe stock prices following continuous-variable, continuous-time processes. Stock prices are restricted to discrete values (e.g., multiples of a cent) and changes can be observed only when the exchange is open for trading. Nevertheless, the continuous-variable, continuous-time process proves to be a useful model for many purposes.
+
+\begin{df}{\bf Markov Process}
+A {\bf Markov process} is a particular type of stochastic process in which only the current value of a variable is relevant for predicting the future. The past history of the variable and the way that the present has emerged from the past are irrelevant.
+\end{df}
+
+\noindent Stock prices are usually assumed to follow a Markov process. For example, suppose that the price of a stock is \$100 now. If the stock price follows a Markov process, our predictions for the future should be unaffected by the price one week ago, one month ago, or one year ago. The only relevant piece of information is that the price is now \$100. Predictions for the future are uncertain and must be expressed in terms of probability distributions. The Markov property implies that the probability distribution of the price at any particular future time is not dependent on the particular path followed by the price in the past.  Note that statistical properties of the stock price history may be useful in determining the characteristics of the stochastic process followed by the stock price (e.g., its volatility). The point being made here is that the particular path followed by the stock in the past is irrelevant.
+
+The Markov property of stock prices is consistent with the weak form of market efficiency. This states that the present price of a stock impounds all the information contained in a record of past prices. If the weak form of market efficiency were not true, technical analysts could make above-average returns by interpreting charts of the past history of stock prices. There is very little evidence that they are in fact able to do this.
+
+It is competition in the marketplace that tends to ensure that weak-form market efficiency and the Markov property hold. There are many investors watching the stock market closely. This leads to a situation where a stock price, at any given time, reflects the information in past prices. Suppose that it was discovered that a particular pattern in a stock price always gave a 65\% chance of subsequent steep price rises. Investors would attempt to buy a stock as soon as the pattern was observed, and demand for the stock would immediately rise. This would lead to an immediate rise in its price and the observed effect would be eliminated, as would any profitable trading opportunities.
+
+\begin{df}{\bf Brownian Motion}\\
+{\bf Brownian motion} $z(t)$ is a continuous Markov stochastic process with the following properties:
+\begin{itemize}
+\item $\displaystyle\Delta z=\epsilon\sqrt{\Delta t}$, where $\epsilon$ has a standard normal distribution, i.e.
+
+$$\mathbb{E}[\Delta z]=0,\quad \mathbb{V}[\Delta z]=\Delta t,\quad \text{Standard deviation of }\Delta z=\sqrt{\Delta t}.$$
+
+\item The values of $\Delta z$ for any two different short intervals of time are independent.  This property states that $z$ is a Markov process.
+\end{itemize}
+Brownian motion is also known as a {\bf Weiner process}.
+\end{df}
+
+\noindent Two important properties of Brownian motion are the following:
+
+\begin{enumerate}
+
+\item The expected length of the path followed by $z$ in any time interval is infinite.
+
+\item The expected number of times $z$ is equal to any particular value in any time interval is infinite.
+
+\end{enumerate}
+
+\noindent Note that as $\Delta t\rightarrow 0$, the standard deviation of $z$, which is equal to $\displaystyle\sqrt{\Delta t}$, is much larger than $\Delta t$ for small $\Delta t$.  This is why the path becomes more ``jagged" as $\Delta t\rightarrow 0$.
+
+\begin{center}
+\includegraphics[scale=1.0]{Brownian.png}
+\end{center}
+
+\begin{df}{\bf Drift Rate}
+The mean change per unit time for a stochastic process is known as the {\bf drift rate} or the {\bf drift}.
+\end{df}
+
+\begin{df}{\bf Variance Rate}
+The variance per unit time for a stochastic process is known as the {\bf variance rate}.
+\end{df}
+
+\begin{df}{\bf Generalized Brownian Motion}
+The variable $x$ follows a generalized Brownian motion process (or is a generalized Weiner process) if $$dx=a\:dt+b\:dz,$$ where $a$ and $b$ are constants and $z$ is Brownian motion.
+\end{df}
+
+\begin{center}
+\includegraphics[scale=0.8]{generalizedBrownian.png}
+\end{center}
+
+
+
+\begin{ex}{\bf Mean, Standard Deviation, and Variance of Generalized Brownian Motion}
+Find the mean, standard deviation, and variance of $\Delta x$.
+\end{ex}
+
+
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Ito Process for a Stock Price}
+
+\begin{df}{\bf Ito Process}
+An {\bf Ito process} is a generalized Weiner process in which the parameters $a$ and $b$ are functions of the value of the underlying variable $x$ and time $t$:
+$$dx = a(x,t)\:dt+b(x,t)\:dz.$$
+\end{df}
+
+\noindent In this section we discuss the stochastic process usually assumed for the price of a non- dividend-paying stock.
+It is tempting to suggest that a stock price follows a generalized Wiener process; that is, that it has a constant expected drift rate and a constant variance rate. However, this model fails to capture a key aspect of stock prices. This is that the expected percentage return required by investors from a stock is independent of the stock’s price. If investors require a 14\% per annum expected return when the stock price is \$10, then they will also require a 14\% per annum expected return when it is \$50.
+Clearly, the assumption of constant expected drift rate is inappropriate and needs to be replaced by the assumption that the expected return (i.e., expected drift divided by the stock price) is constant. If $S_t$ is the stock price at time $t$, then the expected drift rate in $S$ should be assumed to be $\mu S$ for some constant parameter $\mu$ This means that in a short interval of time, $\Delta t$, the expected increase in $S$ is $\mu S\Delta t$. The parameter $\mu$ is the expected rate of return on the stock.  A reasonable assumption is that the variability of the return in a short period of time $\Delta t$ is the same regardless of the stock price. In other words, an investor is just as uncertain about the return when the stock price is \$50 as when it is \$10. This suggests that the standard deviation of the change in a short period of time $\Delta t$ should be proportional to the stock price and leads to the following model.
+
+\begin{df}{\bf Ito Process for a Stock Price}
+\begin{eqnarray*}
+dS&=&\mu S\:dt+\sigma S\:dz\\
+\frac{dS}{S}&=&\mu \:dt+\sigma\:dz\\
+\end{eqnarray*}
+\end{df}
+
+\noindent In this model, $\mu$ is the expected rate of return of the stock, and $\sigma$ is the volatility.  In a risk-neutral world, $\sigma=r$, the risk-free interest rate.
+
+\begin{ex}
+Find $S(t)$ if $\sigma=0$.
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Ito's Lemma}
+
+\begin{thm}{\bf Ito's Lemma}
+Suppose that the value of a variable $x$ follows the Ito process $$dx=a(x,t)\:dt+b(x,t)\:dz,$$ where $dz$ is Brownian motion.  The variable $x$ has a drift rate of $a$ and a variance rate of $b^2$.  Then a function $G$ of $x$ and $t$ follows the process $$dG=\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2G}{\partial x^2}b^2\right)\:dt+\frac{\partial G}{\partial x}b\:dz.$$  Thus, $G$ also follows an Ito process with drift rate $$\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial t}+\frac{1}{2}\frac{\partial^2G}{\partial x^2}b^2\right)$$ and variance rate $$\left(\frac{\partial G}{\partial x}\right)^2b^2.$$
+\end{thm}
+
+
+\begin{ex}
+Find the process followed by a function $G$ of the stock price $S$ and time $t$.
+\end{ex}
+
+
+\begin{ex}\label{lognormal}{\bf The Lognormal Property}
+Let $$G(S)=\ln S.$$  Find the process followed by $G(S)$.  Show that $\ln S_T$ is normally distributed with mean $$\ln S_0+\left(\mu-\frac{\sigma^2}{2}\right)T$$ and standard deviation $$\sigma\sqrt{T}.$$
+\end{ex}
+
+\begin{center}
+\includegraphics[scale=0.5]{lognormal.png}
+\end{center}
+
+
+\begin{ex}
+ Suppose that a stock whose current price is $S_0=\$40$ has an expected return of 16\% per annum and a volatility of 20\% per annum.  Find the probability distribution for $\ln S_T$, and find the 95\% confidence interval for the value of the stock price in $6$ months.
+  \end{ex}
+
+
+
+\begin{ex}
+Suppose that a stock price $S$ follows the Brownian motion process $$dS=\mu S\:dt+\sigma S\:dz.$$  Find the process followed by the variable $S^n$.  Find the expected return of $S^n$.
+\end{ex}
+
+
+
+
+\newpage
+
+\section{The Black-Scholes-Merton Model II}
+
+\subsection{Introduction}
+
+\noindent The model of stock price behavior used by Black, Scholes, and Merton is $$\frac{dS}{S}=\mu \:dt+\sigma\:dz,$$ where $\mu$ is the expected annual return and $\sigma$ is volatility. This model assumes that percentage changes in the stock price in a very short period of time are normally distributed.  As we have shown in Exercise \ref{lognormal}, this model implies that $\ln S_T$ is normally distributed with mean $$\ln S_0+\left(\mu-\frac{\sigma^2}{2}\right)T$$ and standard deviation $$\sigma\sqrt{T}.$$
+
+
+\begin{ex}
+Find $\mathbb{E}[S_T]$ and $\mathbb{V}[S_T]$.
+\end{ex}
+
+
+\begin{ex}
+Consider a stock whose current price is $S_0=\$20$, expected return is $20\%$ per year, and the volatility is $40\%$ per year.  Find $\mathbb{E}[S_T]$ and $\mathbb{V}[S_T]$ at $T=1$ year.
+\end{ex}
+
+\noindent To derive the Black-Scholes-Merton differential equation, we will use ideas similar to the no-arbitrage arguments we used previously to value stock options in the situation where stock price movements were assumed to be binomial.  They involve setting up a riskless portfolio consisting of a position in the derivative and a position in the stock. In the absence of arbitrage opportunities, the return from the portfolio must be the risk-free interest rate, $r$. This leads to the Black-Scholes-Merton differential equation.  The reason a riskless portfolio can be set up is that the stock price and the derivative price are both affected by the same underlying source of uncertainty: stock price movements. In any short period of time, the price of the derivative is perfectly correlated with the price of the underlying stock. When an appropriate portfolio of the stock and the derivative is established, the gain or loss from the stock position always offsets the gain or loss from the derivative position so that the overall value of the portfolio at the end of the short period of time is known with certainty.
+
+\begin{exa} Suppose that at a particular point in time the relationship between a small change $\Delta S$ in the stock price and the resultant small change $\Delta c$ in the price of a European call option is given by $$\Delta c=0.4\Delta S.$$
+This means that the slope of the line representing the relationship between $c$ and $S$
+is $0.4$, as indicated below. 
+
+\begin{center}
+\includegraphics[scale=0.5]{slope.png}
+\end{center}
+
+\noindent A riskless portfolio would consist of the following:
+\begin{itemize}
+\item A long position in $40$ shares
+\item A short position in $100$ call options.
+\end{itemize}
+
+\noindent Suppose that the stock price increases by $10$ cents. The option price will increase by $4$ cents and the $$40 \cdot 0.1 = +4$$ gain on the shares is equal to the $$100 \cdot 0.04 = +4$$ loss on the short option position.
+
+\end{exa}
+
+There is one important difference between the Black–Scholes–Merton analysis and our previous analysis using a binomial model. In Black–Scholes–Merton, the position in the stock and the derivative is riskless for only a very short period of time. Theoretically, it remains riskless only for an instantaneously short period of time. To remain riskless, it must be adjusted, or rebalanced, frequently.
+
+\noindent The fundamental assumptions we use to derive the Black-Scholes-Merton partial differential equation are as follows:
+
+\begin{enumerate}
+
+\item The stock price $S$ follows the lognormal process in Exercise \ref{lognormal}.
+
+\item The short selling of securities with full use of proceeds is permitted.
+\item There are no transaction costs or taxes. All securities are perfectly divisible.
+\item There are no dividends during the life of the derivative.
+\item There are no riskless arbitrage opportunities.
+\item Security trading is continuous.
+\item The risk-free rate of interest, $r$, is constant and the same for all maturities.
+
+\end{enumerate}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Derivation of the Black-Scholes-Merton Partial Differential Equation}
+
+\noindent Let $S(t)=S_t$ denote the price of a stock at a general time $t$, and consider a derivative with maturity $T$ (so that the time to expiry is $T-t$.  Let $f(S,t)$ be the price of a financial derivative on $S$ with expiry $T$ (e.g. the price of a call option).  By Ito's Lemma, $$df=\left(\frac{\partial f}{\partial S}\mu S+\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2f}{\partial S^2}\sigma^2 S^2\right)\:dt+\frac{\partial f}{\partial S}\sigma S\:dz.$$  As we did when constructing the binomial tree model, we will construct a portfolio that eliminates uncertainty (i.e. a portfolio that eliminates the Stochastic process $z$).  Consider a portfolio consisting of the following:
+
+\begin{itemize}
+
+\item $-1$ unit of the derivative
+
+\item $\displaystyle+\frac{\partial f}{\partial S}$ shares
+
+\end{itemize}
+
+\noindent The holder of this portfolio has a short position in $1$ unit of the derivative, and a long position in $\frac{\partial f}{\partial S}$ shares of the stock.  Let $\Pi$ denote the value of this portfolio:  $$\Pi=-f+\frac{\partial f}{\partial S}S.$$  The change $\Delta \Pi$ in the value of the portfolio in a small time interval $\delta t$ is given by $$\Delta \Pi=-\Delta f+\frac{\partial f}{\partial S}\Delta S.$$
+
+
+\begin{ex}
+Show that $$\Delta \Pi=\left(-\frac{\partial f}{\partial t}-\frac{1}{2}\frac{\partial^2f}{\partial S^2}\sigma^2 S^2\right)\Delta t.$$
+\end{ex}
+
+\noindent Thus, the change in the value of the portfolio does not involve $\Delta z$, so the portfolio is riskless during the time interval $\Delta t$.  Thus, the portfolio must instantaneously be equivalent to investing in the risk-free interest rate $r$.  If it earned more than this return, arbitrageurs could make a riskless profit by borrowing money to buy the portfolio; if it earned less, they could make a riskless profit by shorting the portfolio and investing in the risk-free interest rate. It follows that
+$$\Delta \Pi=r\Pi\Delta t.$$
+
+\begin{ex}{\bf The Black-Scholes-Merton Partial Differential Equation}
+Show that $$\frac{\partial f}{\partial t}+rS\frac{\partial f}{\partial S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2f}{\partial S^2}=rf.$$
+\end{ex}
+
+\noindent The particular derivative that is obtained when the equation is solved depends on the boundary conditions that are used. These specify the values of the derivative at the boundaries of possible values of $S$ and $t$.  For example, for a European call option, we have $$f(S,T)=\text{max}(S_T-K,0)$$ when $t=T$.  For a European put option, we have $$f(S,T)=\text{max}(K-S_T,0)$$ when $t=T$.
+
+
+\begin{ex}
+Show that the price $f$ of a forward contract on a non-dividend paying stock with delivery price $K$, $$f=S-Ke^{-r(T-t)},$$ satisfies the Black-Scholes-Merton partial differential equation.
+\end{ex}
+
+
+\begin{ex}{\bf Black-Scholes-Merton Price of a Call Option}
+In this exercise, we will show that $$c=S_0N(d_1)-Ke^{-rT}N(d_2)$$ satisfies the Black-Scholes-Merton partial differential equation, where $$d_1=\frac{\ln(S/K)+(r+\sigma^2/2)(T-t)}{\sigma\sqrt{T-t}}$$ and $$d_2=d_1-\sigma\sqrt{T-t}.$$  
+
+\begin{enumerate}
+
+\item[(a)] Find $N'(x)$.
+\item[(b)] Show that $$SN'(d_1)=Ke^{-r(T-t)}N'(d_2).$$
+\item[(c)] Find $\displaystyle\frac{\partial d_1}{\partial S}$ and $\displaystyle\frac{\partial d_2}{\partial S}$.
+\item[(d)] Show that if $$c=SN(d_1)-Ke^{-r(T-t)}N(d_2),$$ then $$\frac{\partial c}{\partial t}=-rKe^{-r(T-t)}N(d_2)-SN'(d_1)\frac{\sigma}{2\sqrt{T-t}}.$$
+\item[(e)] Show that $$\frac{\partial c}{\partial S}=N(d_1).$$
+\item[(f)] Show that $c$ satisfies the Black-Scholes-Merton partial differential equation.
+\item[(g)] Show that $c$ satisfies the boundary condition for a European call option, i.e. $$c=\text{max}(S-K,0)\text{ as }t\rightarrow T.$$
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+Suppose that a non-dividend-paying stock has an expected return of $\mu$ and a volatility of $\sigma$. Consider a financial derivative that pays $\displaystyle\ln S_T$ at time $T$, where $S_t$ is the value of the stock at time $t$.
+
+\begin{enumerate}
+
+\item[(a)] Use risk-neutral valuation to find the price of this derivative at time $t$.  Let $r$ denote the risk-free interest rate
+
+\item[(b)] Show that the result obtained in part (a) satisfies the Black-Scholes-Merton partial differential equation.
+
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{ex}
+Show that $$\Theta+rS\Delta+\frac{1}{2}\sigma^2S^2\Gamma=r\Pi.$$
+\end{ex}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+\subsection{Properties of the Black-Scholes-Merton Formulas}
+
+$$c=S_0N(d_1)-Ke^{-rT}N(d_2)$$
+
+\begin{itemize}
+
+\item We can interpret $N(d_2)$ as the probability that the call option will be exercised.
+
+\item The expression $S_0N(d_1)e^{rT}$ is the expected stock price at time $T$ in a risk-neutral world, where stock prices less than the strike price are counted as zero.
+
+\item The strike price is only paid if $S_T>K$.
+
+\item Thus, the expected payoff at $t=T$ in a risk-neutral world is $$S_0N(d_1)e^{rT}-KN(d_2).$$  If we discount this from $t=T$ to the present value $t=0$, we have the expected payoff $$c=S_0N(d_1)-Ke^{-rT}N(d_2).$$
+
+\item Note that we can write this in the following way: $$c=e^{-rT}N(d_2)\left[S_0e^{rT}\frac{N(d_1)}{N(d_2)}-K\right].$$
+
+\begin{itemize}
+
+\item $e^{-rT}$: discounting/present value factor
+
+\item $N(d_2)$: probability of exercise
+
+\item $\displaystyle S_0e^{rT}\frac{N(d_1)}{N(d_2)}$: expected stock price in a risk-neutral world if option is exercised
+
+\item $K$: strike price paid if option is exercised
+
+\end{itemize}
+
+\end{itemize}
+
+
+\begin{ex}
+Show that $$\lim_{S_0\rightarrow\infty}c=S_0-Ke^{-rT}.$$ When the stock price, $S_0$, becomes very large, a call option is almost certain to be exercised. It then becomes very similar to a forward contract with delivery price $K$.
+\end{ex}
+
+\begin{ex}
+Show that $$\lim_{S_0\rightarrow\infty}p=0.$$ 
+\end{ex}
+
+\begin{ex}
+Show that $$\lim_{\sigma\rightarrow 0}c=\text{max}(S_0-Ke^{-rT},0).$$ This is because the stock becomes riskless as $\sigma\rightarrow 0$, so its price will grow at the risk-free interest rate $r$ to $S_0e^{rT}$.
+\end{ex}
+
+
+
+\newpage
+
+
+\section{Linear Programming, Optimization, and Operations Research}
+
+\subsection{Introduction}
+
+A mathematical optimization problem is one in which some function is either maximized or minimized relative to a given set of conditions or constraints. The function to be minimized or maximized is called the {\bf objective function} and the set of constraints determines the {\bf feasible region} or {\bf constraint region}. In this course, the feasible region is always taken to be a subset of $\mathbb{R}^n$ (real $n$-dimensional space) and the objective function is a function from $\mathbb{R}^n$ to $\mathbb{R}$.
+
+We further restrict the class of optimization problems that we consider to {\em linear programming} problems (or LPs). An LP is an optimization problem over $\mathbb{R}^n$ in which the objective function is a {\em linear} function, that is, the objective has the form
+$$c_1x_1 +c_2x_2 +\cdots+c_nx_n$$
+for some $c_i\in\mathbb{R}$, $ i = 1,2,\ldots,n$, and the feasible region is the set of solutions to a finite number
+of {\em linear inequality and equality constraints}.
+
+Linear programming is an extremely powerful tool for addressing a wide range of applied optimization and operations problems. Applications of linear programming include resource allocation, production scheduling, storage optimization, transportation scheduling, facility location, flight crew scheduling, portfolio optimization, and parameter estimation.
+
+To begin, consider the following example.
+
+\begin{exa}\label{LP-Ex1}
+Find numbers $x_1$ and $x_2$ that $$\text{maximize }x_1+x_2$$ subject to the constraints \begin{eqnarray*}
+x_1+2x_2&\leq &4\\
+4x_1+2x_2&\leq &12\\
+-x_1+x_2&\leq&1,\\
+\end{eqnarray*}
+where $x_1\geq 0$, and $x_2\geq 0$.
+\end{exa}
+
+In this problem there are two unknowns, and five constraints. All the constraints are inequalities and they are all linear in the sense that each involves an inequality in some linear function of the variables. The first two constraints, $x_1 \geq 0$ and $x_2\geq 0$, are special constraints called {\em nonnegativity constraints} and are often found in linear programming problems. The other constraints are then called the {\em main constraints}. The function to be maximized (or minimized) is called the bjective function. Here, the objective function is $x_1 + x_2$ .
+
+
+Since there are only two variables, we can solve this problem by graphing the set of points in the plane that satisfies all the constraints (called the {\bf constraint set} or {\bf feasible region}) and then finding which point of this set maximizes the value of the objective function. Each inequality constraint is satisfied by a half-plane of points, and the feasible region is the intersection of all the half-planes. 
+
+\begin{ex}
+Graph the feasible region for Example \ref{LP-Ex1}.
+\end{ex}
+
+
+We seek the point $(x_1,x_2)$, that achieves the maximum value of $x_1 +x_2$ as $(x_1,x_2)$ ranges over this constraint set.  Observe that each point in the constraint set may produce a different value of the objective function $x_1+x_2$.  For example, the point $(1,0)$ is in the constraint set.  This leads to the value $1+0=1$.  The point $(2,1)$ is another point in the feasible region and this leads to the value $2+1=3$.  To find the {\bf maximum} value of $$z=x_1+x_2,$$ consider various possible values for $z$.  For example, when $z=0$, the objective function is $0=x_1+x_2$, whose graph is a straight line with slope $-1$.  Similarly, when $z=2$, the objective function is $2=x_1+x_2$, which is again a straight line with slope $-1$.  Note that the objective function cannot take on the value 15, for example, because the graph of the line $x_1+x_2=15$ lies entirely outside the feasible region.
+
+\begin{ex}
+Graph the lines $z=x_1+x_2$ along with the feasible region for $z=0,1,2,5,15$.  Which of these represent possible values of the objective function?
+\end{ex}
+
+Note that these lines are all parallel, because they all have slope $-1$.  As we move this line further from the origin up and to the right, the value of $x_1 + x_2$ increases. Therefore, we seek the line of slope $-1$ that is farthest from the origin and still touches the constraint set.  This occurs at the intersection of the lines $x_1 +2x_2 = 4$ and $4x_1 +2x_2 = 12$, namely, $\displaystyle(x_1,x_2) = (8/3,2/3)$. The value of the objective function there is $(8/3) + (2/3) = 10/3$.
+
+
+
+In general, it is clear that, since the objective function is {\em linear}, the objective function always takes on its maximum (or minimum) value at a {\em corner point} of the feasible region, provided that the feasible region is bounded.  A {\bf corner point} is a point in the feasible region where the boundary lines of two constraints cross.  However, not all linear programming problems are solved as easily as we were able to solve this one.  We were able to provide a graphical representation of this problem since there were only two unknowns.  
+
+
+
+\begin{thm}{\bf Corner Point Theorem}
+
+\begin{itemize} 
+
+\item If the feasible region is bounded, then the objective function has both a maximum and a minimum value, and each occurs at one or more corner points.
+
+
+\item If the feasible region is unbounded, the objective function may not have a maximum or minimum.  If a maximum or minimum value does exist, it will occur at one or more corner points.
+
+\end{itemize}
+\end{thm}
+
+\begin{ex}
+Find all 5 of the corner points for the feasible region of Example \ref{LP-Ex1}, and substitute each into the objective function.  Verify that $10/3$ is the maximum value of the objective function and that it occurs at $\displaystyle(x_1,x_2) = (8/3,2/3)$.
+\end{ex}
+
+This theorem simplifies the job of finding an optimum value. First, graph the feasible region and find all corner points. Then test each point in the objective function. Finally, identify the corner point producing the optimum solution. With this theorem, we could have solved Example \ref{LP-Ex1} by identifying all of the corner points in the feasible region, and then substituting each point into the objective function.  To summarize, we can solve a linear program graphically in the following way:
+
+\begin{alg}{\bf Solving a Linear Programming Problem Graphically}
+\begin{enumerate}
+\item Graph the feasible region.
+\item Determine the coordinates of each of the corner points.  We do this by solving all possible sets of 2 equations in the two unknowns.
+\item Find the value of the objective function at each corner point.
+\item  If the feasible region is bounded, the solution is given by the corner point producing the optimum value of the objective function.
+
+\end{enumerate}
+\end{alg}
+
+\begin{ex}
+Consider the following linear programming problem:  Find $x_1$ and $x_2$ to $$\text{minimize }x_1+3x_2$$ subject to the constraints \begin{eqnarray*}
+2x_1+x_2&\leq 10\\
+5x_1+2x_2&\geq 20\\
+-x_1+2x_2&\geq 0\\
+\end{eqnarray*}
+where $x_1,x_2\geq 0$.
+\end{ex}
+
+
+\begin{ex}
+This linear programming problem was part of the Operations Research Examination of the {\em Society of Actuaries}.  If $c_2>0$, determine the range of $c_1/c_2$ for which $(x_1,x_2)=(4,3)$ is an optimal solution of the problem $$\text{maximize }c_1x_1+c_2x_2$$ subject to
+\begin{eqnarray*}
+2x_1+x_2&\leq 11\\
+-x_1+2x_2&\leq 2\\
+\end{eqnarray*}
+where $x_1,x_2\geq 0$.
+
+\end{ex}
+
+
+
+\begin{ex}
+Consider the following linear programming problem, where the value of $c_1$ has not yet been determined.  Find $x_1$ and $x_2$ to $$\text{maximize } c_1x_1+2x_2$$ subject to the constraints 
+\begin{eqnarray*}
+4x_1+x_2&\leq 12\\
+x_1-x_2&\geq 2\\
+\end{eqnarray*}
+where $x_1,x_2\geq 0$.  Determine the optimal solutions for the various possible values of $c_1$ (both positive and negative).
+
+\end{ex}
+
+
+\begin{ex}	
+A manufacturing process requires that oil refineries manufacture at least 2 gallons of gasoline for every gallon of fuel oil. To meet the winter demand for fuel oil, at least 3 million gallons a day must be produced. The demand for gasoline is no more than 12 million gallons per day. It takes .25 hour to ship each million gallons of gasoline and 1 hour to ship each million gallons of fuel oil out of the warehouse. No more than 6.6 hours are available for shipping. If the refinery sells gasoline for \$1.25 per gallon and fuel oil for \$1 per gallon, how much of each should be produced to maximize revenue? Find the maximum revenue.
+
+
+
+\end{ex}
+
+The problem with the approach outlined above that we have used for these introductory problems, even for the case of only 2 unknowns, is that the number of systems of 2 equations in the 2 unknowns that we must consider increases very quickly as the number of constraints increases. In particular, if there are $m$ constraints and two decision variables, then there are ${m\choose 2}=
+\frac{m(m - 1)}{2}$ choices of 2 equations, and we must solve all of these systems of equations.
+
+Additionally, as the number of unknowns increases, the problem becomes even more difficult.  For example, if we have three variables $x_1,~x_2,~x_3$, then each constraint corresponds to a plane in 3-space and the feasible set is a convex body with planar sides. Changing the value of the objective function sweeps out another set of planes, and the optimal solution occurs at a corner of the feasible set.  These corners are points where 3 of the constraints are simultaneously satisfied, so we can find all possible corners by considering all choices of 3 constraints from the set of $m$ constraints. 
+
+In applications, linear programming problems often require solving for hundreds of variables with thousands of constraints.  In this case it is impossible to enumerate and check all possible corners of the feasible set, which is now an object in a linear space with dimension in the hundreds.  The computing power required to check all possibilities is prohibitive.
+
+In this chapter, we will explore the {\em simplex algorithm}, a powerful and computationally efficient technique for solving linear programming problems.
+
+
+
+\subsection{The Standard Maximum and Minimum Problems; Terminology}
+
+
+
+Recall that a linear program (LP) is a problem of maximization or minimization of a linear function, called the objective function, subject to a finite number of linear inequality and equality constraints. This general definition leads to a large number of possible formulations. In this section we propose one fixed formulation for the purposes of developing an algorithmic solution procedure and developing the theory of linear programming. We will show that every LP can be expressed in standard form. 
+
+\begin{df}{\bf Standard Maximum Problem.}  Find $\displaystyle \bvec{x}=\left[\begin{array}{c}x_1\\x_2\\\cdots\\x_n\end{array}\right]$ to
+
+$$\text{maximize }c_1x_1+c_2x_2+\cdots c_nx_n$$ subject to the constraints
+\begin{eqnarray*}
+a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n\leq b_1\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n\leq b_2\\
+\cdots\\
+a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n\leq b_m\\
+\end{eqnarray*}
+ and $$x_i\geq 0,~~i=1,2,\ldots,n.$$
+
+\noindent Using matrix notation, we can express this in the following way:
+
+\begin{eqnarray*}
+\text{maximize }&&\bvec{c}^T\bvec{x}\\
+\text{subject to }&&A\bvec{x}\leq \bvec{b}\\
+&&\bvec{x}\geq \bvec{0},\\
+\end{eqnarray*}
+
+\noindent where $$\bvec{c}=\left[\begin{array}{c}c_1\\c_2\\\ldots\\c_n\end{array}\right]\in\mathbb{R}^n,~\bvec{x}=\left[\begin{array}{c}x_1\\x_2\\\ldots\\x_n\end{array}\right]\in\mathbb{R}^n,~\bvec{b}=\left[\begin{array}{c}b_1\\b_2\\\ldots\\b_m\end{array}\right]\in\mathbb{R}^m,$$ $$A=\left[a_{ij}\right]\text{ is an }m\times n\text{ matrix,}$$ and the inequalities $A\bvec{x}\leq\bvec{b}$ and $\bvec{x}\geq\bvec{0}$ are interpreted component-wise.
+
+\end{df}
+
+
+We can transform every LP into an LP in standard maximum form in the following way:
+
+\begin{enumerate}
+
+\item If the given objective function is a function to be {\em minimized}, it can be converted to a function to be maximized by multiplying by $-1$. 
+
+\item If a linear program has an inequality constraint of the form $$a_{i1}x_1+a_{i2}x_2+\cdots+a_{in}x_n\geq b_i,$$ transform it into an inequality in standard form by multiplying both sides by $-1$:  $$-a_{i1}x_1-a_{i2}x_2-\cdots-a_{in}x_n\leq -b_i.$$
+
+\item If a linear program has an equality constraint of the form $$a_{i1}x_1+a_{i2}x_2+\cdots+a_{in}x_n= b_i,$$ transform it first into two inequality constraints:  $$a_{i1}x_1+a_{i2}x_2+\cdots+a_{in}x_n\leq b_i$$ and $$a_{i1}x_1+a_{i2}x_2+\cdots+a_{in}x_n\geq b_i.$$  The second inequality can be transformed to standard form by multiplying both sides by $-1$.
+
+\item If a variable $x_i$ has lower bound $x_i\geq l_i$, with $l_i\neq 0$, introduce the variable $w_i$ by making the substitution $$w_i=x_i-l_i.$$  Then the bound $x_i\geq l_i$ is equivalent to the bound $w_i\geq 0$.
+
+\item If a variable $x_i$ has upper bound $x_i\leq u_i$, introduce the variable $w_i$ by making the substitution $$w_i=u_i-x_i.$$  Then the bound $x_i\leq u_i$ is equivalent to the bound $w_i\geq 0$.
+
+\item If a variable $x_i$ has an interval bound $l_i\leq x_i\leq u_i$, introduce the variable $w_i$ by making the substitution $w_i=x_i-l_i$.  The bounds $l_i\leq x_i\leq u_i$ are then equivalent to the bounds $ w_i\geq 0$ and $w_i\leq u_i-l_i$.
+
+\item A variable given without any bounds is called a free variable.  If a variable $x_i$ does not have any bounds, replace it with the difference of two non-negative variables by making the substitution $$x_i=u_i-v_i,$$ where both $u_i\geq 0$ and $v_i\geq 0$.
+
+\end{enumerate}
+
+\begin{ex}
+Transform the following LP to a standard maximum problem.
+
+\begin{eqnarray*}
+\text{minimize }&&x_1-12x_2-2x_3\\
+\text{subject to }&&5x_1-x_2-2x_3=10\\
+&&2x_1+x_2-20x_3\geq -30\\
+&&x_2\leq 0\\
+&& 1\leq x_3\leq 4\\
+\end{eqnarray*}
+
+\end{ex}
+
+
+\begin{df}{\bf Standard Minimum Problem.}  Find $\displaystyle \bvec{y}=\left[\begin{array}{c}y_1\\y_2\\\cdots\\y_m\end{array}\right]$ to 
+
+$$\text{minimize }y_1b_1+y_2b_2+\cdots+y_mb_m$$ subject to the constraints
+
+\begin{eqnarray*}
+y_1a_{11}+y_1a_{21}+\cdots+y_ma_{m1}\geq c_1\\
+y_1a_{12}+y_2a_{22}+\cdots+y_ma_{m2}\geq c_2\\
+\cdots&\geq&\cdots\\
+y_1a_{1n}+y_2a_{2n}+\cdots+y_ma_{mn}\geq c_n\\
+\end{eqnarray*}
+ and $$y_i\geq 0,~~i=1,2,\ldots,m.$$
+
+\noindent Using matrix notation, we can express this in the following way:
+
+\begin{eqnarray*}
+\text{minimize }&&\bvec{y}^T\bvec{b}\\
+\text{subject to }&&\bvec{y}^TA\geq \bvec{c}^T\\
+&&\bvec{y}\geq \bvec{0},\\
+\end{eqnarray*}
+
+\noindent where $$\bvec{c}=\left[\begin{array}{c}c_1\\c_2\\\ldots\\c_n\end{array}\right]\in\mathbb{R}^n,~\bvec{y}=\left[\begin{array}{c}y_1\\y_2\\\cdots\\y_m\end{array}\right]\in\mathbb{R}^m,~\bvec{b}=\left[\begin{array}{c}b_1\\b_2\\\ldots\\b_m\end{array}\right]\in\mathbb{R}^m,$$ $$A=\left[a_{ij}\right]\text{ is an }m\times n\text{ matrix,}$$ and the inequalities $\bvec{y}^TA\geq \bvec{c}^T$ and $\bvec{y}\geq\bvec{0}$ are interpreted component-wise.
+
+\end{df}
+
+
+\begin{df} 
+A vector $\bvec{x}$ for the standard maximum problem or $\bvec{y}$ for the standard minimum problem is said to be {\bf feasible} if it satisfies the corresponding constraints.
+\end{df}
+
+\begin{df}
+The set of feasible vectors is called the {\bf constraint set} or {\bf feasible region}.
+\end{df}
+
+\begin{df}
+A linear programming problem is called {\bf feasible} if the constraint set is not empty;
+otherwise it is said to be {\bf infeasible}.
+\end{df}
+
+\begin{df}
+A feasible maximum problem is {\bf unbounded feasible} if the objective function can assume arbitrarily large positive values at feasible vectors; otherwise, it is {\bf bounded}.  Similarly, a feasible minimum problem is unbounded if it can assume arbitrarily large negative values at feasible vectors.
+\end{df}
+
+\begin{df}
+The {\bf value} of a bounded maximum or minimum problem is the maximum or minimum value of the objective function as the variables range over the constraint set.
+\end{df}
+
+\begin{df}
+A feasible vector at which the objective function achieves the value is called {\bf optimal}.
+\end{df}
+
+\subsection{The Simplex Method}
+
+George Bernard Dantzig (1914--2005) was an American mathematical scientist who made important contributions to operations research, computer science, economics, and statistics.  Dantzig is known for his development of the simplex algorithm for solving linear programming problems, and for his other work with linear programming. In statistics, Dantzig solved two open problems in statistical theory, which he had mistaken for homework after arriving late to a lecture by Jerzy Neyman at the University of Berkeley.  Dantzig died in 2005 at Stanford, where he was Professor Emeritus of Transportation Sciences and Professor of Operations Research and of Computer Science.
+
+The basic idea behind the simplex method is to start by identifying one corner of the feasible region and then systematically move to {\em adjacent} corners until the optimal value of the objective function is obtained.  We will begin with the mechanics of implementing the simplex method both by hand and using technology, and then we will explore the mathematical reasoning that provides the connection between the simplex method and the graphical method that we discussed previously.  We will consider the simplex method for standard maximum problems, so we begin by assuming that the LP is in standard maximum form.  
+
+\subsubsection{The Initial Simplex Tableau}
+
+The first step in using the simplex method to solve a standard maximum problem is to convert each constraint (a linear inequality) to a linear {\bf equation}.  We do this by introducing {\bf slack variables}.
+
+\begin{exa}
+We can convert the inequality $$x_1+x_2\leq 10$$ into an equation by adding the slack variable $s_1$ to obtain $$x_1+x_2+s_1=10,$$ where $$s_1\geq 0.$$
+\end{exa}
+
+We will illustrate the mechanics of the simplex method with an example.
+
+\begin{ex}\label{Lial7-4-Ex1}
+Rewrite the following LP by introducing slack variables so that each inequality constraint is replaced with an equality.
+$$\text{maximize }z=2x_1+3x_2+x_3$$ subject to
+\begin{eqnarray*}
+x_1+x_2+4x_3&\leq 100\\
+x_1+2x_2+x_3&\leq 150\\
+3x_1+2x_2+x_3&\leq 320\\
+\end{eqnarray*}
+where $x_1,x_2,x_3\geq 0$.
+\end{ex}
+
+Observe that adding slack variables to the constraints converts a linear programming problem into a system of linear equations. All of the equations in the system of Exercise \ref{Lial7-4-Ex1} are written with the variables on the left-hand side and the constants on the right-hand side.  We can express the objective function in this form as $$-2x_1-3x_2-x_3+z=0.$$  We can then express the equations of Exercise \ref{Lial7-4-Ex1}, with the constraints listed first and the objective last, using the following augmented matrix:
+
+\begin{center}
+\includegraphics[scale=0.8]{Lial7-4-Ex1.png}
+\end{center}
+
+This matrix is the initial {\bf simplex tableau}. Except for the last entries (the 1 and 0 on the right end) the numbers in the bottom row of a simplex tableau are called {\bf indicators}.  This simplex tableau represents a system of four linear equations in seven variables. Since there are more variables than equations, the system is dependent and has infinitely many solutions. Our goal is to find a solution in which all the variables are nonnegative and z is as large as possible. This will be done by using row operations to replace the given system by an equivalent one in which certain variables are eliminated from some of the equations. The process will be repeated until the optimum solution can be read from the matrix, as explained next.
+
+\subsubsection{Selecting the Pivot}
+
+In linear algebra, we used row operations to eliminate variables and solve the system.  A particular nonzero entry in the matrix is chosen and changed to a 1; then all other entries in that column are changed to zeros. A similar process is used in the simplex method. The chosen entry is called the {\bf pivot}. If we were interested only in solving the system, we could choose the various pivots in many different ways, as we did previously in linear algebra. Here, however, it is not
+enough just to find a solution. We must find one that is nonnegative, satisfies all the constraints, and makes z as a large as possible. Consequently, the pivot must be chosen carefully.  We will continue with Exercise \ref{Lial7-4-Ex1} to illustrate how this is done; later, we will explore why the procedure is used and why it works.
+
+\begin{alg}\label{pivot}{\bf Selecting the Pivot}
+\begin{enumerate}
+\item Look at the indicators (the last row of the simplex tableau) and choose the most negative one.  The most negative indicator identifies the variable that is to be eliminated from all but one of the equations (rows).  The column containing the most negative indicator is called the {\bf pivot column}.
+\item  For each positive entry in the pivot column, divide the number in the far right column of the same row by the positive number in the pivot column.   The row with the smallest quotient is called the {\bf pivot row}.
+\item The entry in the pivot row and pivot column is the {\bf pivot}.
+
+
+\end{enumerate}
+\end{alg}
+
+\begin{ex}
+In Exercise \ref{Lial7-4-Ex1}, the pivot column is $x_2$:
+\begin{center}
+\includegraphics[scale=0.8]{pivot-col.png}
+\end{center}
+
+Show that the quotients obtained in Step 2 of Algorithm \ref{pivot} are 100, 75, and 160, and conclude that the pivot row is the second row.  Thus, the pivot is the 2 indicated below:
+\begin{center}
+\includegraphics[scale=0.8]{pivot.png}
+\end{center}
+\end{ex}
+
+\subsubsection{Pivoting}
+
+Once the pivot has been selected, row operations are used to replace the initial simplex tableau by another simplex tableau in which the pivot column variable is eliminated from all but one of the equations. Since this new tableau is obtained by row operations, it represents an equivalent system of equations (that is, a system with the same solutions as the original system). This process is called {\bf pivoting}.  In particular, we do the following:
+
+\begin{alg}\label{pivot2}{\bf Pivoting}
+\begin{enumerate}
+
+\item Multiply each entry of the pivot row by a non-zero scalar to make the pivot entry a 1.
+\item Use elementary row operations to obtain all zeros in the pivot column (except for the pivot itself, which is equal to 1).  This means that the pivot column variable has been eliminated from all equations except the one represented by the pivot row.
+\end{enumerate}
+{\em Note: } during pivoting, do {\em not} interchange rows of the matrix.
+\end{alg}
+
+\begin{ex}
+Use pivoting to obtain the following simplex tableau for Exercise \ref{Lial7-4-Ex1}.
+\begin{center}
+\includegraphics[scale=0.8]{tableau2.png}
+\end{center}
+The pivot column variable $x_2$ has been eliminated from all equations except the one represented by the pivot row. The initial simplex tableau has been replaced by a new simplex tableau, which represents an equivalent system of equations.
+
+\end{ex}
+
+When at least one of the indicators in the last row of a simplex tableau is negative (as is the case with the tableau obtained above), the simplex method requires that a new pivot be selected and the pivoting be performed again. This procedure is repeated until a simplex tableau with no negative indicators in the last row is obtained or a tableau is reached in which no pivot row can be chosen.
+
+\begin{ex}
+In the simplex tableau obtained above, select a new pivot and perform the pivoting.  You should obtain the following:
+\begin{center}
+\includegraphics[scale=0.8]{final.png}
+\end{center}
+\end{ex}
+
+\subsubsection{Reading the Solution}
+
+The last row of the final simplex tableau for Exercise \ref{Lial7-4-Ex1} represents the equation $$4x_3+s_1+s_2+z=250,$$ or $$z=250-4x_3-s_2-s_2.$$  
+If $x_3$, $s_1$, and $s_2$ are all 0, then the value of $z$ is 250. If any one of $x_3$, $s_1$, or $s_2$ is positive, then $z$ will have a smaller value than 250. Consequently, since we want a solution for this system in which all the variables are nonnegative and $z$ is as large as possible, we must have
+$$x_3 =0,\quad	s_1 =0,\quad	s_2 =0.$$
+
+\begin{ex}
+Find the maximum value of $z=2x_1+3x_2+x_3$ in Exercise \ref{Lial7-4-Ex1} and the values of $x_1,x_2,x_3$ that produce the maximum.
+\end{ex}
+
+
+In any simplex tableau, some columns look like columns of an identity matrix (one entry is 1 and the rest are 0). The variables corresponding to these columns are called {\bf basic variables} and the variables corresponding to the other columns are referred to as {\bf nonbasic variables}. In the tableau of  Exercise \ref{Lial7-4-Ex1} the basic variables are $x_1, x_2, s_3,z$, and the nonbasic variables are $x_3, s_1 s_2$.
+
+The optimal solution in Exercise \ref{Lial7-4-Ex1} was obtained from the final simplex tableau by setting the nonbasic variables equal to 0 and solving for the basic variables. Furthermore, the values of the basic variables are easy to read from the matrix: Find the 1 in the column representing a basic variable; the last entry in that row is the value of that basic variable in the optimal solution. In particular, the entry in the lower right-hand corner of the final simplex tableau is the maximum value of the objective function.
+
+
+The steps involved in solving a standard maximum linear programming problem by the simplex method have been illustrated in the exercises above.  
+
+\begin{thm}{\bf The Simplex Method}
+\begin{enumerate}
+\item Convert each constraint into an equation by adding a slack variable.
+\item Set up the initial simplex tableau.
+\item Locate the most negative indicator.  If there are two such indicators, choose one.This indicator determines the pivot column.
+\item  Use the positive entries in the pivot column to form the quotients necessary for determining the pivot. If there are no positive entries in the pivot column, no maximum solution exists. If two quotients are equally the smallest, let either determine the pivot.
+\item Multiply every entry in the pivot row by the reciprocal of the pivot to change the pivot to 1. Then use row operations to change all other entries in the pivot column to 0 by adding suitable multiples of the pivot row to the other rows.
+\item If the indicators are all positive or 0, you have found the final tableau. If not, go back to Step 5 and repeat the process until a tableau with no negative indicators is obtained.
+\item  In the final tableau, the basic variables correspond to the columns that have one entry of 1 and the rest 0. The nonbasic variables correspond to the other columns. Set each nonbasic variable equal to 0 and solve the system for the basic variables. The maximum value of the objective function is the number in the lower right-hand corner of the final tableau.
+
+
+\end{enumerate}
+\end{thm}
+
+The basic feasible solution obtained from a simplex tableau corresponds to a corner point of the feasible region. Pivoting, which replaces one tableau with another, is a systematic way of moving from one corner point to another, each time improving the value of the objective function. The simplex method ends when a corner point that produces the maximum value of the objective function is reached (or when it becomes clear that the problem has no maximum solution).
+The idea is to improve the value of the objective function by adjusting one variable at a time. The most negative indicator identifies the variable that will account for the largest increase in the value of the objective function. The smallest quotient determines the largest value of that variable which will produce a feasible solution. Pivoting leads to a solution in which the selected variable has this largest value.
+
+When there are three or more variables in a linear programming problem, it may be difficult or impossible to draw a picture, but it can be proved that the optimal value of the objective function occurs at a basic feasible solution (corresponding to a corner point in the two-variable case). The simplex method provides a means of moving from one basic feasible solution to another until one that produces the optimal value of the objective function is reached.  Solve each of the following linear programming problems (by hand) using the simplex method.  Clearly show all of your work.
+
+\begin{ex}
+An office manager needs to purchase new filing cabinets. She knows that Ace cabinets cost \$40 each, require 6 square feet of floor space, and hold 8 cubic feet of files. On the other hand, each Excello cabinet costs \$80, requires 8 square feet of floor space, and holds 12 cubic feet. The budget permits her to spend no more than \$560, while the office has room for no more than 72 square feet of cabinets. The manager desires the greatest storage capacity within the limitations imposed by funds and space. How many of each type of cabinet should she buy?
+\end{ex}
+
+
+\begin{ex}
+Use the simplex method to solve the following LP. $$\text{ maximize }z=x_1+8x_2+2x_3$$ subject to 
+\begin{eqnarray*}
+x_1+x_2+x_3&\leq&90\\
+2x_1+5x_2+x_3&\leq&120\\
+x_1+3x_2&\leq&80\\
+\end{eqnarray*}
+where $x_1,x_2,x_3\geq 0$.
+\end{ex}
+
+
+
+\begin{ex}
+Use the simplex method to solve the following LP. $$\text{ maximize }z=5x_1+4x_2+x_3$$ subject to 
+\begin{eqnarray*}
+-2x_1+x_2+2x_3&\leq &3\\
+x_1-x_2+x_3&\leq 1\\
+\end{eqnarray*}
+where $x_1,x_2,x_3\geq 0$.
+\end{ex}
+
+
+
+
+
+\subsection{Applications Problems}
+
+{\em Note:}  You should use technology to implement the simplex method to solve the applications problems in this section.  I recommend that you use Excel, but you may use another program if you prefer.  If you are using Excel, there is a tutorial posted in Canvas that illustrates the details on how to use the Solver program to implement the simplex method.
+
+\begin{ex}
+A farmer has 110 acres of available land he wishes to plant with a mixture of potatoes, corn, and cabbage. It costs him \$400 to produce an acre of potatoes, \$160 to produce an acre of corn, and \$280 to produce an acre of cabbage. He has a maximum of \$20,000 to spend. He makes a profit of \$120 per acre of potatoes, \$40
+per acre of corn, and \$60 per acre of cabbage.
+\begin{enumerate}
+\item[(a)] How many acres of each crop should he plant to maximize his profit?
+\item[(b)] If the farmer maximizes his profit, how much land will remain unplanted? What is the explanation for this?
+
+\end{enumerate}
+In your write-up, begin by completely defining any variables that you will use in your analysis of this problem.  Then set up and explain the linear programming problem that you will use to solve the problem.  You may use Excel or another technology tool to solve the LP.  Finally, present your solution in real-world terms and interpret your solution in terms of the original context of the problem.  Your solution to this investigation should not simply be a set of numbers; instead, you should approach this investigation as if you were presenting your recommendation to a land/farming management consulting firm.
+\end{ex}
+
+\begin{ex}
+A product can be made in three sizes, large, medium, and small, which yield a net unit profit of \$12, \$10, and \$9, respectively. The company has three centers where this product can be manufactured and these centers have a capacity of turning out 550, 750, and 275 units of the product per day, respectively, regardless of the size or combination of sizes involved.
+Manufacturing this product requires cooling water and each unit of large, medium, and small sizes produced require 21, 17, and 9 gallons of water, respectively. The centers 1, 2, and 3 have 10,000, 7000, and 4200 gallons of cooling water available per day, respectively. Market studies indicate that there is a market for 700, 900, and 340 units of the large, medium, and small sizes, respectively, per day. The problem is to determine how many units of each of the sizes should be produced at the various centers in order to maximize the profit.  
+
+\begin{enumerate}
+\item[(a)] Formulate and solve the linear programming model for this problem.  How many units of each of the sizes should be produced at the various centers to maximize the profit?
+\item[(b)] Next, suppose that the following additional constraint is introduced:
+By company policy, the fraction (scheduled production)/(center's capacity) must be the same at all the centers.
+Using this additional information, formulate and solve a new linear programming model to maximize the profit.  How has your result changed?  Why do you think that this might be a policy that an actual manufacturing company might implement?
+\item[(c)] Which, if any, of the water capacity constraints was {\em binding}?  What happens to the solution and to the overall maximum profit if you increase the water capacity at each center by 1\%?  5\%?  10\%?  Vary each water capacity one at a time, while holding the others fixed, and write a report on your findings.  Include graphs and tables to illustrate your results.  Then do the same thing for the other constraints, and discuss your results in detail.  
+\end{enumerate}
+In your write-up, begin by completely defining any variables that you will use in your analysis of this problem.  Then set up and explain the linear programming problem that you will use to solve the problem.  You may use Excel or another technology tool to solve the LP.  Finally, present your solution in real-world terms and interpret your solution in terms of the original context of the problem. 
+\end{ex}
+
+
+\begin{ex}
+Despite unprecedented industry competition in 1983 and 1984, United Airlines managed to achieve substantial growth with service to 48 new airports.  In 1984, revenues increased 6 percent (as compared to 1983), while costs grew less than 2 percent.  A substantial component of this success was due to the implementation of linear programming to improve the scheduling and utilization of personnel at the airline's reservations offices and airports.  At the time, United Airlines employed about 4,000 reservations sales representatives and personnel at its 11 reservations offices and about 1,000 customer service agents at its 10 largest airports.  Some employees were part-time, working shifts ranging from two to eight hours; some employees were full-time, working 8- or 10-hour shifts.  Shifts started at several different times, and the number of employees required at each location to provide the required level of service varied greatly during the 24-hour day, often including considerable changes even in a single half-hour period.  Trying to design the work schedules for all the employees at a given location to meet these requirements most efficiently is a combinatorial nightmare.  The application of mathematical modeling and linear programming to solve this problem was reported to have had ``an overwhelming impact not only on United's management and members of the project team, but also for many who had never before heard of management science or mathematical modeling.''
+
+In this investigation, you will explore a simplified version of this type of application of linear programming.  Consider an airline personnel scheduling problem with the following constraints and requirements.  First, an analysis has been made of the {\em minimum} number of customer service agents that need to be on duty at different times of the day.  These numbers are illustrated in the table below.
+
+\bigskip
+
+\begin{center}
+
+\begin{tabular}{|l|c|}\hline
+{\bf Time Period}&{\bf Minimum Number of Agents Needed}\\\hline\hline
+6:00 am to 8:00 am & 48\\\hline
+8:00 am to 10:00 am & 79\\\hline
+10:00 am to 12:00 noon & 65\\\hline
+12:00 noon to 2:00 pm & 87\\\hline
+2:00 pm to 4:00 pm & 64\\\hline
+4:00 pm to 6:00 pm & 73\\\hline
+6:00 pm to 8:00 pm & 82\\\hline
+8:00 pm to 10:00 pm & 43\\\hline
+10:00 pm to 12:00 midnight & 52\\\hline
+12:00 midnight to 6:00 am & 15\\\hline
+\end{tabular}
+
+\end{center}
+
+
+Next, one of the provisions in the company's contract with the union that represents the employees is that each agent works an eight-hour shift, and the authorized shift times are as follows:
+
+\begin{itemize}
+
+\item Shift 1: 6:00 am to 2:00 pm
+
+\item Shift 2: 8:00 am to 4:00 pm
+
+\item Shift 3: 12:00 noon to 8:00 pm
+
+\item Shift 4: 4:00 pm to 12:00 midnight
+
+\item Shift 5: 10:00 pm to 6:00 am
+
+\end{itemize}
+
+Finally, because some shifts are less desirable than others, the wages specified in the contract differ by shift.  For each shift, the daily compensation (including benefits) is shown in the table below.
+
+\begin{center}
+
+\begin{tabular}{|l|c|}\hline
+{\bf Shift }&{\bf Daily Cost Per Agent}\\\hline\hline
+Shift 1 & \$170\\\hline
+Shift 2 & \$160\\\hline
+Shift 3 & \$175\\\hline
+Shift 4 & \$180\\\hline
+Shift 5 & \$195\\\hline
+\end{tabular}
+
+\end{center}
+
+The objective is to determine how many agents should be assigned to the respective shifts each day to minimize the total personnel costs while meeting (or exceeding) the minimum service requirements.  Formulate and solve the linear programming model for this problem.  In your write-up, begin by completely defining any variables that you will use in your analysis of this problem.  Then You may use Excel or another technology tool to solve the LP. Finally, present your solution in real-world terms and interpret your solution in terms of the original context of the problem. Your solution to this investigation should not simply be a set of numbers; instead, you should approach this investigation as if you were presenting your recommendation to a management consulting firm. 
+
+Once you've solved this linear programming problem, consider a revised scenario in which management is in negotiations for a new contract with the union.  In each case listed below, management would like to know if the proposed change will result in a new minimum total cost as compared to the original optimal solution.
+
+\begin{enumerate}
+
+\item[(a)] The daily cost per agent for shift 2 changes from \$160 to \$165.
+
+\item[(b)] The daily cost per agent for shift 4 changes from \$180 to \$170.
+
+\item[(c)] The changes in parts (a) and (b) both occur.
+
+\item[(d)] The daily cost per agent increases by \$4 for shifts 2, 4, and 5, but decreases by \$4 for shifts 1 and 3.
+
+\item[(e)] The daily cost per agent increases by 2 percent for each shift.
+
+\end{enumerate}
+
+Analyze the effects of each of these changes on the optimal solution.
+
+\end{ex}
+
+
+\begin{ex}
+A lumber company has three sources of wood and five markets to be supplied. The annual availability of wood at sources 1, 2, and 3 are 10, 20, and 15 million board feet, respectively. The amount that can be sold annually at markets 1, 12, 3, 4, and 5 are 7, 11, 9, 10, and 8 million board feet, respectively.
+In the past the company has shipped the wood by train. However, because shipping costs have been increasing, the alternative of using ships to make some of the deliveries is being investigated. This alternative would require the company to invest in some ships. Except for these investment costs, the shipping costs in thousands of dollars per million board feet by rail and by water (when feasible) would be the following for each route:
+\begin{center}
+\includegraphics[scale=0.8]{cost.png}
+\end{center}
+The capital investment (in thousands of dollars) in ships required for each million board feet to be transported annually by ship along each route is given as follows:
+\begin{center}
+\includegraphics[scale=0.8]{investment.png}
+\end{center}
+Considering the expected useful life of the ships and the time value of money, the equivalent uniform annual cost of these investments is one-tenth the amount given in the table.  The objective is to determine the overall shipping plan that minimizes the total equivalent uniform annual cost (including shipping costs).  Determine the shipping plan for each of the three options listed below:
+
+\begin{itemize}
+
+\item {\em Option 1:} Continue shipping exclusively by rail.
+
+\item {\em Option 2:} Switch to shipping exclusively by water (except where only rail is feasible).
+
+\item {\em Option 3:} Ship by either rail or water, depending on which is less expensive for the particular route.
+
+
+\end{itemize}
+
+
+Formulate and solve the linear programming model for this problem for each of the three options listed above.  Compare your results for each options. In your write-up, begin by completely defining any variables that you will use in your analysis of this problem.  Then set up and explain the linear programming problem that you will use to solve the problem.  You may use Excel or another technology tool to solve the LP.  Finally, present your solution in real-world terms and interpret your solution in terms of the original context of the problem.  Your solution to this problemn should not simply be a set of numbers; instead, you should approach this problem as if you were presenting your recommendation to a management consulting firm.  Additionally, consider the fact that these results are based on current shipping and investment costs, so that the decision on the option to adopt now should take into account management’s projection of how these costs are likely to change in the future. For each option, describe a scenario of future cost changes that would justify adopting that option now.
+\end{ex}
+
+
+
+\newpage
+
+\section{References}
+
+\begin{enumerate}
+
+\item Frederick S. Hillier, Mark S. Hillier, and Gerald J. Lieberman, {\em Introduction to Management Science, A Modeling and Case Studies Approach with Spreadsheets}, McGraw-Hill, 2019.
+
+\item Thomas J. Holloran and Judson E. Bryn, {\em United Airlines Station Manpower Planning System}, {\bf Interfaces 16}, no. 1 (January--February 1986), p. 39--50.
+
+\item John C. Hull, {\em Options, Futures, and Other Derivatives}, 11th edition, Pearson 2021.
+
+\item Charles M. Grinstead and J. Laurie Snell, {\em Probability}, Dartmouth College.
+
+\item Margaret L. Lial {\em et al.}, {\em Mathematics with Applications in the Management, Natural, and Social Sciences}, Pearson 2015.
+
+\item Robert L. McDonald, {\em Derivatives Markets}, 3rd edition, Pearson 2013.
+
+\item Katta G. Murty (Editor), {\em Case Studies in Operations Research:  Applications of Optimal Decision Making}, Springer, International Series in Operations Research \& Management Science, 2015.
+
+
+\item Steven E. Shreve, {\em Stochastic Calculus for Finance I: The Binomial Asset Pricing Model}, Springer 2003.
+
+
+\item Paul Wilmott and Sam Howison, {\em The Mathematics of Financial Derivatives}, ISBN-13: 978-0521497893, Cambridge University Press 1995.
+
+
+\item W. L. Winston, {\em Operations Research; Applications and Algorithms}, Brooks/Cole, 2004.
+
+
+
+\end{enumerate}
+
+
+
+
+
+ 
+\end{document}

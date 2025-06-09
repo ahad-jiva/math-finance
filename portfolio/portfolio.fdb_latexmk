@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1746507883.42791 "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" "portfolio.pdf" "portfolio" 1746507884.93291 0
-  "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" 1746507883.31378 43914 75f9619ca26089e966491783fa0752e4 ""
+["pdflatex"] 1749428870.64818 "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" "portfolio.pdf" "portfolio" 1749428872.34052 0
+  "/Users/ahadj/Desktop/24-25/Spring Quarter/MATH 476/math-finance/portfolio/portfolio.tex" 1749428870.44643 93901 70f328d5b63f82ab1a4ac452b893d860 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -210,10 +210,14 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1741584887 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
+  "figures/ex101.png" 1749347507.9532 53617 881f634801e21b822f3645d0b3024b0d ""
   "figures/ex2.png" 1744164811.85506 347878 4551fce5f772980527cf183cfb1498ff ""
   "figures/ex3.jpg" 1744163406 1055717 94d3801b5c9e7bfad41a4fd3fc31c5e7 ""
-  "portfolio.aux" 1746507884.84232 33 f7d8a52c1d960073e083a764194e265e "pdflatex"
-  "portfolio.tex" 1746507883.31378 43914 75f9619ca26089e966491783fa0752e4 ""
+  "figures/mc1.png" 1748561609.06624 46508 12edb7f252f5c59933269b95dda04613 ""
+  "figures/mc2.png" 1748561655.79014 48053 345790241d3afdae6d511a12ca33d504 ""
+  "figures/mc3.png" 1748561677.48933 47416 1113f1a21598f524cafd5ad8654edc56 ""
+  "portfolio.aux" 1749428872.24916 33 cf539ba9b68108d42f87643bf9d130bc "pdflatex"
+  "portfolio.tex" 1749428870.44643 93901 70f328d5b63f82ab1a4ac452b893d860 ""
   (generated)
   "portfolio.aux"
   "portfolio.log"
